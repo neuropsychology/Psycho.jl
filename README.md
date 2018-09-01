@@ -5,4 +5,4 @@
 [![codecov](https://codecov.io/gh/neuropsychology/Psycho.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/Psycho.jl)
 
 
-Work in progress.
+Work in very progress. See the [R version](https://github.com/neuropsychology/psycho.R).

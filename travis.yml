@@ -3,3 +3,7 @@ julia:
   - nightly
   - 1.0
   - 0.7
+  
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("Psycho"); Pkg.test("Psycho"; coverage=true)';

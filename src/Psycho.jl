@@ -1,6 +1,9 @@
 module Psycho
 
-greet() = print("Hello World!")
-f(x) = x+1
+export
+    f
+
+
+include("functions.jl")
 
 end # module

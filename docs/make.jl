@@ -2,13 +2,13 @@ using Documenter, Psycho
 
 makedocs(
     format = :html,
-    sitename = "Psycho",
+    sitename = "Psycho.jl",
     modules = [Psycho]
 )
 
 deploydocs(
     repo = "github.com/neuropsychology/Psycho.jl.git",
     target = "build",
-    osname = "linux",
-    julia = "release"
+    deps   = nothing,
+    make   = nothing
 )

@@ -1,7 +1,7 @@
 module Psycho
 
 export
-    f
+    f,
     dupa
 
 

@@ -13,7 +13,7 @@ Standardize (scale and reduce, Z-score) X so that the variables are expressed in
 !!! note
 
     **Ideas / help required:**
-    - Deal with missing values
+    - Deal with missing values (See [#4](https://github.com/neuropsychology/Psycho.jl/issues/4))
 
 # Examples
 ```jldoctest

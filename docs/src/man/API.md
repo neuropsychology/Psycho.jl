@@ -8,9 +8,9 @@ CurrentModule = Psycho
 ```
 
 ```@docs
-f(x)
+f(x::Number)
 ```
 
 ```@docs
-Psycho.dupa(x)
+Psycho.dupa(x::Number)
 ```

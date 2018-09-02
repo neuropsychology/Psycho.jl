@@ -2,12 +2,12 @@
 
 Welcome to Psycho's for Julia documentation.
 
-# Status and News
+## Status and News
 
 - 2018/09/02: Initial release of the documentation.
 
 
-# Content
+## Content
 
 ```@contents
 Pages = [

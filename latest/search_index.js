@@ -41,11 +41,27 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "man/API.html#Psycho.f-Tuple{Number}",
+    "page": "API",
+    "title": "Psycho.f",
+    "category": "method",
+    "text": "f(x::Number)\n\nAdd 2 to x.\n\nThis is a more extensive documentation.\n\nArguments\n\nx::Number: the number which to add 2.\n\nExamples\n\njulia> f(3)\n5\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#Psycho.dupa-Tuple{Number}",
+    "page": "API",
+    "title": "Psycho.dupa",
+    "category": "method",
+    "text": "dupa(x::Number)\n\nMultiply x by 2.\n\nThis is a more extensive documentation.\n\nArguments\n\nx::Number: the number which to multiply by 2.\n\nExamples\n\njulia> dupa(3)\n6\n\n\n\n\n\n"
+},
+
+{
     "location": "man/API.html#API-1",
     "page": "API",
     "title": "API",
     "category": "section",
-    "text": "Details about Psycho\'s functions.CurrentModule = Psychof(x)Psycho.dupa(x)"
+    "text": "Details about Psycho\'s functions.CurrentModule = Psychof(x::Number)Psycho.dupa(x::Number)"
 },
 
 ]}

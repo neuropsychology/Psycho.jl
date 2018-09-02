@@ -5,6 +5,6 @@ export
     dupa
 
 
-include("functions.jl")
+include("simulate/correlation.jl")
 
 end # module

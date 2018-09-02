@@ -5,6 +5,6 @@ export
 
 
 include("core/standardize.jl")
-include("simulate/correlation.jl")
+# include("simulate/correlation.jl")
 
 end # module

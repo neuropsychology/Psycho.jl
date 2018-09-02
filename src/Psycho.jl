@@ -8,6 +8,6 @@ export
 
 include("core/standardize.jl")
 include("simulate/groupnames.jl")
-# include("simulate/correlation.jl")
+include("simulate/data_correlation.jl")
 
 end # module

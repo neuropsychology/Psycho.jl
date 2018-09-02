@@ -41,19 +41,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "man/API.html#Psycho.f-Tuple{Number}",
+    "location": "man/API.html#Psycho.standardize-Tuple{Array{#s1,N} where N where #s1<:Number}",
     "page": "API",
-    "title": "Psycho.f",
+    "title": "Psycho.standardize",
     "category": "method",
-    "text": "f(x::Number)\n\nAdd 2 to x.\n\nThis is a more extensive documentation.\n\nArguments\n\nx::Number: the number which to add 2.\n\nExamples\n\njulia> f(3)\n5\n\n\n\n\n\n"
-},
-
-{
-    "location": "man/API.html#Psycho.dupa-Tuple{Number}",
-    "page": "API",
-    "title": "Psycho.dupa",
-    "category": "method",
-    "text": "dupa(x::Number)\n\nMultiply x by 2.\n\nThis is a more extensive documentation.\n\nArguments\n\nx::Number: the number which to multiply by 2.\n\nExamples\n\njulia> dupa(3)\n6\n\n\n\n\n\n"
+    "text": "standardize(X::Array{<:Number}; robust::Bool=false)\n\nStandardize (scale and reduce X).\n\nThis is a more extensive documentation.\n\nArguments\n\nX::Array{<:Number}: Array or DataFrame.\nrobust::Bool: Based on mean and sd (default) or on median and mad.\n\nExamples\n\njulia> standardize([1, 2, 3])\n3-element Array{Float64,1}:\n -1.0\n  0.0\n  1.0\n\n\n\n\n\n"
 },
 
 {
@@ -61,7 +53,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "API",
     "category": "section",
-    "text": "Details about Psycho\'s functions.f(x::Number)dupa(x::Number)link to Psycho.jl Documentation\nlink to f(x::Number)"
+    "text": "Details about Psycho\'s functions.standardize(X::Array{<:Number})"
 },
 
 ]}

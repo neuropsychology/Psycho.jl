@@ -9,6 +9,8 @@ makedocs(
 deploydocs(
     repo = "github.com/neuropsychology/Psycho.jl.git",
     target = "build",
+    julia  = "nightly",
+    osname = "linux",
     deps   = nothing,
     make   = nothing
 )

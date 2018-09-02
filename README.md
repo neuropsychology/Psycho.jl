@@ -1,4 +1,4 @@
-<p align="center"><a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="docs/src/assets/logo_Psycho.jl.png" width="400" align="center" alt="psycho logo julia package"></a></p>
+<p align="center"><a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="docs/src/assets/logo_Psycho.jl.png" width="500" align="center" alt="psycho logo julia package"></a></p>
 
 *<h4 align="center">The Julia Toolbox for Psychological Science</h2>*
 

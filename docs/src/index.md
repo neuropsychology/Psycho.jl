@@ -1,3 +1,3 @@
 # Psycho.jl Documentation
 
-Welcome to the documentation.
+Welcome to Psycho's for Julia documentation.

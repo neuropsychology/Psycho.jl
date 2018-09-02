@@ -2,21 +2,26 @@
 
 *<h4 align="center">The Julia Toolbox for Psychological Science</h2>*
 
-# Psycho.jl <img src="docs/src/assets/logo_small.png" align="right" />
+# Psycho.jl
 [![Build Status](https://travis-ci.org/neuropsychology/Psycho.jl.svg?branch=master)](https://travis-ci.org/neuropsychology/Psycho.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/313hx3rmmc1swckg?svg=true)](https://ci.appveyor.com/project/DominiqueMakowski/psycho-jl)
-[![codecov](https://codecov.io/gh/neuropsychology/Psycho.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/Psycho.jl)
 [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://neuropsychology.github.io/Psycho.jl/latest/)
+[![codecov](https://codecov.io/gh/neuropsychology/Psycho.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/Psycho.jl)
 
 
-
-Work in very progress. See the [R version](https://github.com/neuropsychology/psycho.R).
 
 # Aim
 
+***"From Julia to your Manuscript"***
+
+Enough of copy/pasting, manual formatting and searching what to report and how to report it!
+
+Psycho's primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
+It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analysis.
+
 # Contribute
 
-Psycho.jl is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science:
+Psycho.jl is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science doing the following:
 
 - Create new or check existing **`bug`** issues to report, replicate, understand or solve some bugs.
 - Create new or check existing **`feature idea`** issues to suggest or discuss a new feature.

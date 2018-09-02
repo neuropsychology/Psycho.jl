@@ -53,7 +53,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.standardize",
     "category": "function",
-    "text": "standardize(X; robust::Bool=false)\n\nStandardize (scale and reduce, Z-score) X.\n\nArguments\n\nX: Array or DataFrame.\nrobust::Bool: Based on mean and sd (default) or on median and mad.\n\nExamples\n\njulia> standardize([1, 2, 3])\n3-element Array{Float64,1}:\n -1.0\n  0.0\n  1.0\n\n\n\n\n\n"
+    "text": "standardize(X; robust::Bool=false)\n\nStandardize (scale and reduce, Z-score) X so that the variables are expressed in terms of standard deviation (i.e., mean = 0, SD = 1).\n\nArguments\n\nX: Array or DataFrame.\nrobust::Bool: If true, the standardization will be based on median and mad instead of mean and sd (default).\n\nnote: Note\nIdeas / help required:Deal with missing values\n\nExamples\n\njulia> standardize([1, 2, 3])\n3-element Array{Float64,1}:\n -1.0\n  0.0\n  1.0\n\n\n\n\n\n"
 },
 
 {
@@ -62,6 +62,14 @@ var documenterSearchIndex = {"docs": [
     "title": "Core",
     "category": "section",
     "text": "standardize"
+},
+
+{
+    "location": "man/API.html#Simulate-1",
+    "page": "API",
+    "title": "Simulate",
+    "category": "section",
+    "text": "simulate_groupnames(n::Int; nchar::Int=2)"
 },
 
 ]}

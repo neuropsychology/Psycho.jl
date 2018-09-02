@@ -49,11 +49,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "man/API.html#Psycho.standardize",
+    "page": "API",
+    "title": "Psycho.standardize",
+    "category": "function",
+    "text": "standardize(X; robust::Bool=false)\n\nStandardize (scale and reduce, Z-score) X.\n\nArguments\n\nX: Array or DataFrame.\nrobust::Bool: Based on mean and sd (default) or on median and mad.\n\nExamples\n\njulia> standardize([1, 2, 3])\n3-element Array{Float64,1}:\n -1.0\n  0.0\n  1.0\n\n\n\n\n\n"
+},
+
+{
     "location": "man/API.html#Core-1",
     "page": "API",
     "title": "Core",
     "category": "section",
-    "text": "standardize(X)"
+    "text": "standardize"
 },
 
 ]}

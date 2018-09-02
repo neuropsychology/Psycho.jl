@@ -45,7 +45,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "API",
     "category": "section",
-    "text": "Details about Psycho\'s functions."
+    "text": "Details about Psycho\'s functions.CurrentModule = Psychof(x)Psycho.dupa(x)"
 },
 
 ]}

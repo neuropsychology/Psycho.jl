@@ -26,6 +26,6 @@ function standardize(X::Array{<:Number}; robust::Bool=false)
     if robust == false
         std = (X .- Statistics.mean(X, dims=1)) ./ Statistics.std(X, dims=1)
     else
-        std = (X .- Statistics.median(X, dims=1)) ./ mapslices(StatsBase.mad, X, dims=1)
+        std = (X .- Statistics.median(X, dims=1)) ./ mapslices(x -> StatsBase.mad(x, normalize=true), X, dims=1)
     end
 end

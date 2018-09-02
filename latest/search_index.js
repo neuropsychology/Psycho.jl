@@ -41,19 +41,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "man/API.html#Psycho.standardize-Tuple{Array{#s1,N} where N where #s1<:Number}",
-    "page": "API",
-    "title": "Psycho.standardize",
-    "category": "method",
-    "text": "standardize(X::Array{<:Number}; robust::Bool=false)\n\nStandardize (scale and reduce X).\n\nThis is a more extensive documentation.\n\nArguments\n\nX::Array{<:Number}: Array or DataFrame.\nrobust::Bool: Based on mean and sd (default) or on median and mad.\n\nExamples\n\njulia> standardize([1, 2, 3])\n3-element Array{Float64,1}:\n -1.0\n  0.0\n  1.0\n\n\n\n\n\n"
-},
-
-{
     "location": "man/API.html#API-1",
     "page": "API",
     "title": "API",
     "category": "section",
-    "text": "Details about Psycho\'s functions.standardize(X::Array{<:Number})"
+    "text": "Details about Psycho\'s functions."
+},
+
+{
+    "location": "man/API.html#Core-1",
+    "page": "API",
+    "title": "Core",
+    "category": "section",
+    "text": "standardize(X)"
 },
 
 ]}

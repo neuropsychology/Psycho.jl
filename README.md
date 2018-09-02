@@ -12,18 +12,18 @@
 
 # Aim
 
-***"From Julia to your Manuscript"***
+***"From Julia to Manuscript"***
 
 Enough of copy/pasting, manual formatting and searching what to report and how to report it!
 
-Psycho's primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
+`Psycho`'s primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
 It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analysis.
 
 # Contribute
 
 Psycho.jl is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science doing the following:
 
-- Create new or check existing **`bug`** issues to report, replicate, understand or solve some bugs.
+- Create new or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_bug.png"> issues to report, replicate, understand or solve some bugs.
 - Create new or check existing **`feature idea`** issues to suggest or discuss a new feature.
 - Check existing **`help us if you're reading this`** issues to see things that we'd like to implement, but where help is needed to do it.
 - Check existing **`what's your opinion`** issues to give your opinion and participate in package's design discussions.

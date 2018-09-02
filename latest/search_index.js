@@ -13,7 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Psycho.jl",
     "title": "Psycho.jl",
     "category": "section",
-    "text": "Welcome to Psycho\'s for Julia documentation."
+    "text": "Welcome to Psycho\'s for Julia documentation.note: Note\nThe package is not released yet."
 },
 
 {
@@ -61,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "API",
     "category": "section",
-    "text": "Details about Psycho\'s functions.CurrentModule = Psychof(x::Number)Psycho.dupa(x::Number)"
+    "text": "Details about Psycho\'s functions.f(x::Number)dupa(x::Number)link to Psycho.jl Documentation\nlink to f(x::Number)"
 },
 
 ]}

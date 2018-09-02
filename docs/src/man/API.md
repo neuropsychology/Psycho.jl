@@ -3,14 +3,14 @@
 Details about Psycho's functions.
 
 
-```@meta
-CurrentModule = Psycho
-```
-
 ```@docs
 f(x::Number)
 ```
 
 ```@docs
-Psycho.dupa(x::Number)
+dupa(x::Number)
 ```
+
+
+- link to [Psycho.jl Documentation](@ref)
+- link to [`f(x::Number)`](@ref)

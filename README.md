@@ -6,3 +6,9 @@
 [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://neuropsychology.github.io/Psycho.jl/latest/)
 
 Work in very progress. See the [R version](https://github.com/neuropsychology/psycho.R).
+
+# Installation
+
+```
+pkg> add https://github.com/neuropsychology/Psycho.jl.git
+```

@@ -4,13 +4,5 @@ Details about Psycho's functions.
 
 
 ```@docs
-f(x::Number)
+standardize(X::Array{<:Number})
 ```
-
-```@docs
-dupa(x::Number)
-```
-
-
-- link to [Psycho.jl Documentation](@ref)
-- link to [`f(x::Number)`](@ref)

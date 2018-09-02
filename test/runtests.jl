@@ -1,4 +1,4 @@
 using Test, Psycho
 
-@test f(1) == 3
-@test dupa(1) == 2
+@test standardize([1, 2, 3]) == [-1.0, 0, 1]
+@test standardize([1, 2, 3], robust=true) ≈ [-0.67, 0, 0.67] atol=0.01

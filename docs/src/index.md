@@ -1,4 +1,4 @@
-# Psycho.jl
+# Home
 
 Welcome to Psycho's for Julia documentation.
 

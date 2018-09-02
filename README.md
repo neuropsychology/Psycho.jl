@@ -10,12 +10,12 @@
 
 
 
-# Aim
+# Goal
 
 ***"From Julia to Manuscript"***
 
 Enough of *copy/pasting*, manual formatting and searching *what* to report and *how* to report it! `Psycho`'s primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
-It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analysis.
+It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analyses.
 
 # Contribute
 

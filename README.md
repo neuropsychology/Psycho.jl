@@ -19,7 +19,7 @@ It also provides useful tools and functions for psychologists, neuropsychologist
 
 # Contribute
 
-Psycho.jl is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science doing the following:
+`Psycho.jl` is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science doing the following:
 
 - Create new or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create new or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.

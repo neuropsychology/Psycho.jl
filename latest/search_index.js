@@ -2,23 +2,23 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "index.html#",
-    "page": "Psycho.jl",
-    "title": "Psycho.jl",
+    "page": "Home",
+    "title": "Home",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "index.html#Psycho.jl-1",
-    "page": "Psycho.jl",
-    "title": "Psycho.jl",
+    "location": "index.html#Home-1",
+    "page": "Home",
+    "title": "Home",
     "category": "section",
     "text": "Welcome to Psycho\'s for Julia documentation.note: Note\nThe package is not released yet."
 },
 
 {
     "location": "index.html#Status-and-News-1",
-    "page": "Psycho.jl",
+    "page": "Home",
     "title": "Status and News",
     "category": "section",
     "text": "2018/09/02: Initial release of the documentation."
@@ -26,7 +26,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "index.html#Content-1",
-    "page": "Psycho.jl",
+    "page": "Home",
     "title": "Content",
     "category": "section",
     "text": "Pages = [\n    \"man/API.md\"\n]\nDepth = 1"

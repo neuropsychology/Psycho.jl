@@ -1,10 +1,10 @@
 module Psycho
 
 export
-    f,
-    dupa
+    standardize
 
 
+include("core/standardize.jl")
 include("simulate/correlation.jl")
 
 end # module

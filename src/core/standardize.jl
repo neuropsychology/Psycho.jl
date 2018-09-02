@@ -4,11 +4,16 @@ import Statistics, DataFrames, StatsBase
 """
     standardize(X; robust::Bool=false)
 
-Standardize (scale and reduce, Z-score) X.
+Standardize (scale and reduce, Z-score) X so that the variables are expressed in terms of standard deviation (*i.e.*, mean = 0, SD = 1).
 
 # Arguments
 - `X`: Array or DataFrame.
-- `robust::Bool`: Based on `mean` and `sd` (default) or on `median` and [`mad`](@ref).
+- `robust::Bool`: If true, the standardization will be based on `median` and [`mad`](@ref) instead of `mean` and `sd` (default).
+
+!!! note
+
+    **Ideas / help required:**
+    - Deal with missing values
 
 # Examples
 ```jldoctest
@@ -58,7 +63,6 @@ end
 
 function standardize!(X::DataFrames.DataFrame; robust=false)
     for (colname, col) in DataFrames.eachcol(X)
-        # TODO Check for missing
         if eltype(col) <: Number
             X[colname] = standardize(col)
         end

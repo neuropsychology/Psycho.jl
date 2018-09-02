@@ -8,3 +8,9 @@ Details about Psycho's functions.
 ```@docs
 standardize
 ```
+
+## Simulate
+
+```@docs
+simulate_groupnames(n::Int; nchar::Int=2)
+```

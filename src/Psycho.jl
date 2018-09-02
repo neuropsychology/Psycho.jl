@@ -1,7 +1,8 @@
 module Psycho
 
 export
-    standardize
+    standardize,
+    standardize!
 
 
 include("core/standardize.jl")

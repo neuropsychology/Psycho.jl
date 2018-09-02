@@ -30,8 +30,11 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 ```
 
 
+# Documentation
 
-
+- Reports: Interpret and report your models
+- Effect Sizes: Rules of thumb and interprettation
+- Signal Detection Theory: SDT's related indices
 
 
 

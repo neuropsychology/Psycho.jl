@@ -4,13 +4,17 @@ export
     standardize,
     standardize!,
     perfectNormal,
+
     Rules,
     interpret,
     interpret_p,
     format_p,
+
     simulate_groupnames,
     simulate_coefs_correlation,
-    simulate_data_correlation
+    simulate_data_correlation,
+
+    sdt_indices
 
 
 include("core/standardize.jl")
@@ -23,4 +27,5 @@ include("simulate/groupnames.jl")
 include("simulate/data_correlation.jl")
 
 include("sdt/basics.jl")
+
 end # module

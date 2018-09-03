@@ -57,7 +57,8 @@ standardize!(data)
 
 # Describe the data
 report(data)
-
+```
+```
 The data contains 200 observations of the following variables:
   - y (Mean = 0.0 ± 1.0 [-2.52, 2.92])
   - Var1 (Mean = -0.0 ± 1.0 [-2.07, 3.05])
@@ -68,7 +69,8 @@ The data contains 200 observations of the following variables:
 
 ```julia
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
-
+```
+```
 Dict{String,Float64} with 5 entries:
   "bpp"    => -0.0711812
   "c"      => 0.191778

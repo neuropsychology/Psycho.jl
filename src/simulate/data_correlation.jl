@@ -126,6 +126,13 @@ function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::N
 
   if groupnames == :random
     groupnames = simulate_groupnames(length(coefs); kwargs...)
+  else
+    # Sanity checks
+    if !isa(groupnames, Vector)
+      throw(ArgumentError("groupnames should be a Vector"))
+    elseif length(groupnames) != length(coefs)
+      throw(ArgumentError("groupnames should be of same size as coefs"))
+    end
   end
 
   # Check and fix length difference

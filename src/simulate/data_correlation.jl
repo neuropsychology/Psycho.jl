@@ -33,18 +33,19 @@ end
 
 
 """
-    simulate_data_correlation(coefs; n::Int=100, noise::Number=0.0)
+    simulate_data_correlation(coefs; n::Int=100, noise::Number=0.0, groupnames=:random)
 
 Generate a DataFrame of correlated variables.
 
 # Multiple Variables / Groups
 - If `coefs` is a vector (*e.g., `[0.1, 0.2]`), the DataFrame will contain `length(coefs)` variables (`Var1, Var2, ...`). Altough uncorrelated between them, they are  correlated to the outcome (`y`) by the specified coefs.
-- If `coefs` is a vector of vectors (*e.g., `[[0.1], [0.2]]`), it will create `length(coefs)` groups, *i.e.*, stacked DataFrames with a correlation between the variables and the outcome varying between groups. It is possible to specify the groupnames (see [`simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)`](@ref)).
+- If `coefs` is a vector of vectors (*e.g., `[[0.1], [0.2]]`), it will create `length(coefs)` groups, *i.e.*, stacked DataFrames with a correlation between the variables and the outcome varying between groups. It is possible to specify the `groupnames`.
 
 # Arguments
 - `coefs`: Correlation coefficients. Can be a number, a vector of numbers or a vector of vectors.
 - `n::Int`: Number of observations.
 - `noise::Number`: The SD of the random gaussian noise.
+- `groupnames::Vector`: Vector of group names (default to `:random`).
 
 !!! note
 
@@ -120,12 +121,12 @@ end
 
 
 
-"""
-    simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
 
-Replace random group names by a specified vector of names.
-"""
-function simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
+function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, groupnames=:random)
+
+  if groupnames == :random
+    groupnames = simulate_groupnames(length(coefs); kwargs...)
+  end
 
   # Check and fix length difference
   if all(y -> y == first(length.(coefs)), length.(coefs)) == false

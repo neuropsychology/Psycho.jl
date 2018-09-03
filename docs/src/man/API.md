@@ -19,9 +19,6 @@ standardize
 ```@docs
 simulate_data_correlation
 ```
-```@docs
-simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
-```
 
 
 ### Misc

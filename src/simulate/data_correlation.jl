@@ -33,12 +33,16 @@ end
 
 
 """
-    simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
+    simulate_data_correlation(coefs; n::Int=100, noise::Number=0.0)
 
 Generate a DataFrame of correlated variables.
 
+# Multiple Variables / Groups
+- If `coefs` is a vector (*e.g., `[0.1, 0.2]`), the DataFrame will contain `length(coefs)` variables (`Var1, Var2, ...`). Altough uncorrelated between them, they are  correlated to the outcome (`y`) by the specified coefs.
+- If `coefs` is a vector of vectors (*e.g., `[[0.1], [0.2]]`), it will create `length(coefs)` groups, *i.e.*, stacked DataFrames with a correlation between the variables and the outcome varying between groups. It is possible to specify the groupnames (see [`simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)`](@ref)).
+
 # Arguments
-- `coefs::Vector{<:Number}`: Correlation coefficients.
+- `coefs`: Correlation coefficients. Can be a number, a vector of numbers or a vector of vectors.
 - `n::Int`: Number of observations.
 - `noise::Number`: The SD of the random gaussian noise.
 
@@ -46,14 +50,22 @@ Generate a DataFrame of correlated variables.
 
     **Ideas / help required:**
     - Different group sizes (See [#9](https://github.com/neuropsychology/Psycho.jl/issues/9))
+    - Bug in some cases (*e.g.*, `simulate_data_correlation([0.2, 0.9, 0.5])`) related to failure in Cholesky factorization (See [#11](https://github.com/neuropsychology/Psycho.jl/issues/11))
 
 # Examples
 ```jldoctest
-julia> simulate_data_correlation([0.2])
+julia> simulate_data_correlation(0.2)
 100×2 DataFrames.DataFrame
 [...]
 ```
 """
+function simulate_data_correlation end
+
+
+
+
+
+
 function simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
 
   # Sanity checks
@@ -108,7 +120,11 @@ end
 
 
 
+"""
+    simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
 
+Replace random group names by a specified vector of names.
+"""
 function simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
 
   # Check and fix length difference

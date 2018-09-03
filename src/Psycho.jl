@@ -22,4 +22,5 @@ include("interpret/pvalue.jl")
 include("simulate/groupnames.jl")
 include("simulate/data_correlation.jl")
 
+include("sdt/basics.jl")
 end # module

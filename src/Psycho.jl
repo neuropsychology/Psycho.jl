@@ -6,6 +6,8 @@ export
     perfectNormal,
     Rules,
     interpret,
+    interpret_p,
+    format_p,
     simulate_groupnames,
     simulate_coefs_correlation,
     simulate_data_correlation

@@ -12,7 +12,7 @@ Generate an almost-perfect normal distribution of size `n`.
 
 # Examples
 ```jldoctest
-julia> perfectNormal(n=10)
+julia> perfectNormal(10, 0, 1)
 10-element Array{Float64,1}:
 [...]
 ```
@@ -22,10 +22,4 @@ function perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
                                 range(1/n, stop=1-1/n, length=n))
     return x
 end
-
-
-
-
-
-
 perfectNormal(; n::Int=100, mean::Number=0, sd::Number=1) = perfectNormal(n, mean, sd)

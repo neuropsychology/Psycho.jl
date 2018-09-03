@@ -46,7 +46,7 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 # Examples
 
-## Report Everything
+## Report all the things
 
 ```julia
 # Simulate some data
@@ -65,7 +65,7 @@ The data contains 200 observations of the following variables:
   - Group (1LV, 50.0%; 2QD, 50.0%)
 ```
 
-## Signal Detection Theory Indices
+## Signal Detection Theory (SDT)
 
 ```julia
 sdt_indices(hit=6, fa=7, miss=8, cr=9)

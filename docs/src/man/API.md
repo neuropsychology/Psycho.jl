@@ -39,6 +39,11 @@ format_p(p::Number; stars::Bool=false)
 simulate_data_correlation
 ```
 
+## SDT
+
+```@docs
+sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
+```
 
 ### Misc
 

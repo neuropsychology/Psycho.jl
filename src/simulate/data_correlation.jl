@@ -153,12 +153,3 @@ function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::N
 
   return data
 end
-
-
-
-
-
-function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, kwargs...)
-  groupnames = simulate_groupnames(length(coefs); kwargs...)
-  data = simulate_data_correlation(coefs, groupnames, n=n, noise=noise)
-end

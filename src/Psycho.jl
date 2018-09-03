@@ -15,6 +15,8 @@ export
     simulate_data_correlation,
 
     sdt_indices,
+
+    Report,
     report
 
 
@@ -29,6 +31,7 @@ include("simulate/data_correlation.jl")
 
 include("sdt/basics.jl")
 
+include("report/report.jl")
 include("report/Vector.jl")
 include("report/DataFrame.jl")
 

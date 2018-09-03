@@ -25,8 +25,8 @@ end
 
 function report(x::Array{String, 1}; kwargs...)
     # TODO: Sort by frequency and display the n firsts
-    description = "$(length(unique(x))) different entries"
-    return description
+    text = "$(length(unique(x))) different entries"
+    return Report(text=text)
 end
 
 
@@ -37,16 +37,16 @@ function report(x::Array{Any, 1}; missing_in_percentage=true, kwargs...)
     n_missings = sum(ismissing.(x))
     if n_missings == 0
         x = fix_variable_type(x)
-        description = report(x; kwargs...)
-        return description
+        text = report(x; kwargs...)
+        return Report(text=text)
     end
     if missing_in_percentage == true
         n_missings = "$(round(n_missings / length(x), digits=2))%"
     end
     x = collect(skipmissing(x))
-    description = report(x; kwargs...)
-    description *= ", missing = $n_missings"
-    return description
+    text = report(x; kwargs...)
+    text *= ", missing = $n_missings"
+    return Report(text=text)
 end
 
 
@@ -54,18 +54,18 @@ end
 
 
 function report(x::DataFrames.CategoricalArray{Any, 1}; percentage::Bool=true, kwargs...)
-    description = Vector{String}()
+    text = Vector{String}()
     for level in DataFrames.levels(x)
         if percentage == true
             n = ", $(round(sum(x .== level)/length(x)*100, digits=2))%"
         else
             n = ", n = $(sum(x .== level))"
         end
-        push!(description, (level * n))
+        push!(text, (level * n))
     end
-    description = join(description, "; ")
+    text = join(text, "; ")
 
-    return description
+    return Report(text=text)
 end
 
 
@@ -99,6 +99,11 @@ function report(x::Array{<:Number, 1}; median::Bool=false, dispersion::Bool=true
         var_range = ""
     end
 
-    description = var_centrality * var_dispersion * var_range
-    return description
+    text = var_centrality * var_dispersion * var_range
+
+    # Format
+    text = replace(text, " -0.0 " => "0.0")
+    text = replace(text, " 0.0 " => "0")
+
+    return Report(text=text)
 end

@@ -46,12 +46,29 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 # Examples
 
+## Report Everything
+
+```julia
+# Simulate some data
+data = simulate_data_correlation([[0.3], [0.1]])
+
+# Standardize the results
+standardize!(data)
+
+# Describe the data
+report(data)
+
+The data contains 200 observations of the following variables:
+  - y (Mean = 0.0 ± 1.0 [-2.52, 2.92])
+  - Var1 (Mean = -0.0 ± 1.0 [-2.07, 3.05])
+  - Group (1LV, 50.0%; 2QD, 50.0%)
+```
+
 ## Signal Detection Theory Indices
 
 ```julia
-julia> using Psycho
+sdt_indices(hit=6, fa=7, miss=8, cr=9)
 
-julia> sdt_indices(hit=6, fa=7, miss=8, cr=9)
 Dict{String,Float64} with 5 entries:
   "bpp"    => -0.0711812
   "c"      => 0.191778

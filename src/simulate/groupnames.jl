@@ -13,8 +13,8 @@ Create vector of random group names of length `n` containing `nchar` characters.
 !!! note
 
     **Ideas / help required:**
-    - Can be enhanced to make it more procedural and less random
-    - implement different types simulations (e.g., "A, B... AA, AB...")
+    - Can be enhanced to make it more procedural and less random (See [#8](https://github.com/neuropsychology/Psycho.jl/issues/8))
+    - implement different types simulations (e.g., "A, B... AA, AB...") (See [#8](https://github.com/neuropsychology/Psycho.jl/issues/8))
 
 # Examples
 ```jldoctest

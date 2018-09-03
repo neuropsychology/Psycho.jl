@@ -9,8 +9,27 @@ Details about Psycho's functions.
 standardize
 ```
 
+
+
+
 ## Simulate
+
+### Data
+
+```@docs
+simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
+```
+
+### Misc
+
+```@docs
+simulate_coefs_correlation(coefs_mean::Number=0.1; coefs_sd::Number=0.1, n::Int=10)
+```
 
 ```@docs
 simulate_groupnames(n::Int; nchar::Int=2)
 ```
+
+
+
+

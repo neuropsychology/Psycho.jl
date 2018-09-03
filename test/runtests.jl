@@ -1,3 +1,5 @@
 using Test, Psycho
 
-include("tests/core.jl")
+for file in readdir("tests/")
+    include("tests/" * file)
+end

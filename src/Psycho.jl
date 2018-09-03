@@ -4,6 +4,8 @@ export
     standardize,
     standardize!,
     perfectNormal,
+    Rules,
+    interpret,
     simulate_groupnames,
     simulate_coefs_correlation,
     simulate_data_correlation

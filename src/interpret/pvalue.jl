@@ -1,6 +1,3 @@
-include("interpret.jl")
-
-
 
 function interpret_p(p::Number)
 
@@ -42,10 +39,3 @@ function format_p(p::Number; stars::Bool=false)
     end
     return output
 end
-
-
-
-# Test
-# format_p(0.06, stars=true)
-# interpret_p(0.06)
-# interpret_p.(rand(10)/5)

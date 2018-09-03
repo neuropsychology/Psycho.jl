@@ -13,6 +13,12 @@ standardize
 perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
 ```
 
+## Interpret
+
+```@docs
+Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)
+```
+
 
 ## Simulate
 

@@ -14,7 +14,8 @@ export
     simulate_coefs_correlation,
     simulate_data_correlation,
 
-    sdt_indices
+    sdt_indices,
+    report
 
 
 include("core/standardize.jl")
@@ -27,5 +28,8 @@ include("simulate/groupnames.jl")
 include("simulate/data_correlation.jl")
 
 include("sdt/basics.jl")
+
+include("report/Vector.jl")
+include("report/DataFrame.jl")
 
 end # module

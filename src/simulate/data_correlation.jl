@@ -46,6 +46,7 @@ Generate a DataFrame of correlated variables.
 - `n::Int`: Number of observations.
 - `noise::Number`: The SD of the random gaussian noise.
 - `groupnames::Vector`: Vector of group names (default to `:random`).
+- `kwargs...`: Arguments to pass to other functions.
 
 !!! note
 
@@ -122,7 +123,7 @@ end
 
 
 
-function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, groupnames=:random)
+function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, groupnames=:random, kwargs...)
 
   if groupnames == :random
     groupnames = simulate_groupnames(length(coefs); kwargs...)

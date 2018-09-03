@@ -14,12 +14,12 @@
 
 ***"From Julia to Manuscript"***
 
-Enough of *copy/pasting*, manual formatting and searching *what* to report and *how* to report it! `Psycho`'s primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
+`Psycho`'s primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the use of **best practices** guidelines, ensuring standardization and quality of results reporting.
 It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analyses.
 
 # Contribute
 
-`Psycho.jl` is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science doing the following:
+`Psycho.jl` is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science by doing the following:
 
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
@@ -45,3 +45,36 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 
 # Examples
+
+## Report Everything
+
+```julia
+# Simulate some data
+data = simulate_data_correlation([[0.3], [0.1]])
+
+# Standardize the results
+standardize!(data)
+
+# Describe the data
+report(data)
+```
+```
+The data contains 200 observations of the following variables:
+  - y (Mean = 0.0 ± 1.0 [-2.52, 2.92])
+  - Var1 (Mean = -0.0 ± 1.0 [-2.07, 3.05])
+  - Group (1LV, 50.0%; 2QD, 50.0%)
+```
+
+## Signal Detection Theory Indices
+
+```julia
+sdt_indices(hit=6, fa=7, miss=8, cr=9)
+```
+```
+Dict{String,Float64} with 5 entries:
+  "bpp"    => -0.0711812
+  "c"      => 0.191778
+  "aprime" => 0.527793
+  "dprime" => -0.0235319
+  "beta"   => 0.995497
+```

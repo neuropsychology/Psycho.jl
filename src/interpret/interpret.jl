@@ -8,9 +8,7 @@ end
 """
     Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)
 
-Create a container for interpretation rules of thumb.
-
-- See [`interpret(x::Real, rules::Rules)`](@ref)
+Create a container for interpretation rules of thumb. See [`interpret(x::Real, rules::Rules)`](@ref).
 
 # Arguments
 - `breakpoints::AbstractVector`: Vector of value break points (edges defining categories).

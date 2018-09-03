@@ -1,7 +1,7 @@
 import Distributions
 
 """
-    perfectNormal(; n::Int=100, mean::Number=0, sd::Number=1)
+    perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
 
 Generate an almost-perfect normal distribution of size `n`.
 
@@ -17,8 +17,15 @@ julia> perfectNormal(n=10)
 [...]
 ```
 """
-function perfectNormal(; n::Int=100, mean::Number=0, sd::Number=1)
+function perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
     x = Distributions.quantile.([Distributions.Normal(mean, sd)],
                                 range(1/n, stop=1-1/n, length=n))
     return x
 end
+
+
+
+
+
+
+perfectNormal(; n::Int=100, mean::Number=0, sd::Number=1) = perfectNormal(n, mean, sd)

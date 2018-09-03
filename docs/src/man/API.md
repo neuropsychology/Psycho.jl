@@ -9,7 +9,9 @@ Details about Psycho's functions.
 standardize
 ```
 
-
+```@docs
+perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
+```
 
 
 ## Simulate

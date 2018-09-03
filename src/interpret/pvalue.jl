@@ -66,7 +66,7 @@ function format_p(p::Number; stars::Bool=false)
     elseif p > 0.1
         output = "p > .1"
     else
-        output = "p = $(round(p, digits=2))"
+        output = replace("p = $(round(p, digits=2))", "0." => ".")
         if stars == true
             output *= "°"
         end

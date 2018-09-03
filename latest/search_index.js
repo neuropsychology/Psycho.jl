@@ -57,11 +57,59 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "man/API.html#Psycho.perfectNormal",
+    "page": "API",
+    "title": "Psycho.perfectNormal",
+    "category": "function",
+    "text": "perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)\n\nGenerate an almost-perfect normal distribution of size n.\n\nArguments\n\nn::Int: Length of the vector.\nmean::Number: Mean of the vector.\nsd::Number: SD of the vector.\n\nExamples\n\njulia> perfectNormal(10, 0, 1)\n10-element Array{Float64,1}:\n[...]\n\n\n\n\n\n"
+},
+
+{
     "location": "man/API.html#Core-1",
     "page": "API",
     "title": "Core",
     "category": "section",
-    "text": "standardize"
+    "text": "standardizeperfectNormal(n::Int=100, mean::Number=0, sd::Number=1)"
+},
+
+{
+    "location": "man/API.html#Psycho.Rules",
+    "page": "API",
+    "title": "Psycho.Rules",
+    "category": "type",
+    "text": "Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)\n\nCreate a container for interpretation rules of thumb.\n\nSee interpret(x::Real, rules::Rules)\n\nArguments\n\nbreakpoints::AbstractVector: Vector of value break points (edges defining categories).\nlabels::AbstractVector: Labels associated with each category. Must contain one label more than breakpoints.\niflower::Bool: If true, each label will be given if the value is lower than its breakpoint. The contrary if false.\n\nExamples\n\njulia> Rules([0.05], [\"significant\", \"not significant\"], true)\nRules{Float64}([0.05], [\"significant\", \"not significant\"], true)\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#Psycho.interpret-Tuple{Real,Rules}",
+    "page": "API",
+    "title": "Psycho.interpret",
+    "category": "method",
+    "text": "interpret(x::Real, rules::Rules)\n\nInterpret a value based on a set of rules of thumb.\n\nArguments\n\nx::Real: The value to interpret.\nrules::Rules: A Rules object.\n\nExamples\n\njulia> p_rules = Rules([0.05], [\"significant\", \"not significant\"], true)\njulia> interpret(0.04, p_rules)\n\"signifcant\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#Psycho.interpret_p-Tuple{Number}",
+    "page": "API",
+    "title": "Psycho.interpret_p",
+    "category": "method",
+    "text": "interpret_p(p::Number; alpha=::Number=0.05)\n\nInterpret the p value based on the alpha level.\n\nP-values are the probability of obtaining an effect at least as extreme as the one in your sample data, assuming the truth of the null hypothesis. The significance level, also denoted as alpha or α, is the probability of rejecting the null hypothesis when it is true (i.e., claiming \"there is an effect\" when there is not). For example, a significance level of 0.05 indicates a 5% risk of concluding that a difference exists when there is no actual difference. The traditional default for alpha is .05. However, a strong wave of criticism suggests to either justify your alpha (Lakens et al., 2018) or lower the treshold (for instance to .005; Benjamin et al., 2018).\n\nArguments\n\np::Number: The p value.\nalpha::Number: Significance treshold.\n\nExamples\n\njulia> interpret_p(0.04)\n\"signifcant\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#Psycho.format_p-Tuple{Number}",
+    "page": "API",
+    "title": "Psycho.format_p",
+    "category": "method",
+    "text": "format_p(p::Number; stars::Bool=false)\n\nFormat the p value according to APA standards.\n\nArguments\n\np::Number: The p value.\nstars::Bool: Add stars (*) when significant.\n\nExamples\n\njulia> format_p(0.04)\n\"p < .05\"\n\njulia> format_p(0.04, stars=true)\n\"p < .05*\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#Interpret-1",
+    "page": "API",
+    "title": "Interpret",
+    "category": "section",
+    "text": "Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)interpret(x::Real, rules::Rules)interpret_p(p::Number; alpha::Number=0.05)format_p(p::Number; stars::Bool=false)"
 },
 
 {

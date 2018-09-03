@@ -70,11 +70,6 @@ function simulate_data_correlation end
 
 function simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
 
-  # Sanity checks
-  if all(elem isa Number for elem in coefs) == false
-    throw(ArgumentError("Coefs should all be numbers"))
-  end
-
   # Generate outcome
   y = standardize(Random.rand(Distributions.Normal(0, 1), n))
 

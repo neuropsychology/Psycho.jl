@@ -17,8 +17,9 @@ standardize
 ### Data
 
 ```@docs
-simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
+simulate_data_correlation
 ```
+
 
 ### Misc
 

@@ -46,7 +46,7 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 # Examples
 
-## <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> Report all the things 
+## Report all the things <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 
 ```julia
 # Simulate some data

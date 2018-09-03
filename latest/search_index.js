@@ -73,11 +73,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "man/API.html#Psycho.simulate_data_correlation-Tuple{Array{#s1,1} where #s1<:Number}",
+    "location": "man/API.html#Psycho.simulate_data_correlation",
     "page": "API",
     "title": "Psycho.simulate_data_correlation",
-    "category": "method",
-    "text": "simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)\n\nGenerate a DataFrame of correlated variables.\n\nArguments\n\ncoefs::Vector{<:Number}: Correlation coefficients.\nn::Int: Number of observations.\nnoise::Number: The SD of the random gaussian noise.\n\nnote: Note\nIdeas / help required:Different group sizes (See #9)\n\nExamples\n\njulia> simulate_data_correlation([0.2])\n100×2 DataFrames.DataFrame\n[...]\n\n\n\n\n\n"
+    "category": "function",
+    "text": "simulate_data_correlation(coefs; n::Int=100, noise::Number=0.0, groupnames=:random)\n\nGenerate a DataFrame of correlated variables.\n\nMultiple Variables / Groups\n\nIf coefs is a vector (*e.g., [0.1, 0.2]), the DataFrame will contain length(coefs) variables (Var1, Var2, ...). Altough uncorrelated between them, they are  correlated to the outcome (y) by the specified coefs.\nIf coefs is a vector of vectors (e.g., [[0.1], [0.2]]), it will create length(coefs) groups, *i.e., stacked DataFrames with a correlation between the variables and the outcome varying between groups. It is possible to specify the groupnames.\n\nArguments\n\ncoefs: Correlation coefficients. Can be a number, a vector of numbers or a vector of vectors.\nn::Int: Number of observations.\nnoise::Number: The SD of the random gaussian noise.\ngroupnames::Vector: Vector of group names (default to :random).\nkwargs...: Arguments to pass to other functions.\n\nnote: Note\nIdeas / help required:Different group sizes (See #9)\nBug in some cases (e.g., simulate_data_correlation([0.2, 0.9, 0.5])) related to failure in Cholesky factorization (See #11)\n\nExamples\n\njulia> simulate_data_correlation(0.2)\n100×2 DataFrames.DataFrame\n[...]\n\n\n\n\n\n"
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Data",
     "category": "section",
-    "text": "simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)"
+    "text": "simulate_data_correlation"
 },
 
 {

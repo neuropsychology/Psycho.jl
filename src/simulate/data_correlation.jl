@@ -3,6 +3,33 @@ import LinearAlgebra, Distributions, Random, Statistics, DataFrames
 
 
 
+"""
+    simulate_coefs_correlation(coefs_mean::Number=0.1; coefs_sd::Number=0.1, n::Int=10)
+
+Generate a vector of random correlation coefficients from a normal distribution.
+
+# Arguments
+- `coefs_mean::Number`: Mean of the normal distribution from which to get the coefs.
+- `coefs_sd::Number`: SD of the normal distribution.
+- `n::Int`: Number of coefficients.
+
+# Examples
+```jldoctest
+julia> simulate_coefs_correlation(0.5)
+10-element Array{Array{Float64,1},1}:
+[...]
+```
+"""
+function simulate_coefs_correlation(coefs_mean::Number=0.1; coefs_sd::Number=0.1, n::Int=10)
+  # Generate outcome
+  coefs = Random.rand(Distributions.Normal(coefs_mean, coefs_sd), n)
+  coefs = [x = [x] for x in coefs]
+end
+
+
+
+
+
 
 
 """
@@ -14,6 +41,11 @@ Generate a DataFrame of correlated variables.
 - `coefs::Vector{<:Number}`: Correlation coefficients.
 - `n::Int`: Number of observations.
 - `noise::Number`: The SD of the random gaussian noise.
+
+!!! note
+
+    **Ideas / help required:**
+    - Different group sizes (See [#9](https://github.com/neuropsychology/Psycho.jl/issues/9))
 
 # Examples
 ```jldoctest
@@ -63,4 +95,53 @@ function simulate_data_correlation(coefs::Vector{<:Number}; n::Int=100, noise::N
   data = DataFrames.DataFrame(hcat(y, X),
     Symbol.(vcat(["y"], "Var" .* string.(1:n_var))))
   return data
+end
+
+
+
+
+
+function simulate_data_correlation(coefs::Number; n::Int=100, noise::Number=0.0)
+  simulate_data_correlation([coefs], n=n, noise=noise)
+end
+
+
+
+
+
+function simulate_data_correlation(coefs::Vector{<:Vector}, groupnames::Vector; n::Int=100, noise::Number=0.0)
+
+  # Check and fix length difference
+  if all(y -> y == first(length.(coefs)), length.(coefs)) == false
+    longest = maximum(length.(coefs))
+    for (i, groupcoefs) in enumerate(coefs)
+      if length(groupcoefs) < longest
+        coefs[i] = vcat(groupcoefs, fill(0.0, longest-length(groupcoefs)))
+      end
+    end
+  end
+
+  # Run by group
+  data = DataFrames.DataFrame(Array{Float64}(undef, 0, length(coefs[1])+2))
+  for (i, groupcoefs) in enumerate(coefs)
+    group = simulate_data_correlation(groupcoefs, n=n, noise=noise)
+    group[:Group] = groupnames[i]
+
+    DataFrames.names!(data, names(group))
+    data = vcat(data, group)
+  end
+
+  # Convert to categorical
+  data[:Group] = DataFrames.categorical(data[:Group])
+
+  return data
+end
+
+
+
+
+
+function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, kwargs...)
+  groupnames = simulate_groupnames(length(coefs); kwargs...)
+  data = simulate_data_correlation(coefs, groupnames, n=n, noise=noise)
 end

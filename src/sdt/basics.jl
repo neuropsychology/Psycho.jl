@@ -66,7 +66,7 @@ end
 
 
 
-function sdt_indices(hit::Int, fa::Int; miss::Int, cr::Int, adjusted::Bool=true)
+function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
 
     # Parametric
     z_hit_rate, z_fa_rate = sdt_rates(hit, fa, miss=miss, cr=cr, adjusted=adjusted, z=true)
@@ -87,24 +87,10 @@ function sdt_indices(hit::Int, fa::Int; miss::Int, cr::Int, adjusted::Bool=true)
 
     return indices
 end
+sdt_indices(; hit::Int, fa::Int, miss::Int, cr::Int, adjusted::Bool) = sdt_indices(hit, fa, miss, cr; adjusted=adjusted)
 
 
 
-
-# #--- Variants
-# # TODO
-# # See https://cran.r-project.org/web/packages/psyphy/psyphy.pdf
-#
-# function sdt_dprime_mchoices(hit_rate::Number, m::Int)
-#     # https://github.com/cran/psyphy/blob/master/R/dprime.mAFC.R
-#     # https://cran.r-project.org/web/packages/psyphy/psyphy.pdf
-# end
-#
-#
-# #--- Meta
-#
-#
-#
 #
 # #--- Tests
 #

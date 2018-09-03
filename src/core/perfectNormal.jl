@@ -22,4 +22,4 @@ function perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
                                 range(1/n, stop=1-1/n, length=n))
     return x
 end
-perfectNormal(n::Int=100; mean::Number=0, sd::Number=1) = perfectNormal(n, mean, s)
+perfectNormal(n::Int; mean::Number, sd::Number) = perfectNormal(n, mean, sd)

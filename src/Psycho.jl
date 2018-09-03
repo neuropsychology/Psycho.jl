@@ -3,7 +3,9 @@ module Psycho
 export
     standardize,
     standardize!,
-    simulate_groupnames
+    simulate_groupnames,
+    simulate_coefs_correlation,
+    simulate_data_correlation
 
 
 include("core/standardize.jl")

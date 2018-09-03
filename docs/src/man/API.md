@@ -19,6 +19,17 @@ perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
 Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)
 ```
 
+```@docs
+interpret(x::Real, rules::Rules)
+```
+
+```@docs
+interpret_p(p::Number; alpha::Number=0.05)
+```
+
+```@docs
+format_p(p::Number; stars::Bool=false)
+```
 
 ## Simulate
 

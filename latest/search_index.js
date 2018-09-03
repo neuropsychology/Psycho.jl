@@ -57,14 +57,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "man/API.html#Psycho.perfectNormal",
-    "page": "API",
-    "title": "Psycho.perfectNormal",
-    "category": "function",
-    "text": "perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)\n\nGenerate an almost-perfect normal distribution of size n.\n\nArguments\n\nn::Int: Length of the vector.\nmean::Number: Mean of the vector.\nsd::Number: SD of the vector.\n\nExamples\n\njulia> perfectNormal(10, 0, 1)\n10-element Array{Float64,1}:\n[...]\n\n\n\n\n\n"
-},
-
-{
     "location": "man/API.html#Core-1",
     "page": "API",
     "title": "Core",
@@ -134,6 +126,22 @@ var documenterSearchIndex = {"docs": [
     "title": "Data",
     "category": "section",
     "text": "simulate_data_correlation"
+},
+
+{
+    "location": "man/API.html#Psycho.sdt_indices-NTuple{4,Int64}",
+    "page": "API",
+    "title": "Psycho.sdt_indices",
+    "category": "method",
+    "text": "sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)\n\nCompute Signal Detection Theory (SDT) indices (d\', beta, c, A\', B\'\').\n\nArguments\n\nhit: Number of hits.\nfa: Number of false alarms.\nmiss: Number of misses.\ncr: Number of correct rejections.\nadjusted::Bool: Use Hautus (1995) adjustments for extreme values.\n\nIndices\n\nReturns a Dict containing the following:\n\ndprime (d\'): Sensitivity. Reflects the distance between the two distributions: signal, and signal+noise and corresponds to the Z value of the hit-rate minus that of the false-alarm rate.\nbeta: Bias (criterion). The value for beta is the ratio of the normal density functions at the criterion of the Z values used in the computation of d\'. This reflects an observer\'s bias to say \'yes\' or \'no\' with the unbiased observer having a value around 1.0. As the bias to say \'yes\' increases (liberal), resulting in a higher hit-rate and false-alarm-rate, beta approaches 0.0. As the bias to say \'no\' increases (conservative), resulting in a lower hit-rate and false-alarm rate, beta increases over 1.0 on an open-ended scale.\naprime (A\'): Non-parametric estimate of discriminability. An A\' near 1.0 indicates good discriminability, while a value near 0.5 means chance performance.\nbpp (B\'\'): Non-parametric estimate of bias. A B\'\' equal to 0.0 indicates no bias, positive numbers represent conservative bias (i.e., a tendency to answer \'no\'), negative numbers represent liberal bias (i.e., a tendency to answer \'yes\'). The maximum absolute value is 1.0.\nc: Another index of bias. the number of standard deviations from the midpoint between these two distributions, i.e., a measure on a continuum from \"conservative\" to \"liberal\".\n\nNote that for d\' and beta, adjustement for extreme values are made by default following the recommandations of Hautus (1995).\n\nnote: Note\nIdeas / help required:Compute new indices (See #17)\n\nExamples\n\njulia> sdt_indices(hit=6, fa=7, miss=8, cr=9)\nDict{String,Float64} with 5 entries:\n  \"bpp\"    => -0.0711812\n  \"c\"      => 0.191778\n  \"aprime\" => 0.527793\n  \"dprime\" => -0.0235319\n  \"beta\"   => 0.995497\n\n\n\n\n\n"
+},
+
+{
+    "location": "man/API.html#SDT-1",
+    "page": "API",
+    "title": "SDT",
+    "category": "section",
+    "text": "sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)"
 },
 
 {

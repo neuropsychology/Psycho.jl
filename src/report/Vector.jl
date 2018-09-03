@@ -33,14 +33,14 @@ end
 
 
 
-function report(x::Array{Any, 1}; missing_in_percentage=true, kwargs...)
+function report(x::Array{Any, 1}; missing_percentage::Bool=true, kwargs...)
     n_missings = sum(ismissing.(x))
     if n_missings == 0
         x = fix_variable_type(x)
         text = report(x; kwargs...)
         return Report(text=text)
     end
-    if missing_in_percentage == true
+    if missing_percentage == true
         n_missings = "$(round(n_missings / length(x), digits=2))%"
     end
     x = collect(skipmissing(x))
@@ -53,10 +53,10 @@ end
 
 
 
-function report(x::DataFrames.CategoricalArray{Any, 1}; percentage::Bool=true, kwargs...)
+function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=true, kwargs...)
     text = Vector{String}()
     for level in DataFrames.levels(x)
-        if percentage == true
+        if levels_percentage == true
             n = ", $(round(sum(x .== level)/length(x)*100, digits=2))%"
         else
             n = ", n = $(sum(x .== level))"

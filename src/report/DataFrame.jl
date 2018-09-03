@@ -6,11 +6,16 @@ import DataFrames
 """
     report(df::DataFrames.DataFrame; kwargs...)
 
-Describe a DataFrame.
+Describe the variables in a DataFrame.
 
 # Arguments
 - `df`: DataFrame.
-- `silent::Bool`: Print the output.
+- `missing_percentage::Bool`: Show missings by percentage (default) or number.
+- `levels_percentage::Bool`: Show factor levels by percentage (default) or number.
+- `median::Bool::Bool`: Show `mean` and `sd` (default) or `median` and [`mad`](@ref).
+- `dispersion::Bool`: Show dispersion (`sd` or [`mad`](@ref)).
+- `range::Bool`: Show range.
+
 
 !!! note
 

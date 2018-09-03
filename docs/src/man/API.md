@@ -3,6 +3,13 @@
 Details about Psycho's functions.
 
 
+## Report
+
+```@docs
+report(df::DataFrames.DataFrame; kwargs...)
+```
+
+
 ## Core
 
 ```@docs

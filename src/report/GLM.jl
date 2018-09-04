@@ -124,18 +124,16 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
 
     # Effects
     parameters["text_parameters"] = []
-    for (i, var) in enumerate(parameters["Parameter"])
-        if var != "(Intercept)"
-            effect =
-            "$var is $(parameters["p_interpretation"][i])" *
-            "(beta = $(round(parameters["Coef"][i], digits=2)), " *
-            "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
-            "$(parameters["CI_level"])% "*
-            "[$(round(parameters["CI_lower"][i], digits=2)); $(round(parameters["CI_higher"][i], digits=2))]" *
-            ", $(parameters["p_formatted"][i]))"
+    for (i, var) in enumerate(filter!(x -> x != "(Intercept)", parameters["Parameter"]))
+        effect =
+        "$var is $(parameters["p_interpretation"][i]) " *
+        "(beta = $(round(parameters["Coef"][i], digits=2)), " *
+        "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
+        "$(parameters["CI_level"])% "*
+        "[$(round(parameters["CI_lower"][i], digits=2)); $(round(parameters["CI_higher"][i], digits=2))]" *
+        ", $(parameters["p_formatted"][i]))"
 
-            push!(parameters["text_parameters"], effect)
-        end
+        push!(parameters["text_parameters"], effect)
     end
 
     return parameters

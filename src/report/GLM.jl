@@ -1,109 +1,184 @@
-import DataFrames, GLM
+import Distributions, DataFrames, GLM, StatsModels
+
+
+
+
+
+
+
+function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+end
+
+
+function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+
+    modelname = "linear model"
+    outcome = model.mf.terms.eterms[1]
+    predictors = model.mf.terms.eterms[2:end]
+    formula = StatsModels.Formula(model.mf.terms)
+
+    output = Dict(
+        "Model" => modelname,
+        "Outcome" => outcome,
+        "Predictors" => predictors,
+        "Formula" => formula,
+        "text_description" => "We fitted a linear regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
+        )
+    return Report(text=output["text_description"], values=output)
+end
+
+
+
+
+
+
+
+
+function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+    # p value formula
+    p = Distributions.ccdf.(
+    Distributions.FDist(1, GLM.dof_residual(model)),
+    abs2.(GLM.coef(model) ./ Ref(GLM.stderror(model), 1)))
+
+    output = Dict(
+        "p" => p,
+        "p_interpretation" => interpret_p.(p),
+        "p_formatted" => format_p.(p))
+    return output
+end
+
+
 
 
 
 
 function model_performance(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
 
-    R2 = r2(model)
-    R2_Adj = adjr2(model)
-    text = "The model's explanatory power (R²) is of $(round(R2, digits=2)) (Adj. R² = $(round(R2_Adj, digits=2)))."
+    R2 = GLM.r2(model)
+    R2_adj = GLM.adjr2(model)
 
     output = Dict(
         "R2" => R2,
-        "R2_Adj" => R2_Adj,
-        "text" => text)
-    return output
+        "R2_adj" => R2_adj,
+        "text_performance" => "The model's explanatory power (R²) is of $(round(R2, digits=2)) (adj. R² = $(round(R2_adj, digits=2))).")
+
+    return Report(text=output["text_performance"], values=output)
 end
 
+
+
+
+
+
+
 function model_initial_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-    intercept = coef(model)[1]
-    text = "The model's intercept is at $(round(intercept, digits=2))."
+
+    intercept = GLM.coef(model)[1]
 
     output = Dict(
         "Intercept" => intercept,
-        "text" => text)
-    return output
+        "text_initial" => "The model's intercept is at $(round(intercept, digits=2)).")
+    return Report(text=output["text_initial"], values=output)
 end
 
 
-function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-    # p value formula
-    output = Distributions.ccdf.(
-        Distributions.FDist(1, dof_residual(model)),
-        abs2.(coef(model) ./ stderror(model))
-    )
-    return output
-end
 
 
-function model_table(model::StatsModels.DataFrameRegressionModel)
 
-    names = coefnames(model)
-    coefs = coef(model)
-    std_errors = stderror(model)
-    t_values = coefs ./ std_errors
-    dof = repeat([dof_residual(model)], 2)
-    ci = confint(model)
-    pvalues = model_effects_existence(model)
 
-    summary_table = hcat(names, coefs, std_errors, t_values, dof, ci, pvalues)
-    summary_df = DataFrame(summary_table, [:Parameter, :Coef, :Std_Error, :t, :DoF, :CI_lower, :CI_higher, :p])
-end
 
-function model_effects(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-    effects_table = model_table(model)
 
-    output = Dict()
-    for var in effects_table[:Parameter]
-        output[var] = Dict()
-        var_row = filter(row -> row[:Parameter] == var, effects_table)
+function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 
-        for i in names(var_row)
-            output[var][string(i)] = var_row[i][1]
-        end
-        output[var]["text"] = "$(var_row[:Parameter][1]) is ... ()"
+    parameters = GLM.coefnames(model)
+    coefs = GLM.coef(model)
+    std_errors = GLM.stderror(model)
+    t = coefs ./ std_errors
+    dof = repeat([GLM.dof_residual(model)], 2)
+    ci = GLM.confint(model, CI/100)
+    ci_bounds = [(100-CI)/2, 100-(100-CI)/2]
+    ci_lower = ci[1, :]
+    ci_higher = ci[2, :]
+    loglikelihood = GLM.loglikelihood(model)
+    deviance = GLM.deviance(model)
+
+    parameters = Dict(
+                "Parameter" => parameters,
+                "Coef" => coefs,
+                "Std_error" => std_errors,
+                "t" => t,
+                "DoF" => dof,
+                "CI_level" => CI,
+                "CI" => ci,
+                "CI_bounds" => ci_bounds,
+                "CI_lower" => ci_lower,
+                "CI_higher" => ci_higher,
+                "CI_lower_formatted" => "CI_$(ci_bounds[1])",
+                "CI_higher_formatted" => "CI_$(ci_bounds[2])",
+                "loglikelihood" => ci_higher,
+                "deviance" => deviance)
+
+    parameters = merge(parameters, model_description(model).values)
+    parameters = merge(parameters, model_performance(model).values)
+    parameters = merge(parameters, model_initial_parameters(model).values)
+    parameters = merge(parameters, model_effects_existence(model))
+
+
+
+    # Effects
+    parameters["text_parameters"] = []
+    for (i, var) in enumerate(parameters["Parameter"])
+        effect =
+        "$var is $(parameters["p_interpretation"][i])" *
+        "(beta = $(round(parameters["Coef"][i], digits=2)), " *
+        "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
+        "$(parameters["CI_level"])% "*
+        "[$(round(parameters["CI_lower"][i], digits=2)); $(round(parameters["CI_higher"][i], digits=2))]" *
+        ", $(parameters["p_formatted"][i]))"
+
+        push!(parameters["text_parameters"], effect)
     end
 
-    return output
-end
-
-function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-    # TODO
-end
-
-function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-
-    perf = model_performance(model)["text"]
-    init = model_initial_parameters(model)["text"]
-
-    println("$perf $init Within this model:")
-
-    effects = model_effects(model)
-    for var in coefnames(model)
-        if var != "(Intercept)"
-            println("   - " * effects[var]["text"])
-        end
-    end
+    return parameters
 end
 
 
-function report_table()
+
+
+
+
+
+
+function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
+
+    # Parameters
+    parameters = model_parameters(model, CI=CI)
+
+    # Text
+    description = parameters["text_description"]
+    performance = parameters["text_performance"]
+    initial = parameters["text_initial"]
+
+    text = "$description $performance $initial Within this model:"
+    text = text * join("\n   - " .* parameters["text_parameters"])
+
+    # Table
+    table = hcat(parameters["Parameter"],
+                parameters["Coef"],
+                parameters["Std_error"],
+                parameters["t"],
+                parameters["DoF"],
+                parameters["CI_lower"],
+                parameters["CI_higher"],
+                parameters["p"])
+
+    table = DataFrames.DataFrame(table, [:Parameter,
+                :Coef,
+                :Std_Error,
+                :t,
+                :DoF,
+                Symbol(parameters["CI_lower_formatted"]),
+                Symbol(parameters["CI_higher_formatted"]),
+                :p])
+    return Report(text=text, values=parameters, table=table)
 end
-
-
-# Test
-include("../simulate/data_regression.jl")
-# include("../interpret/interpret.jl.jl")
-include("../interpret/pvalue.jl")
-
-
-# GLM
-df = simulate_data_regression(0.5, n=100)
-model = GLM.lm(@formula(y ~ Var1), df)
-
-model_initial_parameters(model)
-model_performance(model)
-model_table(model)
-model_effects(model)
-report(model)

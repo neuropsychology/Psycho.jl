@@ -60,8 +60,8 @@ report(data)
 ```
 ```
 The data contains 200 observations of the following variables:
-  - y (Mean = 0.0 ± 1.0 [-2.52, 2.92])
-  - Var1 (Mean = -0.0 ± 1.0 [-2.07, 3.05])
+  - y (Mean = 0 ± 1.0 [-2.52, 2.92])
+  - Var1 (Mean = 0 ± 1.0 [-2.07, 3.05])
   - Group (1LV, 50.0%; 2QD, 50.0%)
 ```
 

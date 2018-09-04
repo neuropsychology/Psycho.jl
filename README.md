@@ -19,7 +19,7 @@ It also provides useful tools and functions for psychologists, neuropsychologist
 
 # Contribute
 
-`Psycho.jl` is a young package in need of affection. You can easily hop aboard the developpment of this open-source software and improve psychological science by doing the following:
+`Psycho.jl` **is a young package in need of affection**. You can easily hop aboard the developpment of this open-source software and improve psychological science by doing the following:
 
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
@@ -46,9 +46,11 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 # Examples
 
-## Report Everything
+## Report all the things <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 
 ```julia
+using GLM, Psycho
+
 # Simulate some data
 data = simulate_data_correlation([[0.3], [0.1]])
 
@@ -60,12 +62,22 @@ report(data)
 ```
 ```
 The data contains 200 observations of the following variables:
-  - y (Mean = 0.0 ± 1.0 [-2.52, 2.92])
-  - Var1 (Mean = -0.0 ± 1.0 [-2.07, 3.05])
+  - y (Mean = 0 ± 1.0 [-2.52, 2.92])
+  - Var1 (Mean = 0 ± 1.0 [-2.07, 3.05])
   - Group (1LV, 50.0%; 2QD, 50.0%)
 ```
+```julia
+# Fit a Linear Model
+model = lm(@formula(y ~ Var1), data)
 
-## Signal Detection Theory Indices
+# Report the results
+results = report(model)
+```
+```
+...
+```
+
+## Signal Detection Theory (SDT)
 
 ```julia
 sdt_indices(hit=6, fa=7, miss=8, cr=9)

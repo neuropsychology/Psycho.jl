@@ -17,7 +17,9 @@ export
     sdt_indices,
 
     Report,
-    report
+    report,
+    table,
+    values
 
 
 include("core/standardize.jl")
@@ -34,5 +36,6 @@ include("sdt/basics.jl")
 include("report/report.jl")
 include("report/Vector.jl")
 include("report/DataFrame.jl")
+include("report/GLM.jl")
 
 end # module

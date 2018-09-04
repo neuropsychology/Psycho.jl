@@ -49,6 +49,8 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 ## Report all the things <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 
 ```julia
+using GLM, Psycho
+
 # Simulate some data
 data = simulate_data_correlation([[0.3], [0.1]])
 
@@ -63,6 +65,16 @@ The data contains 200 observations of the following variables:
   - y (Mean = 0 ± 1.0 [-2.52, 2.92])
   - Var1 (Mean = 0 ± 1.0 [-2.07, 3.05])
   - Group (1LV, 50.0%; 2QD, 50.0%)
+```
+```julia
+# Fit a Linear Model
+model = lm(@formula(y ~ Var1), data)
+
+# Report the results
+results = report(model)
+```
+```
+...
 ```
 
 ## Signal Detection Theory (SDT)

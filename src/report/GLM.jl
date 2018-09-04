@@ -124,7 +124,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
 
     # Effects
     parameters["text_parameters"] = []
-    for (i, var) in enumerate(filter!(x -> x != "(Intercept)", parameters["Parameter"]))
+    for (i, var) in enumerate(filter(x -> x != "(Intercept)", parameters["Parameter"]))
         effect =
         "$var is $(parameters["p_interpretation"][i]) " *
         "(beta = $(round(parameters["Coef"][i], digits=2)), " *

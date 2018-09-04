@@ -5,7 +5,7 @@ struct Report
 end
 
 
-function Report(; text="Nothing to report", values=Dict(), table=Array{Any}(undef, 0,0))
+function Report(; text="Nothing to report", values=Dict(), table=Dict())
     Report(text, values, table)
 end
 
@@ -13,7 +13,7 @@ end
 
 
 function Base.show(io::IO, report::Report)
-	display(report.text)
+	println(report.text)
 end
 
 

@@ -145,8 +145,32 @@ end
 
 
 
+"""
+    report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
 
-function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
+Describe a linear model.
+
+# Arguments
+- `model`: A [`GLM.LinearModel`](@ref).
+- `CI::Number`: Confidence interval level.
+
+
+# Examples
+```jldoctest
+using GLM
+
+model = lm(@formula(y ~ Var1 * Group), simulate_data_correlation([[0.1], [0.3]]))
+report(model)
+
+# output
+
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at 0.0. Within this model:
+   - Var1 is not significant (beta = 0.0, t(196) = 0.0, 95% [-0.19; -0.19], p > .1)
+   - Group: 2UL is not significant (beta = 0.1, t(196) = 1.02, 95% [-0.09; -0.09], p > .1)
+   - Var1 & Group: 2UL is not significant (beta = -0.0, t(196) = -0.0, 95% [-0.27; -0.27], p > .1)
+```
+"""
+function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
 
     # Parameters
     parameters = model_parameters(model, CI=CI)

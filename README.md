@@ -48,6 +48,8 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 
 ## Report all the things <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 
+### Data
+
 ```julia
 using GLM, Psycho
 
@@ -66,6 +68,9 @@ The data contains 200 observations ofthe following variables:
   - Var1 (Mean = 0 ± 1.0 [-3.37, 3.1])  
   - Group (1RX, 50.0%; 2UA, 50.0%)
 ```
+
+### GLMs
+
 ```julia
 # Fit a Linear Model
 model = lm(@formula(y ~ Var1 * Group), data)

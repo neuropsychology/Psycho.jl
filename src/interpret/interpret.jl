@@ -17,7 +17,10 @@ Create a container for interpretation rules of thumb. See [`interpret(x::Real, r
 
 # Examples
 ```jldoctest
-julia> Rules([0.05], ["significant", "not significant"], true)
+Rules([0.05], ["significant", "not significant"], true)
+
+# output
+
 Rules{Float64}([0.05], ["significant", "not significant"], true)
 ```
 """
@@ -48,8 +51,11 @@ Interpret a value based on a set of rules of thumb.
 
 # Examples
 ```jldoctest
-julia> p_rules = Rules([0.05], ["significant", "not significant"], true)
-julia> interpret(0.04, p_rules)
+p_rules = Rules([0.05], ["significant", "not significant"], true)
+interpret(0.04, p_rules)
+
+# output
+
 "signifcant"
 ```
 """

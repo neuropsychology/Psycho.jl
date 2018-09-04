@@ -85,20 +85,17 @@ end
 
 
 
-
-
-
 function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 
     parameters = GLM.coefnames(model)
     coefs = GLM.coef(model)
     std_errors = GLM.stderror(model)
     t = coefs ./ std_errors
-    dof = repeat([GLM.dof_residual(model)], 2)
+    dof = repeat([GLM.dof_residual(model)], length(parameters))
     ci = GLM.confint(model, CI/100)
     ci_bounds = [(100-CI)/2, 100-(100-CI)/2]
-    ci_lower = ci[1, :]
-    ci_higher = ci[2, :]
+    ci_lower = ci[:, 1]
+    ci_higher = ci[:, 1]
     loglikelihood = GLM.loglikelihood(model)
     deviance = GLM.deviance(model)
 
@@ -128,15 +125,17 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     # Effects
     parameters["text_parameters"] = []
     for (i, var) in enumerate(parameters["Parameter"])
-        effect =
-        "$var is $(parameters["p_interpretation"][i])" *
-        "(beta = $(round(parameters["Coef"][i], digits=2)), " *
-        "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
-        "$(parameters["CI_level"])% "*
-        "[$(round(parameters["CI_lower"][i], digits=2)); $(round(parameters["CI_higher"][i], digits=2))]" *
-        ", $(parameters["p_formatted"][i]))"
+        if var != "(Intercept)"
+            effect =
+            "$var is $(parameters["p_interpretation"][i])" *
+            "(beta = $(round(parameters["Coef"][i], digits=2)), " *
+            "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
+            "$(parameters["CI_level"])% "*
+            "[$(round(parameters["CI_lower"][i], digits=2)); $(round(parameters["CI_higher"][i], digits=2))]" *
+            ", $(parameters["p_formatted"][i]))"
 
-        push!(parameters["text_parameters"], effect)
+            push!(parameters["text_parameters"], effect)
+        end
     end
 
     return parameters

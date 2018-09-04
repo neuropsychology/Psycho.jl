@@ -13,7 +13,7 @@ end
 
 
 function Base.show(io::IO, report::Report)
-	println(report.text)
+	println(io, report.text)
 end
 
 
@@ -26,6 +26,6 @@ end
 
 
 
-function values(report::Report)
+function Base.values(report::Report)
 	return report.values
 end

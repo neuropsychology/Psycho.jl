@@ -1,6 +1,16 @@
 import GLM
 
-model = GLM.lm(GLM.@formula(y ~ Var1), simulate_data_correlation(0.2))
+data = simulate_data_correlation([[0.1], [0.3]])
+
+# DataFrame
+results = report(data)
+@test isa(results.text, String)
+
+
+
+
+
+model = GLM.lm(GLM.@formula(y ~ Var1 * Group), data)
 
 results = report(model)
 

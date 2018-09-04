@@ -5,10 +5,16 @@ Details about Psycho's functions.
 
 ## Report
 
+### Data
 ```@docs
 report(df::DataFrames.DataFrame; kwargs...)
 ```
 
+### Models
+
+```@docs
+report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
+```
 
 ## Core
 

@@ -18,7 +18,10 @@ Create vector of random group names of length `n` containing `nchar` characters.
 
 # Examples
 ```jldoctest
-julia> simulate_groupnames(10)
+simulate_groupnames(10)
+
+# output
+
 10-element Array{String,1}:
 [...]
 ```

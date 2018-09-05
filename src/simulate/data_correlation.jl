@@ -15,7 +15,10 @@ Generate a vector of random correlation coefficients from a normal distribution.
 
 # Examples
 ```jldoctest
-julia> simulate_coefs_correlation(0.5)
+simulate_coefs_correlation(0.5)
+
+# output
+
 10-element Array{Array{Float64,1},1}:
 [...]
 ```
@@ -56,7 +59,10 @@ Generate a DataFrame of correlated variables.
 
 # Examples
 ```jldoctest
-julia> simulate_data_correlation(0.2)
+simulate_data_correlation(0.2)
+
+# output
+
 100×2 DataFrames.DataFrame
 [...]
 ```

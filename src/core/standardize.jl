@@ -17,7 +17,10 @@ Standardize (scale and reduce, Z-score) X so that the variables are expressed in
 
 # Examples
 ```jldoctest
-julia> standardize([1, 2, 3])
+standardize([1, 2, 3])
+
+# output
+
 3-element Array{Float64,1}:
  -1.0
   0.0

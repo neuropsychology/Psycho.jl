@@ -12,7 +12,10 @@ Generate an almost-perfect normal distribution of size `n`.
 
 # Examples
 ```jldoctest
-julia> perfectNormal(10, 0, 1)
+perfectNormal(10, 0, 1)
+
+# output
+
 10-element Array{Float64,1}:
 [...]
 ```

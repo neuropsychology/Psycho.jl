@@ -96,7 +96,10 @@ Note that for d' and beta, adjustement for extreme values are made by default fo
 
 # Examples
 ```jldoctest
-julia> sdt_indices(hit=6, fa=7, miss=8, cr=9)
+sdt_indices(hit=6, fa=7, miss=8, cr=9)
+
+# output
+
 Dict{String,Float64} with 5 entries:
   "bpp"    => -0.0711812
   "c"      => 0.191778

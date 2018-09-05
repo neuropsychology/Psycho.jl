@@ -4,7 +4,7 @@ makedocs(
     format = :html,
     sitename = "Psycho.jl",
     analytics="UA-97457476-4",
-    modules = [Psycho]
+    modules = [Psycho, DataFrames, GLM]
 )
 
 deploydocs(

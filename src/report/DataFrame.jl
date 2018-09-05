@@ -25,7 +25,10 @@ Describe the variables in a DataFrame.
 
 # Examples
 ```jldoctest
-julia> report(simulate_data_correlation([[0.1], [0.2]]))
+report(simulate_data_correlation([[0.1], [0.2]]))
+
+# output
+
 The data contains 200 observations of the following variables:
 [...]
 ```

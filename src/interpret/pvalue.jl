@@ -12,7 +12,10 @@ P-values are the probability of obtaining an effect at least as extreme as the o
 
 # Examples
 ```jldoctest
-julia> interpret_p(0.04)
+interpret_p(0.04)
+
+# output
+
 "signifcant"
 ```
 """
@@ -40,10 +43,10 @@ Format the *p* value according to APA standards.
 
 # Examples
 ```jldoctest
-julia> format_p(0.04)
-"p < .05"
+format_p(0.04, stars=true)
 
-julia> format_p(0.04, stars=true)
+# output
+
 "p < .05*"
 ```
 """

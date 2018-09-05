@@ -124,41 +124,10 @@ end
 
 
 
+
+
+
 function simulate_data_correlation(coefs::Vector{<:Vector}; n::Int=100, noise::Number=0.0, groupnames=:random, kwargs...)
-
-  if groupnames == :random
-    groupnames = simulate_groupnames(length(coefs); kwargs...)
-  else
-    # Sanity checks
-    if !isa(groupnames, Vector)
-      throw(ArgumentError("groupnames should be a Vector"))
-    elseif length(groupnames) != length(coefs)
-      throw(ArgumentError("groupnames should be of same size as coefs"))
-    end
-  end
-
-  # Check and fix length difference
-  if all(y -> y == first(length.(coefs)), length.(coefs)) == false
-    longest = maximum(length.(coefs))
-    for (i, groupcoefs) in enumerate(coefs)
-      if length(groupcoefs) < longest
-        coefs[i] = vcat(groupcoefs, fill(0.0, longest-length(groupcoefs)))
-      end
-    end
-  end
-
-  # Run by group
-  data = DataFrames.DataFrame(Array{Float64}(undef, 0, length(coefs[1])+2))
-  for (i, groupcoefs) in enumerate(coefs)
-    group = simulate_data_correlation(groupcoefs, n=n, noise=noise)
-    group[:Group] = groupnames[i]
-
-    DataFrames.names!(data, names(group))
-    data = vcat(data, group)
-  end
-
-  # Convert to categorical
-  data[:Group] = DataFrames.categorical(data[:Group])
-
+  data = simulate_data_groups(simulate_data_correlation, coefs=coefs, n=n, noise=noise, groupnames=groupnames, kwargs...)
   return data
 end

@@ -13,6 +13,7 @@ export
     simulate_groupnames,
     simulate_coefs_correlation,
     simulate_data_correlation,
+    simulate_data_logistic,
 
     sdt_indices,
 
@@ -28,14 +29,15 @@ include("core/perfectNormal.jl")
 include("interpret/interpret.jl")
 include("interpret/pvalue.jl")
 
-include("simulate/groupnames.jl")
+include("simulate/data_groups.jl")
 include("simulate/data_correlation.jl")
+include("simulate/data_logistic.jl")
 
 include("sdt/basics.jl")
 
 include("report/report.jl")
 include("report/Vector.jl")
 include("report/DataFrame.jl")
-include("report/GLM.jl")
+include("report/LM.jl")
 
 end # module

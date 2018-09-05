@@ -3,8 +3,9 @@ using Documenter, Psycho
 makedocs(
     format = :html,
     sitename = "Psycho.jl",
+    authors="Dominique Makowski",
     analytics="UA-97457476-4",
-    modules = [Psycho, DataFrames, GLM]
+    modules = [Psycho]
 )
 
 deploydocs(

@@ -61,7 +61,7 @@ function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=
         else
             n = ", n = $(sum(x .== level))"
         end
-        text[i] = level * n)
+        text[i] = level * n
     end
     text = join(text, "; ")
 

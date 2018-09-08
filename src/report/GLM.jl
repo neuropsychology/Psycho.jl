@@ -1,18 +1,20 @@
 # import Distributions, DataFrames, GLM, StatsModels
 #
 #
-# data = DataFrame([[0,0,0,1, 1, 1], [1, 2, 3, 2, 3, 4]], [:y, :x])
+# data = simulate_data_logistic([0.1, 0.5], n=100)
 #
-# glm(@formula(y ~ x), data, Binomial(), LogitLink())
+# model = GLM.glm(GLM.@formula(y ~ Var1 + Var2), data, GLM.Binomial())
 #
+# typeof(model)
+# model_description(model)
 #
-# function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+# function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 # end
+# GLM.GeneralizedLinearModel{GLM.GlmResp{Array{Float64,1},Distributions.Binomial{Float64},GLM.LogitLink}
 #
+# function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 #
-# function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-#
-#     modelname = "linear model"
+#     modelname = "generalized linear model"
 #     outcome = model.mf.terms.eterms[1]
 #     predictors = model.mf.terms.eterms[2:end]
 #     formula = StatsModels.Formula(model.mf.terms)
@@ -22,7 +24,7 @@
 #         "Outcome" => outcome,
 #         "Predictors" => predictors,
 #         "Formula" => formula,
-#         "text_description" => "We fitted a linear regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
+#         "text_description" => "We fitted a logistic regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
 #         )
 #     return Report(text=output["text_description"], values=output)
 # end

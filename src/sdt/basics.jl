@@ -42,7 +42,7 @@ function sdt_c(z_hit_rate::Number, z_fa_rate::Number)
 end
 
 function sdt_aprime(hit_rate::Number, fa_rate::Number)
-    if hit_rate > fa_rate
+    if hit_rate >= fa_rate
         a = 0.5 + ((hit_rate - fa_rate) * (1 + hit_rate - fa_rate) / (4 * hit_rate * (1 - fa_rate)))
     else
         a = 0.5 - ((fa_rate - hit_rate) * (1 + fa_rate - hit_rate) / (4 * fa_rate * (1 - hit_rate)))
@@ -52,7 +52,7 @@ function sdt_aprime(hit_rate::Number, fa_rate::Number)
 end
 
 function sdt_bpp(hit_rate::Number, fa_rate::Number)
-    if hit_rate > fa_rate
+    if hit_rate >= fa_rate
         bpp = (hit_rate*(1-hit_rate) - fa_rate*(1-fa_rate))/(hit_rate*(1-hit_rate) + fa_rate*(1-fa_rate))
     else
         bpp = (fa_rate*(1-fa_rate) - hit_rate*(1-hit_rate))/(fa_rate*(1-fa_rate) + hit_rate*(1-hit_rate))
@@ -60,7 +60,6 @@ function sdt_bpp(hit_rate::Number, fa_rate::Number)
 
     return bpp
 end
-
 
 
 
@@ -94,6 +93,7 @@ Note that for d' and beta, adjustement for extreme values are made by default fo
     **Ideas / help required:**
     - Compute new indices (See [#17](https://github.com/neuropsychology/Psycho.jl/issues/17))
 
+
 # Examples
 ```jldoctest
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
@@ -101,12 +101,16 @@ sdt_indices(hit=6, fa=7, miss=8, cr=9)
 # output
 
 Dict{String,Float64} with 5 entries:
-  "bpp"    => -0.0711812
+  "bpp"    => 0.00243546
   "c"      => 0.191778
-  "aprime" => 0.527793
+  "aprime" => 0.490992
   "dprime" => -0.0235319
   "beta"   => 0.995497
 ```
+
+# References
+
+- Stanislaw, H., & Todorov, N. (1999). Calculation of signal detection theory measures. Behavior research methods, instruments, & computers, 31(1), 137-149.
 """
 function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
 
@@ -118,8 +122,8 @@ function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
 
     # Non-parametric
     hit_rate, fa_rate = sdt_rates(hit, fa, miss=miss, cr=cr, adjusted=false, z=false)
-    aprime = sdt_aprime(z_hit_rate, z_fa_rate)
-    bpp = sdt_bpp(z_hit_rate, z_fa_rate)
+    aprime = sdt_aprime(hit_rate, fa_rate)
+    bpp = sdt_bpp(hit_rate, fa_rate)
 
     indices = Dict("dprime" => dprime,
                 "aprime" => aprime,

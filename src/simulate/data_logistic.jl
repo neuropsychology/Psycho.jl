@@ -1,4 +1,4 @@
-import Distributions, Random, StatsFuns
+import Distributions, Random, StatsFuns, DataFrames
 
 
 
@@ -6,6 +6,12 @@ import Distributions, Random, StatsFuns
     simulate_data_logistic(coefs; n::Int=100, noise::Number=0.0, groupnames=:random)
 
 Generate a DataFrame of variables related a binary dependent variable by specified regression `coefs`.
+
+
+!!! warning
+
+    This function, adapted from [this](https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression) thread, doesn't work as expected (See [#27](https://github.com/neuropsychology/Psycho.jl/issues/27)).
+
 
 # Multiple Variables / Groups
 - If `coefs` is a vector (*e.g., `[0.1, 0.2]`), the DataFrame will contain `length(coefs)` variables (`Var1, Var2, ...`). Altough uncorrelated between them, they are  correlated to the outcome (`y`) by the specified coefs.
@@ -40,9 +46,9 @@ function simulate_data_logistic end
 
 
 function simulate_data_logistic(coefs::Vector{<:Number}; n::Int=100, noise::Number=0.0)
-
+    # https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression
     n_var = length(coefs)
-    X = standardize(randn(n, n_var))
+    X = randn(n, n_var)
     Z = X * coefs .+ 1
 
     p = StatsFuns.logistic.(Z)

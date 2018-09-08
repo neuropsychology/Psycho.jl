@@ -54,14 +54,14 @@ end
 
 
 function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=true, kwargs...)
-    text = Vector{String}()
-    for level in DataFrames.levels(x)
+    text = string.(zeros(DataFrames.levels(x)))
+    for (i, level) in enumerate(DataFrames.levels(x))
         if levels_percentage == true
             n = ", $(round(sum(x .== level)/length(x)*100, digits=2))%"
         else
             n = ", n = $(sum(x .== level))"
         end
-        push!(text, (level * n))
+        text[i] = level * n)
     end
     text = join(text, "; ")
 

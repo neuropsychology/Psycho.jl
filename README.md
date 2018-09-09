@@ -51,7 +51,7 @@ pkg> add https://github.com/neuropsychology/Psycho.jl.git
 ### Data
 
 ```julia
-using GLM, Psycho
+using Psycho
 
 # Simulate some data
 data = simulate_data_correlation([[0.3], [0.1]])
@@ -69,9 +69,11 @@ The data contains 200 observations ofthe following variables:
   - Group (1RX, 50.0%; 2UA, 50.0%)
 ```
 
-### GLMs
+### Linear Models (LM)
 
 ```julia
+using GLM
+
 # Fit a Linear Model
 model = lm(@formula(y ~ Var1 * Group), data)
 
@@ -79,11 +81,10 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of
-0.05 (adj. R² = 0.04). The model's intercept is at 0.0. Within this model:
-   - Var1 is significant (beta = 0.3, t(196) = 3.05, 95% [0.11; 0.11], p < .01)
-   - Group: 2UA is not significant (beta = -0.0, t(196) = -0.0, 95% [-0.27; -0.27], p > .1)
-   - Var1 & Group: 2UA is significant (beta = -0.2, t(196) = -1.44, 95% [-0.47; -0.47], p < .05)
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.09 (adj. R² = 0.07). The model's intercept is at 0.0. Within this model:
+  - Var1 is not significant (beta = 0.1, t(196) = 1.03, 95% [-0.09; -0.09], p > .1)
+  - Group: 2PN is not significant (beta = 0, t(196) = 0, 95% [-0.27; -0.27], p > .1)
+  - Var1 & Group: 2PN is significant (beta = 0.3, t(196) = 2.2, 95% [0.03; 0.03], p < .01)
 ```
 
 ## Signal Detection Theory (SDT)

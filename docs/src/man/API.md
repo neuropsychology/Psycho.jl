@@ -52,6 +52,10 @@ format_p(p::Number; stars::Bool=false)
 simulate_data_correlation
 ```
 
+```@docs
+simulate_data_logistic
+```
+
 ## SDT
 
 ```@docs
@@ -67,7 +71,3 @@ simulate_coefs_correlation(coefs_mean::Number=0.1; coefs_sd::Number=0.1, n::Int=
 ```@docs
 simulate_groupnames(n::Int; nchar::Int=2)
 ```
-
-
-
-

@@ -141,7 +141,9 @@ function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
                 "c" => c,
                 "bpp" => bpp,
                 "pr" => pr,
-                "br" => br)
+                "br" => br,
+                "hit_rate" => hit_rate,
+                "fa_rate" => fa_rate)
 
     return indices
 end

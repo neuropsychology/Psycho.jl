@@ -54,7 +54,7 @@ end
 
 
 function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=true, kwargs...)
-    text = string.(zeros(DataFrames.levels(x)))
+    text = string.(zeros(length(DataFrames.levels(x))))
     for (i, level) in enumerate(DataFrames.levels(x))
         if levels_percentage == true
             n = ", $(round(sum(x .== level)/length(x)*100, digits=2))%"

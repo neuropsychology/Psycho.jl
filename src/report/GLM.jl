@@ -1,53 +1,57 @@
-# import Distributions, DataFrames, GLM, StatsModels
+import Distributions, DataFrames, GLM, StatsModels
 #
-#
+
 # data = simulate_data_logistic([0.1, 0.5], n=100)
-#
 # model = GLM.glm(GLM.@formula(y ~ Var1 + Var2), data, GLM.Binomial())
 #
-# typeof(model)
+#
+# print(typeof(model))
 # model_description(model)
 #
+
+
+
+
 # function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 # end
+
+
 # GLM.GeneralizedLinearModel{GLM.GlmResp{Array{Float64,1},Distributions.Binomial{Float64},GLM.LogitLink}
 #
-# function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
-#
-#     modelname = "generalized linear model"
-#     outcome = model.mf.terms.eterms[1]
-#     predictors = model.mf.terms.eterms[2:end]
-#     formula = StatsModels.Formula(model.mf.terms)
-#
-#     output = Dict(
-#         "Model" => modelname,
-#         "Outcome" => outcome,
-#         "Predictors" => predictors,
-#         "Formula" => formula,
-#         "text_description" => "We fitted a logistic regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
-#         )
-#     return Report(text=output["text_description"], values=output)
-# end
-#
-#
-#
-#
-#
-#
-#
-#
-# function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
-#     # p value formula
-#     p = Distributions.ccdf.(
-#     Distributions.FDist(1, GLM.dof_residual(model)),
-#     abs2.(GLM.coef(model) ./ Ref(GLM.stderror(model), 1)))
-#
-#     output = Dict(
-#         "p" => p,
-#         "p_interpretation" => interpret_p.(p),
-#         "p_formatted" => format_p.(p))
-#     return output
-# end
+function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
+
+    modelname = "generalized linear model"
+    outcome = model.mf.terms.eterms[1]
+    predictors = model.mf.terms.eterms[2:end]
+    formula = StatsModels.Formula(model.mf.terms)
+
+    output = Dict(
+        "Model" => modelname,
+        "Outcome" => outcome,
+        "Predictors" => predictors,
+        "Formula" => formula,
+        "text_description" => "We fitted a logistic regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
+        )
+    return Report(text=output["text_description"], values=output)
+end
+
+
+
+
+
+function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+    # Extract the p value
+    # TODO: Damn it's complicated for now!
+
+    coef_table = GLM.coeftable(model)
+    p = [x.v for x in coef_table.cols[4]]
+
+    output = Dict(
+        "p" => p,
+        "p_interpretation" => interpret_p.(p),
+        "p_formatted" => format_p.(p))
+    return output
+end
 #
 #
 #
@@ -66,7 +70,7 @@
 #
 #     return Report(text=output["text_performance"], values=output)
 # end
-#
+# #
 #
 #
 #

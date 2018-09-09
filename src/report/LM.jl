@@ -36,9 +36,10 @@ end
 
 function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
     # p value formula
-    p = Distributions.ccdf.(
-    Distributions.FDist(1, GLM.dof_residual(model)),
-    abs2.(GLM.coef(model) ./ Ref(GLM.stderror(model), 1)))
+    # TODO: Damn it's complicated for now!
+
+    coef_table = GLM.coeftable(model)
+    p = [x.v for x in coef_table.cols[4]]
 
     output = Dict(
         "p" => p,
@@ -101,6 +102,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     ci_higher = ci[:, 1]
     loglikelihood = GLM.loglikelihood(model)
     deviance = GLM.deviance(model)
+    sigma = sqrt(deviance/GLM.dof_residual(model))
 
     parameters = Dict(
                 "Parameter" => parameters,

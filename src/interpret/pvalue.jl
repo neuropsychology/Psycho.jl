@@ -51,12 +51,12 @@ format_p(0.04, stars=true)
 ```
 """
 function format_p(p::Number; stars::Bool=false)
-    if p < .001
+    if p < 0.001
         output = "p < .001"
         if stars == true
             output *= "***"
         end
-    elseif p < .01
+    elseif p < 0.01
         output = "p < .01"
         if stars == true
             output *= "**"

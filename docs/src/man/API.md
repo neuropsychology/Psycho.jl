@@ -7,13 +7,13 @@ Details about Psycho's functions.
 
 ### Data
 ```@docs
-report
+report(df::DataFrames.DataFrame; kwargs...)
 ```
 
 ### Models
 
 ```@docs
-report
+report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 ```
 
 ## Core

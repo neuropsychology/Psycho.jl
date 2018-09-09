@@ -5,12 +5,18 @@ Welcome to Psycho's for Julia documentation.
 
 !!! note
 
-    The package is not released yet.
+    The package is not released yet. Help for its developpment is very much appreciated.
     
     
 ## Status and News
 
 - 2018/09/02: Initial release of the documentation.
+
+## Goal
+
+`Psycho`'s primary goal is to fill the gap between Julia's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines, ensuring standardization and quality of results reporting.
+It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analyses.
+
 
 ## Quick Example
 

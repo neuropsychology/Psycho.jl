@@ -1,11 +1,11 @@
-using Documenter, Psycho
+using Documenter, Psycho, DataFrames
 
 makedocs(
     format = :html,
     sitename = "Psycho.jl",
     authors="Dominique Makowski",
     analytics="UA-97457476-4",
-    modules = [Psycho]
+    modules = [Psycho, DataFrames]
 )
 
 deploydocs(

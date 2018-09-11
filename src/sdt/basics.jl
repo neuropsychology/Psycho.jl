@@ -44,7 +44,7 @@ end
 
 
 function sdt_c_relative(z_hit_rate::Number, z_fa_rate::Number)
-    c_relative = sdt_c(z_hit_rate, z_fa_rate) / sdt_d(z_hit_rate, z_fa_rate)
+    c_relative = sdt_c(z_hit_rate, z_fa_rate) / sdt_dprime(z_hit_rate, z_fa_rate)
     return c_relative
 end
 

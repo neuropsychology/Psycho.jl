@@ -171,7 +171,7 @@ end
 Describe a linear model.
 
 # Arguments
-- `model`: A [`GLM.LinearModel`](@ref).
+- `model`: A [`Linear Model`](@ref GLM.LinearModel).
 - `CI::Number`: Confidence interval level.
 
 

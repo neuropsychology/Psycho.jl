@@ -11,7 +11,7 @@ Compute Tjur's (2009) D (R²).
 The Coefficients of Determination (D), also referred to as Tjur's R² ([Tjur, 2009](https://amstat.tandfonline.com/doi/abs/10.1198/tast.2009.08210#.W5eJjOgzYuU)), is asymptotically equivalent to the classical version of R² for linear models.
 
 # Arguments
-- `model`: A [`GLM.GeneralizedLinearModel`](@ref).
+- `model`: A [`GeneralizedLinearModel`](@ref GLM.GeneralizedLinearModel).
 
 # References
 - Tjur, T. (2009). Coefficients of determination in logistic regression models—A new proposal: The coefficient of discrimination. The American Statistician, 63(4), 366-372.

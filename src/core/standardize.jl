@@ -8,7 +8,7 @@ Standardize (scale and reduce, Z-score) X so that the variables are expressed in
 
 # Arguments
 - `X`: Array or DataFrame.
-- `robust::Bool`: If true, the standardization will be based on `median` and [`mad`](@ref) instead of `mean` and `sd` (default).
+- `robust::Bool`: If true, the standardization will be based on `median` and [`mad`](@ref StatsBase.mad) instead of `mean` and `sd` (default).
 
 !!! note
 

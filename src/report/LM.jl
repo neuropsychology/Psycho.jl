@@ -10,6 +10,17 @@ function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearMod
 end
 
 
+
+
+
+function model_data(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+    return model.mf.df
+end
+
+
+
+
+
 function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
 
     modelname = "linear model"
@@ -94,12 +105,12 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     parameters = GLM.coefnames(model)
     coefs = GLM.coef(model)
     std_errors = GLM.stderror(model)
-    t = coefs ./ std_errors
+    t = GLM.coeftable(model).cols[3]
     dof = repeat([GLM.dof_residual(model)], length(parameters))
     ci = GLM.confint(model, CI/100)
     ci_bounds = [(100-CI)/2, 100-(100-CI)/2]
     ci_lower = ci[:, 1]
-    ci_higher = ci[:, 1]
+    ci_higher = ci[:, 2]
     loglikelihood = GLM.loglikelihood(model)
     deviance = GLM.deviance(model)
     sigma = sqrt(deviance/GLM.dof_residual(model))
@@ -135,7 +146,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     for (i, var) in enumerate(filter(x -> x != "(Intercept)", parameters["Parameter"]))
         effect =
         "$var is $(parameters["p_interpretation"][i+1]) " *
-        "(beta = $(round(parameters["Coef"][i+1], digits=2)), " *
+        "(coef = $(round(parameters["Coef"][i+1], digits=2)), " *
         "t($(Int(parameters["DoF"][i+1]))) = $(round(parameters["t"][i+1], digits=2)), " *
         "$(parameters["CI_level"])% "*
         "[$(round(parameters["CI_lower"][i+1], digits=2)); " *
@@ -166,17 +177,16 @@ Describe a linear model.
 
 # Examples
 ```jldoctest
-using GLM
+using GLM, DataFrames
 
-model = lm(@formula(y ~ Var1 * Group), simulate_data_correlation([[0.1], [0.4]]))
+model = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))
 report(model)
 
 # output
 
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.09 (adj. R² = 0.07). The model's intercept is at 0.0. Within this model:
-  - Var1 is not significant (beta = 0.1, t(196) = 1.03, 95% [-0.09; -0.09], p > .1)
-  - Group: 2PN is not significant (beta = -0.0, t(196) = -0.0, 95% [-0.27; -0.27], p > .1)
-  - Var1 & Group: 2PN is significant (beta = 0.3, t(196) = 2.2, 95% [0.03; 0.03], p < .01)
+We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model's explanatory power (R²)
+is of 0.97 (adj. R² = 0.95). The model's intercept is at -3.14. Within this model:
+  - Var1 is significant (coef = 1.49, t(2) = 7.51, 95% [0.63; 2.34], p < .05)
 ```
 """
 function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
@@ -202,7 +212,8 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; 
                 parameters["CI_higher"],
                 parameters["p"])
 
-    table = DataFrames.DataFrame(table, [:Parameter,
+    table = DataFrames.DataFrame(table,
+                [:Parameter,
                 :Coef,
                 :Std_Error,
                 :t,

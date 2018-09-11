@@ -15,6 +15,10 @@ report(df::DataFrames.DataFrame; kwargs...)
 ```@docs
 report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 ```
+```@docs
+report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI=95)
+```
+
 
 ## Core
 
@@ -24,6 +28,10 @@ standardize
 
 ```@docs
 perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
+```
+
+```@docs
+r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 ```
 
 ## Interpret

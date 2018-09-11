@@ -1,23 +1,45 @@
-import Statistics, DataFrames, StatsBase, GLM
+import Statistics, StatsModels, GLM
 
 
-data = simulate_data_logistic([0.1, 0.5], n=100)
-model = GLM.glm(GLM.@formula(y ~ Var1 + Var2), data, GLM.Binomial())
 
-model.model.rr.mu
-GLM.fitted(model)
-GLM.model_response(model)
-fieldnames(model.model)
-model.mf
 
-# https://www.jstor.org/stable/pdf/25652317.pdf?casa_token=wzZ_TvA39rEAAAAA:cAFFDx4FoHxdVgxn5nZG-hhvU3FycqRbpHlwe__DlWi-MVqxcdeZvmlTraylxsobzI5lBieLLpLuT4ii1-K72GdDBFzCt6v-32TdTApBZCxL-XITbpff
-function r2_tjur()
-    Average_1 = Statistics.mean(round.(GLM.predict(model, data[data[:y] .== 1.0, :])))
-    Average_0 = Statistics.mean(round.(GLM.predict(model, data[data[:y] .== 0.0, :])))
+"""
+    r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 
+Compute Tjur's (2009) D (R²).
+
+The Coefficients of Determination (D), also referred to as Tjur's R² ([Tjur, 2009](https://amstat.tandfonline.com/doi/abs/10.1198/tast.2009.08210#.W5eJjOgzYuU)), is asymptotically equivalent to the classical version of R² for linear models.
+
+# Arguments
+- `model`: A [`GLM.GeneralizedLinearModel`](@ref).
+
+# References
+- Tjur, T. (2009). Coefficients of determination in logistic regression models—A new proposal: The coefficient of discrimination. The American Statistician, 63(4), 366-372.
+
+# Examples
+```jldoctest
+using GLM, DataFrames
+
+model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())
+r2_tjur(model)
+
+# output
+
+0.5
+```
+"""
+function r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
+    data = model_data(model)
+    outcome = values(model_description(model))["Outcome"]
+
+    Average_1 = Statistics.mean(round.(GLM.predict(model, data[data[outcome] .== 1.0, :])))
+    Average_0 = Statistics.mean(round.(GLM.predict(model, data[data[outcome] .== 0.0, :])))
+    D = abs(Average_1 - Average_0)
+    return D
 end
 
 
 # http://rsif.royalsocietypublishing.org/content/14/134/20170213
 # https://github.com/cran/MuMIn/blob/master/R/r.squaredGLMM2.R
+# https://github.com/strengejacke/sjstats/blob/master/R/r2.R#L445
 # r2glmm

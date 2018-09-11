@@ -26,11 +26,6 @@ Describe the variables in a DataFrame.
 # Examples
 ```julia
 report(simulate_data_correlation([[0.1], [0.2]]))
-
-# output
-
-The data contains 200 observations of the following variables:
-[...]
 ```
 """
 function report(df::DataFrames.DataFrame; kwargs...)

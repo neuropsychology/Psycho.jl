@@ -19,11 +19,6 @@ Create vector of random group names of length `n` containing `nchar` characters.
 # Examples
 ```julia
 simulate_groupnames(10)
-
-# output
-
-10-element Array{String,1}:
-[...]
 ```
 """
 function simulate_groupnames(n::Int; nchar::Int=2)

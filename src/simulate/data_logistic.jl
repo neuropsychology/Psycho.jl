@@ -32,11 +32,6 @@ Generate a DataFrame of variables related a binary dependent variable by specifi
 # Examples
 ```julia
 simulate_data_logistic(0.2)
-
-# output
-
-100×2 DataFrames.DataFrame
-[...]
 ```
 """
 function simulate_data_logistic end

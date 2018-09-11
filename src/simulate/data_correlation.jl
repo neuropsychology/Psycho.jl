@@ -16,11 +16,6 @@ Generate a vector of random correlation coefficients from a normal distribution.
 # Examples
 ```julia
 simulate_coefs_correlation(0.5)
-
-# output
-
-10-element Array{Array{Float64,1},1}:
-[...]
 ```
 """
 function simulate_coefs_correlation(coefs_mean::Number=0.1; coefs_sd::Number=0.1, n::Int=10)
@@ -60,11 +55,6 @@ Generate a DataFrame of correlated variables.
 # Examples
 ```julia
 simulate_data_correlation(0.2)
-
-# output
-
-100×2 DataFrames.DataFrame
-[...]
 ```
 """
 function simulate_data_correlation end

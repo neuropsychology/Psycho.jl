@@ -109,11 +109,6 @@ Note that for d' and beta, adjustement for extreme values are made by default fo
 # Examples
 ```julia
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
-
-# output
-
-Dict{String,Float64} with 7 entries:
-[...]
 ```
 
 # References

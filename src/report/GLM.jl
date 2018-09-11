@@ -168,7 +168,7 @@ end
 Describe a general linear model.
 
 # Arguments
-- `model`: A [`Generalized Linear Model`](@ref GLM.GeneralizedLinearModel).
+- `model`: A `GeneralizedLinearModel`.
 - `CI::Number`: Confidence interval level.
 
 

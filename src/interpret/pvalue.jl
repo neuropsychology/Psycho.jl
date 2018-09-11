@@ -11,7 +11,9 @@ P-values are the probability of obtaining an effect at least as extreme as the o
 - `alpha::Number`: Significance treshold.
 
 # Examples
-```julia
+```jldoctest
+using Psycho
+
 interpret_p(0.04)
 
 # output
@@ -42,7 +44,9 @@ Format the *p* value according to APA standards.
 - `stars::Bool`: Add stars (*) when significant.
 
 # Examples
-```julia
+```jldoctest
+using Psycho
+
 format_p(0.04, stars=true)
 
 # output

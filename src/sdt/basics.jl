@@ -84,11 +84,11 @@ Compute Signal Detection Theory (SDT) indices (d', beta, c, A', B'').
 # Indices
 Returns a `Dict` containing the following indices:
 
-- **dprime (d')**: Sensitivity. Reflects the distance between the two distributions: signal, and signal+noise and corresponds to the Z value of the hit-rate minus that of the false-alarm rate.
+- **dprime (d')**: Sensitivity (pronounced (*"dee-prime"*). Reflects the distance between the two distributions: signal, and signal+noise and corresponds to the Z value of the hit-rate minus that of the false-alarm rate.
 - **beta**: Bias (criterion). The value for beta is the ratio of the normal density functions at the criterion of the Z values used in the computation of d'. This reflects an observer's bias to say 'yes' or 'no' with the unbiased observer having a value around 1.0. As the bias to say 'yes' increases (liberal), resulting in a higher hit-rate and false-alarm-rate, beta approaches 0.0. As the bias to say 'no' increases (conservative), resulting in a lower hit-rate and false-alarm rate, beta increases over 1.0 on an open-ended scale.
 - **c**: Another index of bias. the number of standard deviations from the midpoint between these two distributions, *i.e.*, a measure on a continuum from "conservative" to "liberal".
 - **aprime (A')**: Non-parametric estimate of discriminability. An A' near 1.0 indicates good discriminability, while a value near 0.5 means chance performance.
-- **bpp (B'')**: Also referred to as B''D. Non-parametric estimate of bias. A B'' equal to 0.0 indicates no bias, positive numbers represent conservative bias (*i.e.*, a tendency to answer 'no'), negative numbers represent liberal bias (*i.e.*, a tendency to answer 'yes'). The maximum absolute value is 1.0.
+- **bpp (B'')**: Also referred to as B''D (pronounced *"b prime prime d"*). Non-parametric estimate of bias. A B'' equal to 0.0 indicates no bias, positive numbers represent conservative bias (*i.e.*, a tendency to answer 'no'), negative numbers represent liberal bias (*i.e.*, a tendency to answer 'yes'). The maximum absolute value is 1.0.
 - **pr** and **br**: Indices based on the *Two-High Threshold Model* (Feenan & Snodgrass, 1990). Pr is the discrimination measure (also sometimes called the corrected recognition score). Br is the bias measure; values greater than 0.5 indicate a liberal bias, values less than 0.5 indicate a conservative bias.
 
 Note that for d' and beta, adjustement for extreme values are made by default following the recommandations of Hautus (1995).
@@ -106,13 +106,7 @@ sdt_indices(hit=6, fa=7, miss=8, cr=9)
 # output
 
 Dict{String,Float64} with 7 entries:
-  "bpp"    => 0.263158
-  "c"      => 0.191778
-  "aprime" => 0.490992
-  "br"     => 0.433628
-  "dprime" => -0.0235319
-  "pr"     => -0.00892857
-  "beta"   => 0.995497
+[...]
 ```
 
 # References

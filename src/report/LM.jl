@@ -176,7 +176,7 @@ Describe a linear model.
 
 
 # Examples
-```jldoctest
+```julia
 using GLM, DataFrames
 
 model = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))

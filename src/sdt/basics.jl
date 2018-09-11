@@ -107,7 +107,7 @@ Note that for d' and beta, adjustement for extreme values are made by default fo
 
 
 # Examples
-```jldoctest
+```julia
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
 
 # output

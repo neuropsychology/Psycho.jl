@@ -14,7 +14,7 @@ Generate a vector of random correlation coefficients from a normal distribution.
 - `n::Int`: Number of coefficients.
 
 # Examples
-```jldoctest
+```julia
 simulate_coefs_correlation(0.5)
 
 # output
@@ -58,7 +58,7 @@ Generate a DataFrame of correlated variables.
     - Bug in some cases (*e.g.*, `simulate_data_correlation([0.2, 0.9, 0.5])`) related to failure in Cholesky factorization (See [#11](https://github.com/neuropsychology/Psycho.jl/issues/11))
 
 # Examples
-```jldoctest
+```julia
 simulate_data_correlation(0.2)
 
 # output

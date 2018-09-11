@@ -24,7 +24,7 @@ Describe the variables in a DataFrame.
     - Deal with SubDataFrames (See [#20](https://github.com/neuropsychology/Psycho.jl/issues/20))
 
 # Examples
-```jldoctest
+```julia
 report(simulate_data_correlation([[0.1], [0.2]]))
 
 # output

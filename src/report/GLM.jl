@@ -173,7 +173,7 @@ Describe a general linear model.
 
 
 # Examples
-```jldoctest
+```julia
 using GLM, DataFrames
 
 model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())

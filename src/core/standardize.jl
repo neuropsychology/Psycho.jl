@@ -16,7 +16,7 @@ Standardize (scale and reduce, Z-score) X so that the variables are expressed in
     - Deal with missing values (See [#4](https://github.com/neuropsychology/Psycho.jl/issues/4))
 
 # Examples
-```jldoctest
+```julia
 standardize([1, 2, 3])
 
 # output

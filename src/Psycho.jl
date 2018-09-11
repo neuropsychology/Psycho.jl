@@ -26,7 +26,8 @@ export
 
 include("core/standardize.jl")
 include("core/perfectNormal.jl")
-include("core/R2.jl")
+
+include("modelling/R2.jl")
 
 include("interpret/interpret.jl")
 include("interpret/pvalue.jl")

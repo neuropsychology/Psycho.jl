@@ -27,7 +27,7 @@ standardize
 ```
 
 ```@docs
-perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
+perfectNormal(n::Int, mean::Number=0, sd::Number=1)
 ```
 
 ```@docs

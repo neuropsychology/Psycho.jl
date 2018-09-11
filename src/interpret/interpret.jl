@@ -16,7 +16,9 @@ Create a container for interpretation rules of thumb. See [`interpret(x::Real, r
 - `iflower::Bool`: If true, each label will be given if the value *is lower* than its breakpoint. The contrary if false.
 
 # Examples
-```julia
+```jldoctest
+using Psycho
+
 Rules([0.05], ["significant", "not significant"], true)
 
 # output
@@ -50,7 +52,9 @@ Interpret a value based on a set of rules of thumb.
 - `rules::Rules`: A [`Rules`](@ref) object.
 
 # Examples
-```julia
+```jldoctest
+using Psycho
+
 p_rules = Rules([0.05], ["significant", "not significant"], true)
 interpret(0.04, p_rules)
 

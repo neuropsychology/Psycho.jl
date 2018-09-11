@@ -34,11 +34,9 @@ end
 
 
 
-function format_text!(text)
-	replace!(text,
-		" -0.0 " => " 0.0 ",
-		" 0.0 " => " 0 ",
-		" 0.0 " => " 0 ",
-		" 0.0 " => " 0 ")
-
+function format_text(text)
+	text = replace(text, " -0.0 " => " 0.0 ")
+	text = replace(text, " 0.0 " => " 0 ")
+	text = replace(text, " -0.0," => " 0.0,")
+	text = replace(text, " 0.0," => " 0,")
 end

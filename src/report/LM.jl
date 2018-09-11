@@ -202,9 +202,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; 
     text = "$description $performance $initial Within this model:"
     text = text * join("\n  - " .* parameters["text_parameters"])
 
-    # Format
-    replace!(text, " -0.0 " => " 0.0 ")
-    replace!(text, " 0.0 " => " 0 ")
+    text = format_text(text)
 
 
     # Table

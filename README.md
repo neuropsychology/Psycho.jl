@@ -95,10 +95,15 @@ p > .1)
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
 ```
 ```
-Dict{String,Float64} with 5 entries:
-  "bpp"    => -0.0711812
-  "c"      => 0.191778
-  "aprime" => 0.527793
-  "dprime" => -0.0235319
-  "beta"   => 0.995497
+Dict{String,Float64} with 10 entries:
+  "hit_rate"   => 0.428571
+  "fa_rate"    => 0.4375
+  "dprime"     => -0.0235319
+  "beta"       => 0.995497
+  "c"          => 0.191778
+  "c_relative" => -8.14973
+  "aprime"     => 0.490992
+  "bpp"        => 0.263158
+  "pr"         => -0.00892857
+  "br"         => 0.433628
 ```

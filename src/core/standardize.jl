@@ -44,19 +44,36 @@ function standardize! end
 
 
 
+
 function standardize(X::Array{<:Number}; robust::Bool=false)
+
     if robust == false
-        std = (X .- Statistics.mean(X, dims=1)) ./ Statistics.std(X, dims=1)
+        z = (X .- Statistics.mean(X, dims=1)) ./ Statistics.std(X, dims=1)
     else
-        std = (X .- Statistics.median(X, dims=1)) ./ mapslices(x -> StatsBase.mad(x, normalize=true), X, dims=1)
+        z = (X .- Statistics.median(X, dims=1)) ./ mapslices(x -> StatsBase.mad(x, normalize=true), X, dims=1)
     end
+    return z
+end
+
+
+StatsBase.mad(skipmissing([1, 2, 3, missing]))
+
+function standardize(X::Vector{<:Union{Missing, Number}}; robust::Bool=false)
+
+    complete = collect(skipmissing(X))
+
+    if robust == false
+        z = (X .- Statistics.mean(complete)) ./ Statistics.std(complete)
+    else
+        z = (X .- Statistics.median(complete)) ./ StatsBase.mad(complete, normalize=true)
+    end
+    return z
 end
 
 
 
 
-
-function standardize!(X::Array{<:Number}; robust=false)
+function standardize!(X::Array{<:Union{Missing, Number}}; robust=false)
     X[:] = standardize(X, robust=robust)
 end
 
@@ -64,14 +81,14 @@ end
 
 
 
+
 function standardize!(X::DataFrames.DataFrame; robust=false)
     for (colname, col) in DataFrames.eachcol(X)
-        if eltype(col) <: Number
+        if eltype(col) <: Union{Missing, Number}
             X[colname] = standardize(col)
         end
     end
 end
-
 
 
 

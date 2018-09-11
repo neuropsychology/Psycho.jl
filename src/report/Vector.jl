@@ -102,8 +102,8 @@ function report(x::Array{<:Number, 1}; median::Bool=false, dispersion::Bool=true
     text = var_centrality * var_dispersion * var_range
 
     # Format
-    text = replace(text, " -0.0 " => " 0.0 ")
-    text = replace(text, " 0.0 " => " 0 ")
+    replace!(text, " -0.0 " => " 0.0 ")
+    replace!(text, " 0.0 " => " 0 ")
 
     return Report(text=text)
 end

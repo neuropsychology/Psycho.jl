@@ -64,9 +64,9 @@ report(data)
 ```
 ```
 The data contains 200 observations of the following variables:
-  - y (Mean = 0 ± 1.0 [-2.8, 2.95])
-  - Var1 (Mean = 0 ± 1.0 [-3.23, 2.45])
-  - Group (1JT, 50.0%; 2LH, 50.0%)
+  - y (Mean = 0 ± 1.0 [-2.22, 2.6])
+  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])
+  - Group (1HK, 50.0%; 2YP, 50.0%)
 ```
 
 ### Linear Models (LM)
@@ -81,10 +81,12 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).
+The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
   - Var1 is significant (coef = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
-  - Group: 2LH is not significant (coef = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
-  - Var1 & Group: 2LH is not significant (coef = -0.2, t(196) = -1.44, 95% [-0.47; 0.07], p > .1)
+  - Group: 2YP is not significant (coef = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
+  - Var1 & Group: 2YP is not significant (coef = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
+p > .1)
 ```
 
 ## Signal Detection Theory (SDT)

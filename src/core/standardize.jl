@@ -17,6 +17,8 @@ Standardize (scale and reduce, Z-score) X so that the variables are expressed in
 
 # Examples
 ```jldoctest
+using Psycho
+
 standardize([1, 2, 3])
 
 # output

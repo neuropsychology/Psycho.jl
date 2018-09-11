@@ -29,3 +29,16 @@ end
 function Base.values(report::Report)
 	return report.values
 end
+
+
+
+
+
+function format_text!(text)
+	replace!(text,
+		" -0.0 " => " 0.0 ",
+		" 0.0 " => " 0 ",
+		" 0.0 " => " 0 ",
+		" 0.0 " => " 0 ")
+
+end

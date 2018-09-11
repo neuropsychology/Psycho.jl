@@ -17,14 +17,13 @@ The Coefficients of Determination (D), also referred to as Tjur's R² ([Tjur, 20
 - Tjur, T. (2009). Coefficients of determination in logistic regression models—A new proposal: The coefficient of discrimination. The American Statistician, 63(4), 366-372.
 
 # Examples
-```julia
+```jldoctest
 using GLM, DataFrames
 
 model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())
 r2_tjur(model)
 
 # output
-
 0.5
 ```
 """

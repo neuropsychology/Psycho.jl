@@ -30,13 +30,8 @@ Generate a DataFrame of variables related a binary dependent variable by specifi
     - Different group sizes (See [#9](https://github.com/neuropsychology/Psycho.jl/issues/9))
 
 # Examples
-```jldoctest
+```julia
 simulate_data_logistic(0.2)
-
-# output
-
-100×2 DataFrames.DataFrame
-[...]
 ```
 """
 function simulate_data_logistic end

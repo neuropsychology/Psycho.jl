@@ -20,4 +20,4 @@ Psycho is a high-level package that would not exist without its many dependencie
 
 Psycho.jl has been used in the following publications:
 
-- Let me know!
+- Let us know!

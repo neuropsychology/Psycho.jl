@@ -12,8 +12,8 @@ Describe the variables in a DataFrame.
 - `df`: DataFrame.
 - `missing_percentage::Bool`: Show missings by percentage (default) or number.
 - `levels_percentage::Bool`: Show factor levels by percentage (default) or number.
-- `median::Bool::Bool`: Show `mean` and `sd` (default) or `median` and [`mad`](@ref).
-- `dispersion::Bool`: Show dispersion (`sd` or [`mad`](@ref)).
+- `median::Bool::Bool`: Show `mean` and `sd` (default) or `median` and `mad`.
+- `dispersion::Bool`: Show dispersion (`sd` or `mad`).
 - `range::Bool`: Show range.
 
 
@@ -24,13 +24,8 @@ Describe the variables in a DataFrame.
     - Deal with SubDataFrames (See [#20](https://github.com/neuropsychology/Psycho.jl/issues/20))
 
 # Examples
-```jldoctest
+```julia
 report(simulate_data_correlation([[0.1], [0.2]]))
-
-# output
-
-The data contains 200 observations of the following variables:
-[...]
 ```
 """
 function report(df::DataFrames.DataFrame; kwargs...)

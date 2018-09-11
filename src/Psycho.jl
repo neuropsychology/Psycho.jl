@@ -4,6 +4,7 @@ export
     standardize,
     standardize!,
     perfectNormal,
+    r2_tjur,
 
     Rules,
     interpret,
@@ -26,6 +27,8 @@ export
 include("core/standardize.jl")
 include("core/perfectNormal.jl")
 
+include("modelling/R2.jl")
+
 include("interpret/interpret.jl")
 include("interpret/pvalue.jl")
 
@@ -39,5 +42,6 @@ include("report/report.jl")
 include("report/Vector.jl")
 include("report/DataFrame.jl")
 include("report/LM.jl")
+include("report/GLM.jl")
 
 end # module

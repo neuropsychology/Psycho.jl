@@ -16,7 +16,7 @@ interpret_p(0.04)
 
 # output
 
-"signifcant"
+"significant"
 ```
 """
 function interpret_p(p::Number; alpha::Number=0.05)

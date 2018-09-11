@@ -2,19 +2,29 @@
 
 Details about Psycho's functions.
 
+```@meta
+DocTestSetup = quote
+    using Psycho
+end
+```
+
 
 ## Report
 
 ### Data
 ```@docs
-report
+report(df::DataFrames.DataFrame; kwargs...)
 ```
 
 ### Models
 
 ```@docs
-report
+report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 ```
+```@docs
+report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI=95)
+```
+
 
 ## Core
 
@@ -23,7 +33,11 @@ standardize
 ```
 
 ```@docs
-perfectNormal(n::Int=100, mean::Number=0, sd::Number=1)
+perfectNormal(n::Int, mean::Number=0, sd::Number=1)
+```
+
+```@docs
+r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 ```
 
 ## Interpret

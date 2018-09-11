@@ -17,13 +17,8 @@ Create vector of random group names of length `n` containing `nchar` characters.
     - implement different types simulations (e.g., "A, B... AA, AB...") (See [#8](https://github.com/neuropsychology/Psycho.jl/issues/8))
 
 # Examples
-```jldoctest
+```julia
 simulate_groupnames(10)
-
-# output
-
-10-element Array{String,1}:
-[...]
 ```
 """
 function simulate_groupnames(n::Int; nchar::Int=2)

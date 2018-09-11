@@ -63,10 +63,10 @@ standardize!(data)
 report(data)
 ```
 ```
-The data contains 200 observations ofthe following variables:
-  - y (Mean = 0 ± 1.0 [-2.79, 3.28])
-  - Var1 (Mean = 0 ± 1.0 [-3.37, 3.1])  
-  - Group (1RX, 50.0%; 2UA, 50.0%)
+The data contains 200 observations of the following variables:
+  - y (Mean = 0 ± 1.0 [-2.22, 2.6])
+  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])
+  - Group (1HK, 50.0%; 2YP, 50.0%)
 ```
 
 ### Linear Models (LM)
@@ -81,10 +81,12 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.09 (adj. R² = 0.07). The model's intercept is at 0.0. Within this model:
-  - Var1 is not significant (beta = 0.1, t(196) = 1.03, 95% [-0.09; -0.09], p > .1)
-  - Group: 2PN is not significant (beta = 0, t(196) = 0, 95% [-0.27; -0.27], p > .1)
-  - Var1 & Group: 2PN is significant (beta = 0.3, t(196) = 2.2, 95% [0.03; 0.03], p < .01)
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).
+The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
+  - Var1 is significant (coef = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
+  - Group: 2YP is not significant (coef = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
+  - Var1 & Group: 2YP is not significant (coef = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
+p > .1)
 ```
 
 ## Signal Detection Theory (SDT)
@@ -93,10 +95,15 @@ We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 +
 sdt_indices(hit=6, fa=7, miss=8, cr=9)
 ```
 ```
-Dict{String,Float64} with 5 entries:
-  "bpp"    => -0.0711812
-  "c"      => 0.191778
-  "aprime" => 0.527793
-  "dprime" => -0.0235319
-  "beta"   => 0.995497
+Dict{String,Float64} with 10 entries:
+  "hit_rate"   => 0.428571
+  "fa_rate"    => 0.4375
+  "dprime"     => -0.0235319
+  "beta"       => 0.995497
+  "c"          => 0.191778
+  "c_relative" => -8.14973
+  "aprime"     => 0.490992
+  "bpp"        => 0.263158
+  "pr"         => -0.00892857
+  "br"         => 0.433628
 ```

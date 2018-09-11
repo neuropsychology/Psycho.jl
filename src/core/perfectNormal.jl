@@ -11,13 +11,8 @@ Generate an almost-perfect normal distribution of size `n`.
 - `sd::Number`: SD of the vector.
 
 # Examples
-```jldoctest
+```julia
 perfectNormal(10, 0, 1)
-
-# output
-
-10-element Array{Float64,1}:
-[...]
 ```
 """
 function perfectNormal(n::Int, mean::Number=0, sd::Number=1)

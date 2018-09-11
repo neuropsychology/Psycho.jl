@@ -56,7 +56,7 @@ interpret(0.04, p_rules)
 
 # output
 
-"signifcant"
+"significant"
 ```
 """
 function interpret(x::Real, rules::Rules)

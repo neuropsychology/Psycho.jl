@@ -2,6 +2,12 @@
 
 Details about Psycho's functions.
 
+```@meta
+DocTestSetup = quote
+    using Psycho
+end
+```
+
 
 ## Report
 

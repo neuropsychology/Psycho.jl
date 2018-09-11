@@ -18,7 +18,7 @@ The Coefficients of Determination (D), also referred to as Tjur's R² ([Tjur, 20
 
 # Examples
 ```jldoctest
-using GLM, DataFrames, Psycho
+using GLM, DataFrames
 
 model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())
 r2_tjur(model)

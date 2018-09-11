@@ -12,8 +12,6 @@ P-values are the probability of obtaining an effect at least as extreme as the o
 
 # Examples
 ```jldoctest
-using Psycho
-
 interpret_p(0.04)
 
 # output
@@ -45,8 +43,6 @@ Format the *p* value according to APA standards.
 
 # Examples
 ```jldoctest
-using Psycho
-
 format_p(0.04, stars=true)
 
 # output

@@ -12,8 +12,6 @@ Generate an almost-perfect normal distribution of size `n`.
 
 # Examples
 ```julia
-using Psycho
-
 perfectNormal(10, 0, 1)
 ```
 """

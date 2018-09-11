@@ -17,8 +17,6 @@ Create a container for interpretation rules of thumb. See [`interpret(x::Real, r
 
 # Examples
 ```jldoctest
-using Psycho
-
 Rules([0.05], ["significant", "not significant"], true)
 
 # output
@@ -53,8 +51,6 @@ Interpret a value based on a set of rules of thumb.
 
 # Examples
 ```jldoctest
-using Psycho
-
 p_rules = Rules([0.05], ["significant", "not significant"], true)
 interpret(0.04, p_rules)
 

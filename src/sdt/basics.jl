@@ -36,11 +36,10 @@ end
 
 
 
-
-function sdt_beta(z_hit_rate::Number, z_fa_rate::Number)
-    beta = exp(-z_hit_rate * z_hit_rate / 2 + z_fa_rate * z_fa_rate / 2)
-    return beta
+function sdt_Xc(z_fa_rate::Number)
+    return -1 * z_fa_rate
 end
+
 
 
 
@@ -50,6 +49,17 @@ function sdt_c(z_hit_rate::Number, z_fa_rate::Number)
     c = -(z_hit_rate + z_fa_rate) / 2
     return c
 end
+
+
+
+
+
+
+function sdt_beta(z_hit_rate::Number, z_fa_rate::Number)
+    beta = exp(-z_hit_rate * z_hit_rate / 2 + z_fa_rate * z_fa_rate / 2)
+    return beta
+end
+
 
 
 
@@ -117,12 +127,14 @@ Signal detection theory (SDT) is used when psychologists want to measure the way
 Returns a `Dict` containing the following indices:
 
 - **dprime (d')**: Sensitivity (pronounced (*"dee-prime"*). Reflects the distance between the two distributions: signal, and signal+noise and corresponds to the Z value of the hit-rate minus that of the false-alarm rate.
-- **beta**: Bias (criterion). The value for beta is the ratio of the normal density functions at the criterion of the Z values used in the computation of d'. This reflects an observer's bias to say 'yes' or 'no' with the unbiased observer having a value around 1.0. As the bias to say 'yes' increases (liberal), resulting in a higher hit-rate and false-alarm-rate, beta approaches 0.0. As the bias to say 'no' increases (conservative), resulting in a lower hit-rate and false-alarm rate, beta increases over 1.0 on an open-ended scale.
-- **c**: Another index of bias. the number of standard deviations from the midpoint between these two distributions, *i.e.*, a measure on a continuum from "conservative" to "liberal".
+- **beta**: Likelihood ratio decision criterion. The value for beta is the ratio of the normal density functions at the criterion of the Z values used in the computation of d'. This reflects an observer's bias to say 'yes' or 'no' with the unbiased observer having a value around 1.0. As the bias to say 'yes' increases (liberal), resulting in a higher hit-rate and false-alarm-rate, beta approaches 0.0. As the bias to say 'no' increases (conservative), resulting in a lower hit-rate and false-alarm rate, beta increases over 1.0 on an open-ended scale.
+- **c**: Another index of response bias. the number of standard deviations from the midpoint between these two distributions, *i.e.*, a measure on a continuum from "conservative" to "liberal".
 - **c_relative (c')**: Scaled criterion location (c) relative to performance (d'). Indeed, with easier discrimination tasks a more extreme criterion (as measured by c) would be needed to yield the same amount of bias.
+- **Xc**: Decision criterion, given by the negative standardized false alarm rate (DeCarlo, 1998).
 - **aprime (A')**: Non-parametric estimate of discriminability. An A' near 1.0 indicates good discriminability, while a value near 0.5 means chance performance.
 - **bpp (B'')**: Also referred to as B''D (pronounced *"b prime prime d"*). Non-parametric estimate of bias. A B'' equal to 0.0 indicates no bias, positive numbers represent conservative bias (*i.e.*, a tendency to answer 'no'), negative numbers represent liberal bias (*i.e.*, a tendency to answer 'yes'). The maximum absolute value is 1.0.
 - **pr** and **br**: Indices based on the *Two-High Threshold Model* (Feenan & Snodgrass, 1990). Pr is the discrimination measure (also sometimes called the corrected recognition score). Br is the bias measure; values greater than 0.5 indicate a liberal bias, values less than 0.5 indicate a conservative bias.
+- **dprime_glm** and **Xc_glm**: Indices as estimated by a Bernouilli probit GLM.
 
 Note that for d' and beta, adjustement for extreme values are made by default following the recommandations of Hautus (1995).
 
@@ -151,6 +163,7 @@ function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
     beta = sdt_beta(z_hit_rate, z_fa_rate)
     c = sdt_c(z_hit_rate, z_fa_rate)
     c_relative = sdt_c_relative(z_hit_rate, z_fa_rate)
+    Xc = sdt_Xc(z_fa_rate)
 
     # Non-parametric
     hit_rate, fa_rate = sdt_rates(hit, fa, miss=miss, cr=cr, adjusted=false, z=false)
@@ -164,12 +177,15 @@ function sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
                 "beta" => beta,
                 "c" => c,
                 "c_relative" => c_relative,
+                "Xc" => Xc,
                 "bpp" => bpp,
                 "pr" => pr,
                 "br" => br,
                 "hit_rate" => hit_rate,
                 "fa_rate" => fa_rate)
 
+    indices_glm = sdt_glm(hit, fa, miss=miss, cr=cr)
+    indices = merge(indices, indices_glm)
     return indices
 end
 sdt_indices(; hit::Int, fa::Int, miss::Int, cr::Int, adjusted::Bool=true) = sdt_indices(hit, fa, miss, cr; adjusted=adjusted)

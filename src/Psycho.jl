@@ -36,6 +36,7 @@ include("simulate/data_groups.jl")
 include("simulate/data_correlation.jl")
 include("simulate/data_logistic.jl")
 
+include("sdt/GLM.jl")
 include("sdt/basics.jl")
 
 include("report/report.jl")

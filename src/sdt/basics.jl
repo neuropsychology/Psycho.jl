@@ -25,10 +25,16 @@ function sdt_rates(hit::Int, fa::Int; miss::Int, cr::Int, adjusted::Bool=true, z
 end
 
 
+
+
+
 function sdt_dprime(z_hit_rate::Number, z_fa_rate::Number)
     dprime = z_hit_rate - z_fa_rate
     return dprime
 end
+
+
+
 
 
 function sdt_beta(z_hit_rate::Number, z_fa_rate::Number)
@@ -37,16 +43,25 @@ function sdt_beta(z_hit_rate::Number, z_fa_rate::Number)
 end
 
 
+
+
+
 function sdt_c(z_hit_rate::Number, z_fa_rate::Number)
     c = -(z_hit_rate + z_fa_rate) / 2
     return c
 end
 
 
+
+
+
 function sdt_c_relative(z_hit_rate::Number, z_fa_rate::Number)
     c_relative = sdt_c(z_hit_rate, z_fa_rate) / sdt_dprime(z_hit_rate, z_fa_rate)
     return c_relative
 end
+
+
+
 
 
 function sdt_aprime(hit_rate::Number, fa_rate::Number)
@@ -60,10 +75,16 @@ function sdt_aprime(hit_rate::Number, fa_rate::Number)
 end
 
 
+
+
+
 function sdt_bpp(hit_rate::Number, fa_rate::Number)
     bpp = ((1-hit_rate)*(1-fa_rate)-(hit_rate*fa_rate))/((1-hit_rate)*(1-fa_rate)+(hit_rate*fa_rate))
     return bpp
 end
+
+
+
 
 
 function sdt_treshold(hit_rate::Number, fa_rate::Number)
@@ -73,6 +94,9 @@ function sdt_treshold(hit_rate::Number, fa_rate::Number)
     br = fa_rate / (1-pr)
     return pr, br
 end
+
+
+
 
 """
     sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)

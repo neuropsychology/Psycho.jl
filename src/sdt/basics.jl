@@ -77,7 +77,9 @@ end
 """
     sdt_indices(hit::Int, fa::Int, miss::Int, cr::Int; adjusted::Bool=true)
 
-Compute Signal Detection Theory (SDT) indices (d', beta, c, A', B'').
+Compute Signal Detection Theory (SDT) indices (d', beta, c, A', B''...).
+
+Signal detection theory (SDT) is used when psychologists want to measure the way we make decisions under conditions of uncertainty. SDT assumes that the decision maker is not a passive receiver of information, but an active decision-maker who makes difficult perceptual judgments under conditions of uncertainty. In tasks where stimuli were either present or absent, and the observer categorized each trial as having the stimulus present or absent, the trials can be sorted into one of four categories: Hit, Miss, Correct Rejection and False Alarm.
 
 # Arguments
 - `hit`: Number of hits.

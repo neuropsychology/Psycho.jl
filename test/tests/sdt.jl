@@ -5,7 +5,11 @@ sdt = sdt_indices(6, 7, 8, 9, adjusted=false)
 @test sdt["beta"] ≈ 0.996 atol=0.001
 @test sdt["c"] ≈ 0.169 atol=0.001
 @test sdt["c_relative"] ≈ -7.43 atol=0.001
+@test sdt["Xc"] ≈ 0.157 atol=0.001
 @test sdt["bpp"] ≈ 0.263 atol=0.001
+
+@test sdt["dprime_glm"] ≈ -0.0227 atol=0.001
+@test sdt["Xc_glm"] ≈ 0.157 atol=0.001
 
 sdt = sdt_indices(6, 7, 8, 9, adjusted=true)
 @test sdt["dprime"] ≈ -0.023 atol=0.001

@@ -102,8 +102,11 @@ Dict{String,Float64} with 10 entries:
   "beta"       => 0.995497
   "c"          => 0.191778
   "c_relative" => -8.14973
+  "Xc"         => 0.180012
   "aprime"     => 0.490992
   "bpp"        => 0.263158
   "pr"         => -0.00892857
   "br"         => 0.433628
+  "dprime_glm" => -0.0227017
+  "Xc_glm"     => 0.157311
 ```

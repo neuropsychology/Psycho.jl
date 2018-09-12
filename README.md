@@ -83,9 +83,9 @@ results = report(model)
 ```
 We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).
 The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
-  - Var1 is significant (coef = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
-  - Group: 2YP is not significant (coef = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
-  - Var1 & Group: 2YP is not significant (coef = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
+  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
+  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
+  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
 p > .1)
 ```
 

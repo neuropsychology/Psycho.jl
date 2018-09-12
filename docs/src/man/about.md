@@ -2,7 +2,9 @@
 
 
 
+## People
 
+- **[Dominique Makowski](https://dominiquemakowski.github.io/)**
 
 
 

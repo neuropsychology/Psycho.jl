@@ -143,7 +143,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Gene
     for (i, var) in enumerate(filter(x -> x != "(Intercept)", parameters["Parameter"]))
         effect =
         "$var is $(parameters["p_interpretation"][i+1]) " *
-        "(coef = $(round(parameters["Coef"][i+1], digits=2)), " *
+        "(β = $(round(parameters["Coef"][i+1], digits=2)), " *
         "z($(Int(parameters["DoF"][i+1]))) = $(round(parameters["z"][i+1], digits=2)), " *
         "$(parameters["CI_level"])% "*
         "[$(round(parameters["CI_lower"][i+1], digits=2)); " *
@@ -173,16 +173,11 @@ Describe a general linear model.
 
 
 # Examples
-```jldoctest
+```julia
 using GLM, DataFrames
 
 model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())
 report(model)
-
-# output
-
-We fitted a logistic regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model's explanatory power (Tjur's R²) is of 0.5. The model's intercept is at -28.26. Within this model:
-   - Var1 is not significant (coef = 14.13, z(2) = 0.02, 95% [-1375.39; 1403.64], p > .1)
 ```
 """
 function report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI::Number=95)
@@ -196,7 +191,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLin
     initial = parameters["text_initial"]
 
     text = "$description $performance $initial Within this model:"
-    text = text * join("\n   - " .* parameters["text_parameters"])
+    text = text * join("\n  - " .* parameters["text_parameters"])
 
     text = format_text(text)
 

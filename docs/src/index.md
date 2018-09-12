@@ -5,12 +5,14 @@ Welcome to Psycho's for Julia documentation.
 
 !!! note
 
-    The package is not released yet. Help for its developpment is very much appreciated.
+    The package is not released yet. Help for its development is very much appreciated.
 
 
-## Status and News
+## Installation
 
-- 2018/09/02: Initial release of the documentation.
+```
+pkg> add https://github.com/neuropsychology/Psycho.jl.git
+```
 
 ## Goal
 
@@ -33,10 +35,10 @@ standardize!(data)
 report(data)
 ```
 ```
-The data contains 200 observations ofthe following variables:
-  - y (Mean = 0 ± 1.0 [-2.79, 3.28])
-  - Var1 (Mean = 0 ± 1.0 [-3.37, 3.1])  
-  - Group (1RX, 50.0%; 2UA, 50.0%)
+The data contains 200 observations of the following variables:
+  - y (Mean = 0 ± 1.0 [-2.22, 2.6])
+  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])
+  - Group (1HK, 50.0%; 2YP, 50.0%)
 ```
 
 ```julia
@@ -49,18 +51,21 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
-  - Var1 is significant (coef = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
-  - Group: 2LH is not significant (coef = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
-  - Var1 & Group: 2LH is not significant (coef = -0.2, t(196) = -1.44, 95% [-0.47; 0.07], p > .1)
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).
+The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
+  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
+  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
+  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
+p > .1)
 ```
 
 ## Content
 
 ```@contents
 Pages = [
+    "man/tutorials.md",
     "man/API.md",
     "man/about.md"
 ]
-Depth = 1
+Depth = 2
 ```

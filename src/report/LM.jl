@@ -146,7 +146,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     for (i, var) in enumerate(filter(x -> x != "(Intercept)", parameters["Parameter"]))
         effect =
         "$var is $(parameters["p_interpretation"][i+1]) " *
-        "(coef = $(round(parameters["Coef"][i+1], digits=2)), " *
+        "(β = $(round(parameters["Coef"][i+1], digits=2)), " *
         "t($(Int(parameters["DoF"][i+1]))) = $(round(parameters["t"][i+1], digits=2)), " *
         "$(parameters["CI_level"])% "*
         "[$(round(parameters["CI_lower"][i+1], digits=2)); " *
@@ -176,17 +176,11 @@ Describe a linear model.
 
 
 # Examples
-```jldoctest
+```julia
 using GLM, DataFrames
 
 model = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))
 report(model)
-
-# output
-
-We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model's explanatory power (R²)
-is of 0.97 (adj. R² = 0.95). The model's intercept is at -3.14. Within this model:
-  - Var1 is significant (coef = 1.49, t(2) = 7.51, 95% [0.63; 2.34], p < .05)
 ```
 """
 function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)

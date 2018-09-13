@@ -4,7 +4,9 @@ export
     standardize,
     standardize!,
     perfectNormal,
+    
     r2_tjur,
+    datagrid,
 
     Rules,
     interpret,
@@ -28,6 +30,7 @@ include("core/standardize.jl")
 include("core/perfectNormal.jl")
 
 include("modelling/R2.jl")
+include("modelling/datagrid.jl")
 
 include("interpret/interpret.jl")
 include("interpret/pvalue.jl")

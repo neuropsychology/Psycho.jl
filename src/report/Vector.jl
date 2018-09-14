@@ -23,7 +23,7 @@ end
 
 
 
-function report(x::Array{String, 1}; kwargs...)
+function report(x::Vector{String}; kwargs...)
     # TODO: Sort by frequency and display the n firsts
     text = "$(length(unique(x))) different entries"
     return Report(text=text)
@@ -33,7 +33,7 @@ end
 
 
 
-function report(x::Array{Any, 1}; missing_percentage::Bool=true, kwargs...)
+function report(x::Vector{Any}; missing_percentage::Bool=true, kwargs...)
     n_missings = sum(ismissing.(x))
     if n_missings == 0
         x = fix_variable_type(x)
@@ -53,7 +53,7 @@ end
 
 
 
-function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=true, kwargs...)
+function report(x::DataFrames.CategoricalVector; levels_percentage::Bool=true, kwargs...)
     text = string.(zeros(length(DataFrames.levels(x))))
     for (i, level) in enumerate(DataFrames.levels(x))
         if levels_percentage == true
@@ -72,7 +72,7 @@ end
 
 
 
-function report(x::Array{<:Number, 1}; median::Bool=false, dispersion::Bool=true, range::Bool=true, kwargs...)
+function report(x::Vector{<:Real}; median::Bool=false, dispersion::Bool=true, range::Bool=true, kwargs...)
 
     # Centrality
     if median == false

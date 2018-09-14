@@ -13,7 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Home",
     "category": "section",
-    "text": "Pages   = [\n    \"man/tutorials.md\",\n    \"man/API.md\",\n    \"man/about.md\"\n]Welcome to Psycho\'s for Julia documentation.note: Note\nThe package is not released yet. Help for its development is very much appreciated."
+    "text": "Welcome to Psycho\'s for Julia documentation.note: Note\nThe package is not released yet. Help for its development is very much appreciated."
 },
 
 {
@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Quick Example",
     "category": "section",
-    "text": "using GLM, Psycho\n\n# Simulate some data\ndata = simulate_data_correlation([[0.3], [0.1]])\n\n# Standardize the results\nstandardize!(data)\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.22, 2.6])\n  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])\n  - Group (1HK, 50.0%; 2YP, 50.0%)using GLM\n\n# Fit a Linear Model\nmodel = lm(@formula(y ~ Var1 * Group), data)\n\n# Report the results\nresults = report(model)We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).\nThe model\'s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)\n  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)\n  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],\np > .1)Pages = [\n    \"man/tutorials.md\",\n    \"man/API.md\",\n    \"man/about.md\"\n]\nDepth = 1"
+    "text": "using GLM, Psycho\n\n# Simulate some data\ndata = simulate_data_correlation([[0.3], [0.1]])\n\n# Standardize the results\nstandardize!(data)\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.22, 2.6])\n  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])\n  - Group (1HK, 50.0%; 2YP, 50.0%)using GLM\n\n# Fit a Linear Model\nmodel = lm(@formula(y ~ Var1 * Group), data)\n\n# Report the results\nresults = report(model)We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).\nThe model\'s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)\n  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)\n  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],\np > .1)"
 },
 
 {

@@ -12,9 +12,10 @@ Describe the variables in a DataFrame.
 - `df`: DataFrame.
 - `missing_percentage::Bool`: Show missings by percentage (default) or number.
 - `levels_percentage::Bool`: Show factor levels by percentage (default) or number.
-- `median::Bool::Bool`: Show `mean` and `sd` (default) or `median` and `mad`.
+- `median::Bool`: Show `mean` and `sd` (default) or `median` and `mad`.
 - `dispersion::Bool`: Show dispersion (`sd` or `mad`).
 - `range::Bool`: Show range.
+- `n_strings::Int`: Number of different string elements to show.
 
 
 !!! note

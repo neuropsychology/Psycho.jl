@@ -29,6 +29,11 @@ report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}
 ## Core
 
 ```@docs
+datagrid(df::DataFrames.DataFrame; cols=:all, n::Int=10, kwargs...)
+```
+
+
+```@docs
 standardize
 ```
 

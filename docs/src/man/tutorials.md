@@ -26,11 +26,17 @@ The data contains 100 observations of the following variables:
 
 !!! note
 
-    The results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generate different results at each run.
+    The results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generates different results at each run.
 
 
 
-As we can see, the `report()` function does work on DataFrames! We have successfully generated two numeric variables, `y` and `Var1`.
+As we can see, we have successfully generated two numeric variables, `y` and `Var1`. Moreover, the `report()` function works on a DataFrame and provide a quick and convenient description of your data. 
+
+
+!!! tipp
+
+    This `report` is quite flexible. For example, running `report(data, median=true, levels_percentage=false)` will display the median instead of the mean and the raw count of factor levels insteand of the percentage. See the [documentation](https://neuropsychology.github.io/Psycho.jl/latest/man/API.html#Psycho.report-Tuple{DataFrame}) for details.
+
 
 ## Fit a Linear Regression
 

@@ -23,9 +23,16 @@ end
 
 
 
-function report(x::Array{String, 1}; kwargs...)
-    # TODO: Sort by frequency and display the n firsts
-    text = "$(length(unique(x))) different entries"
+function report(x::Vector{String}; n_strings::Int=4, kwargs...)
+    # Sort by frequency
+    sorted =first.(sort(collect(StatsBase.countmap(x)), by = i -> i[2], rev=true))
+    if length(sorted) > n_strings
+        sorted = "(" * join(sorted[1:n_strings], ", ") * ", ...)"
+    else
+        sorted = "(" * join(sorted, ", ", " and ") * ")"
+    end
+
+    text = "$(length(unique(x))) different entries " * sorted
     return Report(text=text)
 end
 
@@ -33,7 +40,7 @@ end
 
 
 
-function report(x::Array{Any, 1}; missing_percentage::Bool=true, kwargs...)
+function report(x::Vector{<:Any}; missing_percentage::Bool=true, kwargs...)
     n_missings = sum(ismissing.(x))
     if n_missings == 0
         x = fix_variable_type(x)
@@ -44,7 +51,7 @@ function report(x::Array{Any, 1}; missing_percentage::Bool=true, kwargs...)
         n_missings = "$(round(n_missings / length(x), digits=2))%"
     end
     x = collect(skipmissing(x))
-    text = report(x; kwargs...)
+    text = report(x; kwargs...).text
     text *= ", missing = $n_missings"
     return Report(text=text)
 end
@@ -53,7 +60,7 @@ end
 
 
 
-function report(x::DataFrames.CategoricalArray{Any, 1}; levels_percentage::Bool=true, kwargs...)
+function report(x::DataFrames.CategoricalVector; levels_percentage::Bool=true, kwargs...)
     text = string.(zeros(length(DataFrames.levels(x))))
     for (i, level) in enumerate(DataFrames.levels(x))
         if levels_percentage == true
@@ -72,7 +79,7 @@ end
 
 
 
-function report(x::Array{<:Number, 1}; median::Bool=false, dispersion::Bool=true, range::Bool=true, kwargs...)
+function report(x::Vector{<:Real}; median::Bool=false, dispersion::Bool=true, range::Bool=true, kwargs...)
 
     # Centrality
     if median == false

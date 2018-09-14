@@ -1,12 +1,19 @@
 import Distributions, DataFrames, GLM, StatsModels
-#
 
 
 
 
 
 
-function model_data(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
+
+function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+end
+
+
+
+
+
+function model_data(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
     return model.mf.df
 end
 
@@ -14,9 +21,9 @@ end
 
 
 
-function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
+function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
 
-    modelname = "generalized linear model"
+    modelname = "linear model"
     outcome = model.mf.terms.eterms[1]
     predictors = model.mf.terms.eterms[2:end]
     formula = StatsModels.Formula(model.mf.terms)
@@ -26,7 +33,7 @@ function model_description(model::StatsModels.DataFrameRegressionModel{<:GLM.Gen
         "Outcome" => outcome,
         "Predictors" => predictors,
         "Formula" => formula,
-        "text_description" => "We fitted a logistic regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
+        "text_description" => "We fitted a linear regression to predict $outcome with $(join(predictors, ", ", " and ")) ($formula)."
         )
     return Report(text=output["text_description"], values=output)
 end
@@ -35,8 +42,11 @@ end
 
 
 
-function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
-    # Extract the p value
+
+
+
+function model_effects_existence(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+    # p value formula
     # TODO: Damn it's complicated for now!
 
     coef_table = GLM.coeftable(model)
@@ -52,13 +62,17 @@ end
 
 
 
-function model_performance(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
 
-    R2 = r2_tjur(model)
+
+function model_performance(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+
+    R2 = GLM.r2(model)
+    R2_adj = GLM.adjr2(model)
 
     output = Dict(
         "R2" => R2,
-        "text_performance" => "The model's explanatory power (Tjur's R²) is of $(round(R2, digits=2)).")
+        "R2_adj" => R2_adj,
+        "text_performance" => "The model's explanatory power (R²) is of $(round(R2, digits=2)) (adj. R² = $(round(R2_adj, digits=2))).")
 
     return Report(text=output["text_performance"], values=output)
 end
@@ -69,7 +83,7 @@ end
 
 
 
-function model_initial_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})
+function model_initial_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
 
     intercept = GLM.coef(model)[1]
 
@@ -83,7 +97,7 @@ end
 
 
 
-function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI=95)
+function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
 
     # Gather everything
     # ------------------
@@ -91,7 +105,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Gene
     parameters = GLM.coefnames(model)
     coefs = GLM.coef(model)
     std_errors = GLM.stderror(model)
-    z = GLM.coeftable(model).cols[3]
+    t = GLM.coeftable(model).cols[3]
     dof = repeat([GLM.dof_residual(model)], length(parameters))
     ci = GLM.confint(model, CI/100)
     ci_bounds = [(100-CI)/2, 100-(100-CI)/2]
@@ -105,7 +119,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Gene
                 "Parameter" => parameters,
                 "Coef" => coefs,
                 "Std_error" => std_errors,
-                "z" => z,
+                "t" => t,
                 "DoF" => dof,
                 "CI_level" => CI,
                 "CI" => ci,
@@ -133,7 +147,7 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Gene
         effect =
         "$var is $(parameters["p_interpretation"][i+1]) " *
         "(β = $(round(parameters["Coef"][i+1], digits=2)), " *
-        "z($(Int(parameters["DoF"][i+1]))) = $(round(parameters["z"][i+1], digits=2)), " *
+        "t($(Int(parameters["DoF"][i+1]))) = $(round(parameters["t"][i+1], digits=2)), " *
         "$(parameters["CI_level"])% "*
         "[$(round(parameters["CI_lower"][i+1], digits=2)); " *
         "$(round(parameters["CI_higher"][i+1], digits=2))]" *
@@ -152,12 +166,12 @@ end
 
 
 """
-    report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI::Number=95)
+    report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
 
-Describe a general linear model.
+Describe a linear model.
 
 # Arguments
-- `model`: A `GeneralizedLinearModel`.
+- `model`: A `LinearModel`.
 - `CI::Number`: Confidence interval level.
 
 
@@ -165,11 +179,11 @@ Describe a general linear model.
 ```julia
 using GLM, DataFrames
 
-model = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())
+model = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))
 report(model)
 ```
 """
-function report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI::Number=95)
+function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
 
     # Parameters
     parameters = model_parameters(model, CI=CI)
@@ -184,11 +198,12 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLin
 
     text = format_text(text)
 
+
     # Table
     table = hcat(parameters["Parameter"],
                 parameters["Coef"],
                 parameters["Std_error"],
-                parameters["z"],
+                parameters["t"],
                 parameters["DoF"],
                 parameters["CI_lower"],
                 parameters["CI_higher"],
@@ -198,7 +213,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLin
                 [:Parameter,
                 :Coef,
                 :Std_Error,
-                :z,
+                :t,
                 :DoF,
                 Symbol(parameters["CI_lower_formatted"]),
                 Symbol(parameters["CI_higher_formatted"]),

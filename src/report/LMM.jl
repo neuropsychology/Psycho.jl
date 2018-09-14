@@ -1,4 +1,4 @@
-using MixedModels, GLM, DataFrames
+using MixedModels., GLM, DataFrames
 
 
 # Simulate some data
@@ -6,7 +6,9 @@ data = simulate_data_correlation([[0.3], [0.1], [0.5]])
 report(data)
 
 typeof(data[:Group])
-model = lmm(@formula(y ~ Var1 + (1|Group)), data)
+data[:Group] = string.(data[:Group])
+
+model = lmm(@formula(y ~ Var1 + (1 | Group)), data)
 model = fit(LinearMixedModel, @formula(y ~ Var1 + (1|Group)), data)
 
 

@@ -26,7 +26,7 @@ It also provides useful tools and functions for psychologists, neuropsychologist
 - Check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
 - Check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
 
-Don't be shy, try to code and submit a pull request (PR). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.
+Don't be shy, try to code and submit a pull request (See the [contributing guide](https://github.com/neuropsychology/Psycho.jl/master/.github/CONTRIBUTING.md)). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.
 
 
 # Installation

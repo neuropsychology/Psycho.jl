@@ -1,13 +1,6 @@
 # Home
 
 
-```@index
-Pages   = [
-    "man/tutorials.md",
-    "man/API.md",
-    "man/about.md"
-]
-```
 
 
 Welcome to Psycho's for Julia documentation.
@@ -69,11 +62,3 @@ The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's in
 p > .1)
 ```
 
-```@contents
-Pages = [
-    "man/tutorials.md",
-    "man/API.md",
-    "man/about.md"
-]
-Depth = 1
-```

@@ -1,11 +1,11 @@
-using Statistics, GLM, DataFrames
+import Statistics, GLM, DataFrames
 
 
 
 """
     datagrid(df::DataFrames.DataFrame; cols=:all, n::Int=10, kwargs...)
 
-Create a reference grid of your data.
+Create a reference grid of data.
 
 
 # Arguments
@@ -68,10 +68,12 @@ end
 
 
 
+
 # datagrid: Vectors ------------------------------------------------------------------------
 
 
-function datagrid(X::Vector{<:Number}; n::Int=10)
+function datagrid(X::AbstractVector{<:Union{Real, Missing}}; n::Int=10)
+    X = skipmissing(X)
     X = collect(range(minimum(X), stop=maximum(X), length=n))
 end
 
@@ -79,7 +81,8 @@ end
 
 
 
-function datagrid(X::DataFrames.CategoricalVector; n::Int)
+
+function datagrid(X::DataFrames.CategoricalVector; n=nothing)
     X = levels(X)
 end
 
@@ -87,17 +90,13 @@ end
 
 
 
-function datagrid(X::Vector{String}; n::Int)
-    X = unique(X)
+function datagrid(X::AbstractVector{<:Union{String, Missing}}; n=nothing)
+    X = unique(skipmissing(X))
 end
 
 
 
 
-
-function datagrid(X::Vector{Any}; n::Int=10)
-    X = datagrid(collect(skipmissing(X)); n=n)
-end
 
 
 
@@ -108,10 +107,11 @@ end
 
 
 
-function keep_fixed(X::Vector{<:Number}; fix_num=Statistics.mean, kwargs...)
+function keep_fixed(X::AbstractVector{<:Union{Real, Missing}}; fix_num=Statistics.mean, kwargs...)
     if isa(fix_num, Number)
         return fix_num
     else
+        X = skipmissing(X)
         fix_num(X)
     end
 end
@@ -139,8 +139,9 @@ end
 
 
 
-function keep_fixed(X::Vector{String}; fix_fac=1, kwargs...)
+function keep_fixed(X::AbstractVector{<:Union{String, Missing}}; fix_fac=1, kwargs...)
     if isa(fix_fac, Int)
+        X = skipmissing(X)
         return unique(X)[fix_fac]
     elseif isa(fix_fac, String)
         return fix_fac

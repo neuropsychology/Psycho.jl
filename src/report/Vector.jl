@@ -23,9 +23,16 @@ end
 
 
 
-function report(x::Vector{String}; kwargs...)
-    # TODO: Sort by frequency and display the n firsts
-    text = "$(length(unique(x))) different entries"
+function report(x::Vector{String}; n_strings::Int=4, kwargs...)
+    # Sort by frequency
+    sorted =first.(sort(collect(StatsBase.countmap(x)), by = i -> i[2], rev=true))
+    if length(sorted) > n_strings
+        sorted = "(" * join(sorted[1:n_strings], ", ") * ", ...)"
+    else
+        sorted = "(" * join(sorted, ", ", " and ") * ")"
+    end
+
+    text = "$(length(unique(x))) different entries " * sorted
     return Report(text=text)
 end
 
@@ -33,7 +40,7 @@ end
 
 
 
-function report(x::Vector{Any}; missing_percentage::Bool=true, kwargs...)
+function report(x::Vector{<:Any}; missing_percentage::Bool=true, kwargs...)
     n_missings = sum(ismissing.(x))
     if n_missings == 0
         x = fix_variable_type(x)
@@ -44,7 +51,7 @@ function report(x::Vector{Any}; missing_percentage::Bool=true, kwargs...)
         n_missings = "$(round(n_missings / length(x), digits=2))%"
     end
     x = collect(skipmissing(x))
-    text = report(x; kwargs...)
+    text = report(x; kwargs...).text
     text *= ", missing = $n_missings"
     return Report(text=text)
 end

@@ -15,6 +15,7 @@ Describe the variables in a DataFrame.
 - `median::Bool::Bool`: Show `mean` and `sd` (default) or `median` and `mad`.
 - `dispersion::Bool`: Show dispersion (`sd` or `mad`).
 - `range::Bool`: Show range.
+- `n_strings::Int`: Number of different string elements to show. 
 
 
 !!! note

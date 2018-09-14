@@ -2,6 +2,13 @@ import GLM, DataFrames
 
 data = simulate_data_correlation([[0.1], [0.3]])
 
+
+# Vectors
+@test isa(report([3,5,1]).text, String)
+@test isa(report([3,5,1, missing]).text, String)
+@test isa(report(["a", "b", "c", "e", missing], n_strings=2).text, String)
+
+
 # DataFrame
 results = report(data)
 @test isa(results.text, String)

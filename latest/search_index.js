@@ -1,51 +1,51 @@
 var documenterSearchIndex = {"docs": [
 
 {
-    "location": "index.html#",
-    "page": "Home",
-    "title": "Home",
+    "location": "man/tutorials.html#",
+    "page": "Tutorials",
+    "title": "Tutorials",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "index.html#Home-1",
-    "page": "Home",
-    "title": "Home",
+    "location": "man/tutorials.html#Tutorials-1",
+    "page": "Tutorials",
+    "title": "Tutorials",
     "category": "section",
-    "text": "Welcome to Psycho\'s for Julia documentation.note: Note\nThe package is not released yet. Help for its development is very much appreciated."
+    "text": ""
 },
 
 {
-    "location": "index.html#Installation-1",
-    "page": "Home",
-    "title": "Installation",
+    "location": "man/tutorials.html#Design-1",
+    "page": "Tutorials",
+    "title": "Design",
     "category": "section",
-    "text": "pkg> add https://github.com/neuropsychology/Psycho.jl.git"
+    "text": "The package is centered around one function, report(), which goal is to transform a Julia object into readable text. It also provides useful general and domain-specific functions to efficiently process psychological data."
 },
 
 {
-    "location": "index.html#Goal-1",
-    "page": "Home",
-    "title": "Goal",
+    "location": "man/tutorials.html#Simulate-some-Data-1",
+    "page": "Tutorials",
+    "title": "Simulate some Data",
     "category": "section",
-    "text": "Psycho\'s primary goal is to fill the gap between Julia\'s output and the formatted result description of your manuscript, with the automated use of best practices guidelines, ensuring standardization and quality of results reporting. It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analyses."
+    "text": "Let\'s start by simulating some correlated data:using Psycho  # Import the Psycho package\n\n# Simulate some data wit ha specified correlation coefficient (0.3)\ndata = simulate_data_correlation(0.3)\n\n# Describe the data\nreport(data)The data contains 100 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-1.9, 2.58])\n  - Var1 (Mean = 0 ± 1.0 [-2.18, 3.01])note: Note\nThe results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generates different results at each run.As we can see, we have successfully generated two numeric variables, y and Var1. Moreover, the report() function works on a DataFrame and provide a quick and convenient description of your data. tipp: Tipp\nThis report is quite flexible. For example, running report(data, median=true, levels_percentage=false) will display the median instead of the mean and the raw count of factor levels insteand of the percentage. See the documentation for details."
 },
 
 {
-    "location": "index.html#Quick-Example-1",
-    "page": "Home",
-    "title": "Quick Example",
+    "location": "man/tutorials.html#Fit-a-Linear-Regression-1",
+    "page": "Tutorials",
+    "title": "Fit a Linear Regression",
     "category": "section",
-    "text": "using GLM, Psycho\n\n# Simulate some data\ndata = simulate_data_correlation([[0.3], [0.1]])\n\n# Standardize the results\nstandardize!(data)\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.22, 2.6])\n  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])\n  - Group (1HK, 50.0%; 2YP, 50.0%)using GLM\n\n# Fit a Linear Model\nmodel = lm(@formula(y ~ Var1 * Group), data)\n\n# Report the results\nresults = report(model)We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).\nThe model\'s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)\n  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)\n  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],\np > .1)"
+    "text": "using GLM  # Import the package for fitting GLMs\n\nmodel = lm(@formula(y ~ Var1), data)\nreport(model)We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model\'s explanatory power (R²) is of 0.09 (adj. R² = 0.08). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(98) = 3.11, 95% [0.11; 0.49], p < .01)This returns the model\'s formula and a general index of the model\'s predictive performance (here, the normal and adjusted R²). Then, it also reports all the parameters (often, the \"effects\" in psychology) and their characteristics: the coefficient (β), the statistic (the t value), degrees of freedom, confidence interval and p value. In our example, the regression coefficient of Var1 is indeed the one that we specified (0.3): everything worked correctly."
 },
 
 {
-    "location": "index.html#Content-1",
-    "page": "Home",
-    "title": "Content",
+    "location": "man/tutorials.html#Fit-a-Multiple-GLM-1",
+    "page": "Tutorials",
+    "title": "Fit a Multiple GLM",
     "category": "section",
-    "text": "Pages = [\n    \"man/tutorials.md\",\n    \"man/API.md\",\n    \"man/about.md\"\n]\nDepth = 2"
+    "text": "Let\'s fit a more complex model involving more variables and a binomial outcome (made of zeros and ones).# Simulate some data suited for logistic regression with multiple groups\ndata = simulate_data_logistic([[0.3, 0.5], [0.1, 0.3]])\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0.72 ± 0.45 [0.0, 1.0])\n  - Var1 (Mean = 0 ± 1.01 [-2.37, 2.44])\n  - Var2 (Mean = 0.06 ± 0.95 [-2.11, 2.67])\n  - Group (1DS, 50.0%; 2QC, 50.0%)We generated a dataset with one outcome (0 and 1), two numeric variables (Var1 and Var2) and one factor (Group) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but by writing glm instead of lm and adding an additional argument at the end to specify the Binomial nature of the model.model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())\nreport(model)We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group). The model\'s explanatory power (Tjur\'s R²) is of 0.0. The model\'s intercept is at 1.01. Within this model:\n  - Var1 is not significant (β = 0.06, z(195) = 0.36, 95% [-0.25; 0.36], p > .1)\n  - Var2 is not significant (β = 0.39, z(195) = 1.55, 95% [-0.1; 0.88], p > .1)\n  - Group: 2QC is not significant (β = -0.18, z(195) = -0.56, 95% [-0.8; 0.44], p > .1)\n  - Var2 & Group: 2QC is not significant (β = -0.08, z(195) = -0.24, 95% [-0.75; 0.59], p > .1WIP"
 },
 
 {
@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.report",
     "category": "method",
-    "text": "report(df::DataFrames.DataFrame; kwargs...)\n\nDescribe the variables in a DataFrame.\n\nArguments\n\ndf: DataFrame.\nmissing_percentage::Bool: Show missings by percentage (default) or number.\nlevels_percentage::Bool: Show factor levels by percentage (default) or number.\nmedian::Bool::Bool: Show mean and sd (default) or median and mad.\ndispersion::Bool: Show dispersion (sd or mad).\nrange::Bool: Show range.\n\nnote: Note\nIdeas / help required:Add more indices (See #19)\nDeal with SubDataFrames (See #20)\n\nExamples\n\nreport(simulate_data_correlation([[0.1], [0.2]]))\n\n\n\n\n\n"
+    "text": "report(df::DataFrames.DataFrame; kwargs...)\n\nDescribe the variables in a DataFrame.\n\nArguments\n\ndf: DataFrame.\nmissing_percentage::Bool: Show missings by percentage (default) or number.\nlevels_percentage::Bool: Show factor levels by percentage (default) or number.\nmedian::Bool: Show mean and sd (default) or median and mad.\ndispersion::Bool: Show dispersion (sd or mad).\nrange::Bool: Show range.\nn_strings::Int: Number of different string elements to show.\n\nnote: Note\nIdeas / help required:Add more indices (See #19)\nDeal with SubDataFrames (See #20)\n\nExamples\n\nreport(simulate_data_correlation([[0.1], [0.2]]))\n\n\n\n\n\n"
 },
 
 {
@@ -113,6 +113,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "man/API.html#Psycho.datagrid-Tuple{DataFrame}",
+    "page": "API",
+    "title": "Psycho.datagrid",
+    "category": "method",
+    "text": "datagrid(df::DataFrames.DataFrame; cols=:all, n::Int=10, kwargs...)\n\nCreate a reference grid of data.\n\nArguments\n\ndf: A DataFrame (can be a StatsModel).\ncols: The target columns. The rest will be maintained \"fixed\".\nn: For numeric targets columns, what desired length (controls the spacing).\nfix_num: How to fix the numeric variables. Can be a function or a number.\nfix_fac: How to fix the factors. Should be a String indicating an existing level.\n\nExamples\n\ndf = simulate_data_correlation([[0.2, 0.5], [0.4, 0.2]])\n\ngrid = datagrid(df, n=3)\n\n\n\n\n\n"
+},
+
+{
     "location": "man/API.html#Psycho.standardize",
     "page": "API",
     "title": "Psycho.standardize",
@@ -133,7 +141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.r2_tjur",
     "category": "method",
-    "text": "r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})\n\nCompute Tjur\'s (2009) D (R²).\n\nThe Coefficients of Determination (D), also referred to as Tjur\'s R² (Tjur, 2009), is asymptotically equivalent to the classical version of R² for linear models.\n\nArguments\n\nmodel: A GeneralizedLinearModel.\n\nReferences\n\nTjur, T. (2009). Coefficients of determination in logistic regression models—A new proposal: The coefficient of discrimination. The American Statistician, 63(4), 366-372.\n\nExamples\n\nusing GLM, DataFrames\n\nmodel = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())\nr2_tjur(model)\n\n# output\n0.5\n\n\n\n\n\n"
+    "text": "r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})\n\nCompute Tjur\'s (2009) D (R²).\n\nThe Coefficients of Determination (D), also referred to as Tjur\'s R² (Tjur, 2009), is asymptotically equivalent to the classical version of R² for linear models.\n\nArguments\n\nmodel: A GeneralizedLinearModel.\n\nExamples\n\nusing GLM, DataFrames\n\nmodel = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())\nr2_tjur(model)\n\n# output\n0.5\n\nReferences\n\nTjur, T. (2009). Coefficients of determination in logistic regression models—A new proposal: The coefficient of discrimination. The American Statistician, 63(4), 366-372.\n\n\n\n\n\n"
 },
 
 {
@@ -141,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Core",
     "category": "section",
-    "text": "standardizeperfectNormal(n::Int, mean::Number=0, sd::Number=1)r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})"
+    "text": "datagrid(df::DataFrames.DataFrame; cols=:all, n::Int=10, kwargs...)standardizeperfectNormal(n::Int, mean::Number=0, sd::Number=1)r2_tjur(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel})"
 },
 
 {
@@ -302,54 +310,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Featured in",
     "category": "section",
     "text": "Psycho.jl has been used in the following publications:Let us know!"
-},
-
-{
-    "location": "man/tutorials.html#",
-    "page": "Tutorials",
-    "title": "Tutorials",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "man/tutorials.html#Tutorials-1",
-    "page": "Tutorials",
-    "title": "Tutorials",
-    "category": "section",
-    "text": ""
-},
-
-{
-    "location": "man/tutorials.html#Design-1",
-    "page": "Tutorials",
-    "title": "Design",
-    "category": "section",
-    "text": "The package is centered around one function, report(), which goal is to transform a Julia object into readable text. It also provides useful general and domain-specific functions to efficiently process psychological data."
-},
-
-{
-    "location": "man/tutorials.html#Simulate-some-Data-1",
-    "page": "Tutorials",
-    "title": "Simulate some Data",
-    "category": "section",
-    "text": "Let\'s start by simulating some correlated data:using Psycho  # Import the Psycho package\n\n# Simulate some data wit ha specified correlation coefficient (0.3)\ndata = simulate_data_correlation(0.3)\n\n# Describe the data\nreport(data)The data contains 100 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-1.9, 2.58])\n  - Var1 (Mean = 0 ± 1.0 [-2.18, 3.01])note: Note\nThe results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generate different results at each run.As we can see, the report() function does work on DataFrames! We have successfully generated two numeric variables, y and Var1."
-},
-
-{
-    "location": "man/tutorials.html#Fit-a-Linear-Regression-1",
-    "page": "Tutorials",
-    "title": "Fit a Linear Regression",
-    "category": "section",
-    "text": "using GLM  # Import the package for fitting GLMs\n\nmodel = lm(@formula(y ~ Var1), data)\nreport(model)We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model\'s explanatory power (R²) is of 0.09 (adj. R² = 0.08). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(98) = 3.11, 95% [0.11; 0.49], p < .01)This returns the model\'s formula and a general index of the model\'s predictive performance (here, the normal and adjusted R²). Then, it also reports all the parameters (often, the \"effects\" in psychology) and their characteristics: the coefficient (β), the statistic (the t value), degrees of freedom, confidence interval and p value. In our example, the regression coefficient of Var1 is indeed the one that we specified (0.3): everything worked correctly."
-},
-
-{
-    "location": "man/tutorials.html#Fit-a-Multiple-GLM-1",
-    "page": "Tutorials",
-    "title": "Fit a Multiple GLM",
-    "category": "section",
-    "text": "Let\'s fit a more complex model involving more variables and a binomial outcome (made of zeros and ones).# Simulate some data suited for logistic regression with multiple groups\ndata = simulate_data_logistic([[0.3, 0.5], [0.1, 0.3]])\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0.72 ± 0.45 [0.0, 1.0])\n  - Var1 (Mean = 0 ± 1.01 [-2.37, 2.44])\n  - Var2 (Mean = 0.06 ± 0.95 [-2.11, 2.67])\n  - Group (1DS, 50.0%; 2QC, 50.0%)We generated a dataset with one outcome (0 and 1), two numeric variables (Var1 and Var2) and one factor (Group) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but by writing glm instead of lm and adding an additional argument at the end to specify the Binomial nature of the model.model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())\nreport(model)We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group). The model\'s explanatory power (Tjur\'s R²) is of 0.0. The model\'s intercept is at 1.01. Within this model:\n  - Var1 is not significant (β = 0.06, z(195) = 0.36, 95% [-0.25; 0.36], p > .1)\n  - Var2 is not significant (β = 0.39, z(195) = 1.55, 95% [-0.1; 0.88], p > .1)\n  - Group: 2QC is not significant (β = -0.18, z(195) = -0.56, 95% [-0.8; 0.44], p > .1)\n  - Var2 & Group: 2QC is not significant (β = -0.08, z(195) = -0.24, 95% [-0.75; 0.59], p > .1WIP"
 },
 
 ]}

@@ -5,17 +5,17 @@ makedocs(
     sitename = "Psycho.jl",
     authors="Dominique Makowski",
     analytics="UA-97457476-4",
-    modules = [Psycho, DataFrames, GLM],
-    pages = [
-        "man/tutorials.md",
-        "man/API.md",
-        "man/about.md"
-    ]
+    modules = [Psycho, DataFrames, GLM]
+    # pages = [
+    #     "man/tutorials.md",
+    #     "man/API.md",
+    #     "man/about.md"
+    # ]
 )
 
 
-    
-    
+
+
 deploydocs(
     repo = "github.com/neuropsychology/Psycho.jl.git",
     target = "build",

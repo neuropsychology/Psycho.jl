@@ -33,12 +33,12 @@ The data contains 100 observations of the following variables:
 As we can see, we have successfully generated two numeric variables, `y` and `Var1`. Moreover, the `report()` function works on a DataFrame and provide a quick and convenient description of your data. 
 
 
-!!! tipp
+!!! tip
 
     This `report` is quite flexible. For example, running `report(data, median=true, levels_percentage=false)` will display the median instead of the mean and the raw count of factor levels insteand of the percentage. See the [documentation](https://neuropsychology.github.io/Psycho.jl/latest/man/API.html#Psycho.report-Tuple{DataFrame}) for details.
 
 
-## Fit a Linear Regression
+## Fit a Linear Regression (LM)
 
 
 ```julia
@@ -52,7 +52,7 @@ We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). Th
   - Var1 is significant (β = 0.3, t(98) = 3.11, 95% [0.11; 0.49], p < .01)
 ```
 
-This returns the model's formula and a general index of the model's predictive performance (here, the normal and adjusted R²). Then, it also reports all the parameters (often, the "effects" in psychology) and their characteristics: the coefficient (β), the statistic (the *t* value), degrees of freedom, confidence interval and *p* value. In our example, the regression coefficient of `Var1` is indeed the one that we specified (`0.3`): everything worked correctly.
+Applying the `report()` function to a linear model returns the model's formula and a general index of the model's predictive performance (here, the normal and adjusted R²). It also reports all the parameters (the "effects" in psychology) and their characteristics: the coefficient (β), the statistic (the *t* value), degrees of freedom, the confidence interval and the *p* value. In our example, the regression coefficient of `Var1` is indeed the one that we specified (`0.3`): everything worked correctly.
 
 
 ## Fit a Multiple GLM
@@ -75,7 +75,7 @@ The data contains 200 observations of the following variables:
   - Group (1DS, 50.0%; 2QC, 50.0%)
 ```
 
-We generated a dataset with one outcome (0 and 1), two numeric variables (`Var1` and `Var2`) and one factor (`Group`) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but by writing `glm` instead of `lm` and adding an additional argument at the end to specify the `Binomial` nature of the model.
+We generated a dataset with one outcome (0 and 1), two numeric variables (`Var1` and `Var2`) and one factor (`Group`) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but with writing `glm` instead of `lm` and adding an additional argument at the end to specify the `Binomial` nature of the model.
 
 ```julia
 model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())

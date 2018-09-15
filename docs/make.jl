@@ -6,11 +6,11 @@ makedocs(
     authors="Dominique Makowski",
     analytics="UA-97457476-4",
     modules = [Psycho, DataFrames, GLM]
-    # pages = [
-    #     "man/tutorials.md",
-    #     "man/API.md",
-    #     "man/about.md"
-    # ]
+    pages = [
+         "man/tutorials.md",
+         "man/API.md",
+         "man/about.md"
+    ]
 )
 
 

@@ -7,6 +7,7 @@ makedocs(
     analytics="UA-97457476-4",
     modules = [Psycho, DataFrames, GLM],
     pages = [
+         "index.md",
          "man/tutorials.md",
          "man/API.md",
          "man/about.md"

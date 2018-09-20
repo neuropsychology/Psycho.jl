@@ -6,7 +6,12 @@ import Distributions, DataFrames, GLM, StatsModels
 
 
 
+
+
 function standardize(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
+    std_data = standardize(model_data(model))
+    std_model = lm(StatsModels.Formula(model.mf.terms), std_data)
+    return std_model
 end
 
 
@@ -82,6 +87,65 @@ end
 
 
 
+function model_std_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
+
+    std_model = standardize(model)
+
+    # Gather values
+    coefs = GLM.coef(std_model)
+    std_errors = GLM.stderror(std_model)
+    ci = GLM.confint(std_model, CI/100)
+    ci_lower = ci[:, 1]
+    ci_higher = ci[:, 2]
+
+    parameters = Dict{Any, Any}(
+        "Std_Coef" => coefs,
+        "Std_SE" => std_errors,
+        "Std_CI" => ci,
+        "Std_CI_lower" => ci_lower,
+        "Std_CI_higher" => ci_higher)
+
+    return parameters
+end
+
+
+
+
+
+
+
+
+function model_effect_size(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}, coefs::Vector{<:Number}; rules="cohen1988", add_std::Bool=true)
+
+    effect_size = interpret_d.(coefs, rules=rules)
+
+    output = Dict{Any, Any}("Effect_Size" => effect_size)
+
+    # Effects
+    # --------
+    # Generate empty vector
+    output["text_effect_size"] = string.(zeros(length(output["Effect_Size"])))
+    for i in 1:length(output["text_effect_size"])
+        effect = " and can be considered as $(output["Effect_Size"][i])"
+
+        if add_std == true
+            effect = effect * " (Std. Coef = $(round(coefs[i], digits=2)))."
+        else
+            effect = effect * "."
+        end
+
+        output["text_effect_size"][i] = effect
+    end
+
+    return output
+end
+
+
+
+
+
+
+
 
 function model_initial_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel})
 
@@ -97,7 +161,11 @@ end
 
 
 
-function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI=95)
+
+function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel};
+    CI::Number=95,
+    std_coefs::Bool=true,
+    effect_size="cohen1988")
 
     # Gather everything
     # ------------------
@@ -106,21 +174,21 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     coefs = GLM.coef(model)
     std_errors = GLM.stderror(model)
     t = GLM.coeftable(model).cols[3]
-    dof = repeat([GLM.dof_residual(model)], length(parameters))
+    DoF = repeat([GLM.dof_residual(model)], length(parameters))
     ci = GLM.confint(model, CI/100)
     ci_bounds = [(100-CI)/2, 100-(100-CI)/2]
     ci_lower = ci[:, 1]
     ci_higher = ci[:, 2]
-    loglikelihood = GLM.loglikelihood(model)
+    LogLikelihood = GLM.loglikelihood(model)
     deviance = GLM.deviance(model)
     sigma = sqrt(deviance/GLM.dof_residual(model))
 
-    parameters = Dict(
+    parameters = Dict{Any, Any}(
                 "Parameter" => parameters,
                 "Coef" => coefs,
-                "Std_error" => std_errors,
+                "SE" => std_errors,
                 "t" => t,
-                "DoF" => dof,
+                "DoF" => DoF,
                 "CI_level" => CI,
                 "CI" => ci,
                 "CI_bounds" => ci_bounds,
@@ -128,13 +196,22 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
                 "CI_higher" => ci_higher,
                 "CI_lower_formatted" => "CI_$(ci_bounds[1])",
                 "CI_higher_formatted" => "CI_$(ci_bounds[2])",
-                "loglikelihood" => ci_higher,
-                "deviance" => deviance)
+                "LogLikelihood" => LogLikelihood,
+                "Deviance" => deviance)
 
     parameters = merge(parameters, model_description(model).values)
     parameters = merge(parameters, model_performance(model).values)
     parameters = merge(parameters, model_initial_parameters(model).values)
     parameters = merge(parameters, model_effects_existence(model))
+    parameters = merge(parameters, model_std_parameters(model, CI=CI))
+
+    if effect_size != nothing
+        if std_coefs == true
+            parameters = merge(parameters, model_effect_size(model, parameters["Std_Coef"], rules=effect_size, add_std=true))
+        else
+            parameters = merge(parameters, model_effect_size(model, coefs, rules=effect_size, add_std=false))
+        end
+    end
 
 
 
@@ -142,16 +219,21 @@ function model_parameters(model::StatsModels.DataFrameRegressionModel{<:GLM.Line
     # --------
 
     # Generate empty vector
-    parameters["text_parameters"] = string.(zeros(length(parameters["Parameter"])-1))
-    for (i, var) in enumerate(filter(x -> x != "(Intercept)", parameters["Parameter"]))
+    parameters["text_parameters"] = string.(zeros(length(parameters["Parameter"])))
+    for (i, var) in enumerate(parameters["Parameter"])
         effect =
-        "$var is $(parameters["p_interpretation"][i+1]) " *
-        "(β = $(round(parameters["Coef"][i+1], digits=2)), " *
-        "t($(Int(parameters["DoF"][i+1]))) = $(round(parameters["t"][i+1], digits=2)), " *
-        "$(parameters["CI_level"])% "*
-        "[$(round(parameters["CI_lower"][i+1], digits=2)); " *
-        "$(round(parameters["CI_higher"][i+1], digits=2))]" *
-        ", $(parameters["p_formatted"][i+1]))"
+        "$var is $(parameters["p_interpretation"][i]) " *
+        "(Coef = $(round(parameters["Coef"][i], digits=2)), " *
+        "t($(Int(parameters["DoF"][i]))) = $(round(parameters["t"][i], digits=2)), " *
+        "$(parameters["CI_level"])% CI "*
+        "[$(round(parameters["CI_lower"][i], digits=2)); " *
+        "$(round(parameters["CI_higher"][i], digits=2))]" *
+        ", $(parameters["p_formatted"][i]))"
+        if effect_size != nothing
+            effect = effect * parameters["text_effect_size"][i]
+        else
+            effect = effect * "."
+        end
 
         parameters["text_parameters"][i] = effect
     end
@@ -166,14 +248,18 @@ end
 
 
 """
-    report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
+    report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel};
+        CI::Number=95,
+        std_coefs::Bool=true,
+        effect_size="cohen1988")
 
 Describe a linear model.
 
 # Arguments
 - `model`: A `LinearModel`.
-- `CI::Number`: Confidence interval level.
-
+- `CI`: Confidence interval level.
+- `std_coefs`: Interpret effect sizes of standardized, rather than raw, coefs.
+- `effect_size`: Can be 'cohen1988', 'sawilowsky2009', or custom set of [Rules](@ref) (See [cohen_d](@ref)). Set to `nothing` to omit interpretation.
 
 # Examples
 ```julia
@@ -183,10 +269,16 @@ model = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))
 report(model)
 ```
 """
-function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)
+function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel};
+    CI::Number=95,
+    std_coefs::Bool=true,
+    effect_size="cohen1988")
 
     # Parameters
-    parameters = model_parameters(model, CI=CI)
+    parameters = model_parameters(model,
+                                CI=CI,
+                                std_coefs=std_coefs,
+                                effect_size=effect_size)
 
     # Text
     description = parameters["text_description"]
@@ -194,7 +286,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; 
     initial = parameters["text_initial"]
 
     text = "$description $performance $initial Within this model:"
-    text = text * join("\n  - " .* parameters["text_parameters"])
+    text = text * join("\n  - " .* parameters["text_parameters"][2:end])
 
     text = format_text(text)
 
@@ -202,7 +294,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; 
     # Table
     table = hcat(parameters["Parameter"],
                 parameters["Coef"],
-                parameters["Std_error"],
+                parameters["SE"],
                 parameters["t"],
                 parameters["DoF"],
                 parameters["CI_lower"],
@@ -212,7 +304,7 @@ function report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; 
     table = DataFrames.DataFrame(table,
                 [:Parameter,
                 :Coef,
-                :Std_Error,
+                :SE,
                 :t,
                 :DoF,
                 Symbol(parameters["CI_lower_formatted"]),

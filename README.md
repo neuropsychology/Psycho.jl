@@ -19,7 +19,7 @@ It also provides useful tools and functions for psychologists, neuropsychologist
 
 # Contribute
 
-`Psycho.jl` **is a young package in need of affection**. You can easily hop aboard the developpment of this open-source software and improve psychological science by doing the following:
+`Psycho.jl` **is a young package in need of affection**. You can easily hop aboard the [developpment](.github/CONTRIBUTING.md) of this open-source software and improve psychological science by doing the following:
 
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/neuropsychology/Psycho.jl/issues><img src="docs/src/assets/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
@@ -69,7 +69,7 @@ The data contains 200 observations of the following variables:
   - Group (1HK, 50.0%; 2YP, 50.0%)
 ```
 
-### Linear Models (LM)
+### Linear Models (GLM)
 
 ```julia
 using GLM

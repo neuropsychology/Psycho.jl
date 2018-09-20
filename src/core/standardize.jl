@@ -85,7 +85,9 @@ end
 function standardize!(X::DataFrames.DataFrame; robust=false)
     for (colname, col) in DataFrames.eachcol(X)
         if eltype(col) <: Union{Missing, Number}
-            X[colname] = standardize(col)
+            if length(unique(col)) > 2
+                X[colname] = standardize(col)
+            end
         end
     end
 end

@@ -64,9 +64,9 @@ report(data)
 ```
 ```
 The data contains 200 observations of the following variables:
-  - y (Mean = 0 ± 1.0 [-2.22, 2.6])
-  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])
-  - Group (1HK, 50.0%; 2YP, 50.0%)
+  - y (Mean = 0 ± 1.0 [-2.92, 3.07])
+  - Var1 (Mean = 0 ± 1.0 [-2.35, 3.25])
+  - Group (1FD, 50.0%; 2HA, 50.0%)
 ```
 
 ### Linear Models (GLM)
@@ -81,12 +81,10 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).
-The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at -0.0. Within this model:
-  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)
-  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)
-  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
-p > .1)
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at 0.0. Within this model:
+  - Var1 is significant (Coef = 0.3, t(196) = 3.05, 95% CI [0.11; 0.49], p < .01) and can be considered as small (Std. Coef = 0.3).
+  - Group: 2HA is not significant (Coef = 0, t(196) = 0, 95% CI [-0.27; 0.27], p > .1) and can be considered as very small (Std. Coef = 0).
+  - Var1 & Group: 2HA is not significant (Coef = -0.2, t(196) = -1.44, 95% CI [-0.47; 0.07], p > .1) and can be considered as very small (Std. Coef = -0.2).
 ```
 
 ## Signal Detection Theory (SDT)

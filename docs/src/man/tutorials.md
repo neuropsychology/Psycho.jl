@@ -20,8 +20,8 @@ report(data)
 ```
 ```
 The data contains 100 observations of the following variables:
-  - y (Mean = 0 ± 1.0 [-1.9, 2.58])
-  - Var1 (Mean = 0 ± 1.0 [-2.18, 3.01])
+  - y (Mean = 0 ± 1.0 [-2.32, 2.6])
+  - Var1 (Mean = 0 ± 1.0 [-3.16, 2.01])
 ```
 
 !!! note
@@ -30,7 +30,7 @@ The data contains 100 observations of the following variables:
 
 
 
-As we can see, we have successfully generated two numeric variables, `y` and `Var1`. Moreover, the `report()` function works on a DataFrame and provide a quick and convenient description of your data. 
+As we can see, we have successfully generated two numeric variables, `y` and `Var1`. Moreover, the `report()` function works on a DataFrame and provide a quick and convenient description of your data.
 
 
 !!! tip
@@ -45,14 +45,15 @@ As we can see, we have successfully generated two numeric variables, `y` and `Va
 using GLM  # Import the package for fitting GLMs
 
 model = lm(@formula(y ~ Var1), data)
-report(model)
+report(model, std_coefs=false)
 ```
 ```
-We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model's explanatory power (R²) is of 0.09 (adj. R² = 0.08). The model's intercept is at -0.0. Within this model:
-  - Var1 is significant (β = 0.3, t(98) = 3.11, 95% [0.11; 0.49], p < .01)
+We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model's explanatory power (R²) is
+of 0.09 (adj. R² = 0.08). The model's intercept is at -0.0. Within this model:
+  - Var1 is significant (Coef = 0.3, t(98) = 3.11, 95% CI [0.11; 0.49], p < .01) and can be considered as small (Std. Coef = 0.3).
 ```
 
-Applying the `report()` function to a linear model returns the model's formula and a general index of the model's predictive performance (here, the normal and adjusted R²). It also reports all the parameters (the "effects" in psychology) and their characteristics: the coefficient (β), the statistic (the *t* value), degrees of freedom, the confidence interval and the *p* value. In our example, the regression coefficient of `Var1` is indeed the one that we specified (`0.3`): everything worked correctly.
+Applying the `report()` function to a linear model returns the model's formula and a general index of the model's predictive performance (here, the normal and adjusted R²). It also reports all the parameters (the "effects" in psychology) and their characteristics: the coefficient (*β*), the statistic (the *t* value), degrees of freedom, the confidence interval and the *p* value. It also returns, by default, the standardized coefficients (which in, in this case, the same as  the raw one as our data was generated standardized). It is used as an index of *effect size* and interpreted with rules of thumb (Cohen's (1988) by default). In our example, the regression coefficient of `Var1` is indeed the one that we specified (`0.3`): everything worked correctly.
 
 
 ## Fit a Multiple GLM
@@ -82,13 +83,18 @@ model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())
 report(model)
 ```
 ```
-We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group). The model's explanatory power (Tjur's R²) is of 0.0. The model's intercept is at 1.01. Within this model:
-  - Var1 is not significant (β = 0.06, z(195) = 0.36, 95% [-0.25; 0.36], p > .1)
-  - Var2 is not significant (β = 0.39, z(195) = 1.55, 95% [-0.1; 0.88], p > .1)
-  - Group: 2QC is not significant (β = -0.18, z(195) = -0.56, 95% [-0.8; 0.44], p > .1)
-  - Var2 & Group: 2QC is not significant (β = -0.08, z(195) = -0.24, 95% [-0.75; 0.59], p > .1
+We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group).
+The model's explanatory power (Tjur's R²) is of 0.07. The model's intercept is at 1.42. Within this model:
+  - Var1 is not significant (Coef = 0.25, z(195) = 1.42, 95% CI [-0.1; 0.59], p > .1) and can be considered as very small (Std. Coef = 0.25).
+  - Var2 is not significant (Coef = 0.55, z(195) = 1.96, 95% CI [-0.0; 1.1], p = .05) and can be considered as very small (Std. Coef = 0.53).
+  - Group: 2HV is not significant (Coef = -0.34, z(195) = -0.96, 95% CI [-1.03; 0.35], p > .1) and can be considered as very small (Std. Coef = -0.34).
+  - Var2 & Group: 2HV is not significant (Coef = -0.01, z(195) = -0.03, 95% CI [-0.73; 0.7], p > .1) and can be considered as very small (Std. Coef = -0.01).
 ```
 
+## Mixed Models
 
+**WIP**
+
+## Bayesian Models
 
 **WIP**

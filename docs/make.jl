@@ -6,7 +6,7 @@ makedocs(
     authors="Dominique Makowski",
     analytics="UA-97457476-4",
     modules = [Psycho, DataFrames, GLM],
-    strict = true,
+    strict = false,
     pages = [
          "index.md",
          "man/tutorials.md",

@@ -11,9 +11,9 @@ end
 Create a container for interpretation rules of thumb. See [`interpret(x::Real, rules::Rules)`](@ref).
 
 # Arguments
-- `breakpoints::AbstractVector`: Vector of value break points (edges defining categories).
-- `labels::AbstractVector`: Labels associated with each category. Must contain one label more than breakpoints.
-- `iflower::Bool`: If true, each label will be given if the value *is lower* than its breakpoint. The contrary if false.
+- `breakpoints`: Vector of value break points (edges defining categories).
+- `labels`: Labels associated with each category. Must contain one label more than breakpoints.
+- `iflower`: If true, each label will be given if the value *is lower* than its breakpoint. The contrary if false.
 
 # Examples
 ```jldoctest
@@ -46,8 +46,8 @@ Rules(breakpoints, labels, iflower)
 Interpret a value based on a set of rules of thumb.
 
 # Arguments
-- `x::Real`: The value to interpret.
-- `rules::Rules`: A [`Rules`](@ref) object.
+- `x`: The value to interpret.
+- `rules`: A [`Rules`](@ref) object.
 
 # Examples
 ```jldoctest

@@ -4,7 +4,7 @@ export
     standardize,
     standardize!,
     perfectNormal,
-    
+
     r2_tjur,
     datagrid,
 
@@ -12,6 +12,8 @@ export
     interpret,
     interpret_p,
     format_p,
+    interpret_d,
+    interpret_odds,
 
     simulate_groupnames,
     simulate_coefs_correlation,
@@ -34,6 +36,8 @@ include("modelling/datagrid.jl")
 
 include("interpret/interpret.jl")
 include("interpret/pvalue.jl")
+include("interpret/cohen_d.jl")
+include("interpret/odds.jl")
 
 include("simulate/data_groups.jl")
 include("simulate/data_correlation.jl")

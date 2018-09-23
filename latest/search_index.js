@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Quick Example",
     "category": "section",
-    "text": "using GLM, Psycho\n\n# Simulate some data\ndata = simulate_data_correlation([[0.3], [0.1]])\n\n# Standardize the results\nstandardize!(data)\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.22, 2.6])\n  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])\n  - Group (1HK, 50.0%; 2YP, 50.0%)using GLM\n\n# Fit a Linear Model\nmodel = lm(@formula(y ~ Var1 * Group), data)\n\n# Report the results\nresults = report(model)We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group).\nThe model\'s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p < .01)\n  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p > .1)\n  - Var1 & Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],\np > .1)"
+    "text": "using GLM, Psycho\n\n# Simulate some data\ndata = simulate_data_correlation([[0.3], [0.1]])\n\n# Standardize the results\nstandardize!(data)\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.92, 3.07])\n  - Var1 (Mean = 0 ± 1.0 [-2.35, 3.25])\n  - Group (1FD, 50.0%; 2HA, 50.0%)using GLM\n\n# Fit a Linear Model\nmodel = lm(@formula(y ~ Var1 * Group), data)\n\n# Report the results\nresults = report(model)We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model\'s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model\'s intercept is at 0.0. Within this model:\n  - Var1 is significant (Coef = 0.3, t(196) = 3.05, 95% CI [0.11; 0.49], p < .01) and can be considered as small (Std. Coef = 0.3).\n  - Group: 2HA is not significant (Coef = 0, t(196) = 0, 95% CI [-0.27; 0.27], p > .1) and can be considered as very small (Std. Coef = 0).\n  - Var1 & Group: 2HA is not significant (Coef = -0.2, t(196) = -1.44, 95% CI [-0.47; 0.07], p > .1) and can be considered as very small (Std. Coef = -0.2)."
 },
 
 {
@@ -69,15 +69,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Tutorials",
     "title": "Simulate some Data",
     "category": "section",
-    "text": "Let\'s start by simulating some correlated data:using Psycho  # Import the Psycho package\n\n# Simulate some data wit ha specified correlation coefficient (0.3)\ndata = simulate_data_correlation(0.3)\n\n# Describe the data\nreport(data)The data contains 100 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-1.9, 2.58])\n  - Var1 (Mean = 0 ± 1.0 [-2.18, 3.01])note: Note\nThe results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generates different results at each run.As we can see, we have successfully generated two numeric variables, y and Var1. Moreover, the report() function works on a DataFrame and provide a quick and convenient description of your data. tipp: Tipp\nThis report is quite flexible. For example, running report(data, median=true, levels_percentage=false) will display the median instead of the mean and the raw count of factor levels insteand of the percentage. See the documentation for details."
+    "text": "Let\'s start by simulating some correlated data:using Psycho  # Import the Psycho package\n\n# Simulate some data wit ha specified correlation coefficient (0.3)\ndata = simulate_data_correlation(0.3)\n\n# Describe the data\nreport(data)The data contains 100 observations of the following variables:\n  - y (Mean = 0 ± 1.0 [-2.32, 2.6])\n  - Var1 (Mean = 0 ± 1.0 [-3.16, 2.01])note: Note\nThe results reported here and those in your console might be not be exactly the same. This is due to the random nature of some functions that generates different results at each run.As we can see, we have successfully generated two numeric variables, y and Var1. Moreover, the report() function works on a DataFrame and provide a quick and convenient description of your data.tip: Tip\nThis report is quite flexible. For example, running report(data, median=true, levels_percentage=false) will display the median instead of the mean and the raw count of factor levels insteand of the percentage. See the documentation for details."
 },
 
 {
-    "location": "man/tutorials.html#Fit-a-Linear-Regression-1",
+    "location": "man/tutorials.html#Fit-a-Linear-Regression-(LM)-1",
     "page": "Tutorials",
-    "title": "Fit a Linear Regression",
+    "title": "Fit a Linear Regression (LM)",
     "category": "section",
-    "text": "using GLM  # Import the package for fitting GLMs\n\nmodel = lm(@formula(y ~ Var1), data)\nreport(model)We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model\'s explanatory power (R²) is of 0.09 (adj. R² = 0.08). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (β = 0.3, t(98) = 3.11, 95% [0.11; 0.49], p < .01)This returns the model\'s formula and a general index of the model\'s predictive performance (here, the normal and adjusted R²). Then, it also reports all the parameters (often, the \"effects\" in psychology) and their characteristics: the coefficient (β), the statistic (the t value), degrees of freedom, confidence interval and p value. In our example, the regression coefficient of Var1 is indeed the one that we specified (0.3): everything worked correctly."
+    "text": "using GLM  # Import the package for fitting GLMs\n\nmodel = lm(@formula(y ~ Var1), data)\nreport(model, std_coefs=false)We fitted a linear regression to predict y with Var1 (Formula: y ~ 1 + Var1). The model\'s explanatory power (R²) is\nof 0.09 (adj. R² = 0.08). The model\'s intercept is at -0.0. Within this model:\n  - Var1 is significant (Coef = 0.3, t(98) = 3.11, 95% CI [0.11; 0.49], p < .01) and can be considered as small (Std. Coef = 0.3).Applying the report() function to a linear model returns the model\'s formula and a general index of the model\'s predictive performance (here, the normal and adjusted R²). It also reports all the parameters (the \"effects\" in psychology) and their characteristics: the coefficient (β), the statistic (the t value), degrees of freedom, the confidence interval and the p value. It also returns, by default, the standardized coefficients (which in, in this case, the same as  the raw one as our data was generated standardized). It is used as an index of effect size and interpreted with rules of thumb (Cohen\'s (1988) by default). In our example, the regression coefficient of Var1 is indeed the one that we specified (0.3): everything worked correctly."
 },
 
 {
@@ -85,7 +85,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Tutorials",
     "title": "Fit a Multiple GLM",
     "category": "section",
-    "text": "Let\'s fit a more complex model involving more variables and a binomial outcome (made of zeros and ones).# Simulate some data suited for logistic regression with multiple groups\ndata = simulate_data_logistic([[0.3, 0.5], [0.1, 0.3]])\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0.72 ± 0.45 [0.0, 1.0])\n  - Var1 (Mean = 0 ± 1.01 [-2.37, 2.44])\n  - Var2 (Mean = 0.06 ± 0.95 [-2.11, 2.67])\n  - Group (1DS, 50.0%; 2QC, 50.0%)We generated a dataset with one outcome (0 and 1), two numeric variables (Var1 and Var2) and one factor (Group) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but by writing glm instead of lm and adding an additional argument at the end to specify the Binomial nature of the model.model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())\nreport(model)We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group). The model\'s explanatory power (Tjur\'s R²) is of 0.0. The model\'s intercept is at 1.01. Within this model:\n  - Var1 is not significant (β = 0.06, z(195) = 0.36, 95% [-0.25; 0.36], p > .1)\n  - Var2 is not significant (β = 0.39, z(195) = 1.55, 95% [-0.1; 0.88], p > .1)\n  - Group: 2QC is not significant (β = -0.18, z(195) = -0.56, 95% [-0.8; 0.44], p > .1)\n  - Var2 & Group: 2QC is not significant (β = -0.08, z(195) = -0.24, 95% [-0.75; 0.59], p > .1WIP"
+    "text": "Let\'s fit a more complex model involving more variables and a binomial outcome (made of zeros and ones).# Simulate some data suited for logistic regression with multiple groups\ndata = simulate_data_logistic([[0.3, 0.5], [0.1, 0.3]])\n\n# Describe the data\nreport(data)The data contains 200 observations of the following variables:\n  - y (Mean = 0.72 ± 0.45 [0.0, 1.0])\n  - Var1 (Mean = 0 ± 1.01 [-2.37, 2.44])\n  - Var2 (Mean = 0.06 ± 0.95 [-2.11, 2.67])\n  - Group (1DS, 50.0%; 2QC, 50.0%)We generated a dataset with one outcome (0 and 1), two numeric variables (Var1 and Var2) and one factor (Group) with two levels. To fit a logistic model (a subtype of GLMs suited for binomial outcomes), we do as previously, but with writing glm instead of lm and adding an additional argument at the end to specify the Binomial nature of the model.model = glm(@formula(y ~ Var1 + Var2 * Group), data, Binomial())\nreport(model)We fitted a logistic regression to predict y with Var1, Var2 and Group (Formula: y ~ 1 + Var1 + Var2 + Group + Var2 & Group).\nThe model\'s explanatory power (Tjur\'s R²) is of 0.07. The model\'s intercept is at 1.42. Within this model:\n  - Var1 is not significant (Coef = 0.25, z(195) = 1.42, 95% CI [-0.1; 0.59], p > .1) and can be considered as very small (Std. Coef = 0.25).\n  - Var2 is not significant (Coef = 0.55, z(195) = 1.96, 95% CI [-0.0; 1.1], p = .05) and can be considered as very small (Std. Coef = 0.53).\n  - Group: 2HV is not significant (Coef = -0.34, z(195) = -0.96, 95% CI [-1.03; 0.35], p > .1) and can be considered as very small (Std. Coef = -0.34).\n  - Var2 & Group: 2HV is not significant (Coef = -0.01, z(195) = -0.03, 95% CI [-0.73; 0.7], p > .1) and can be considered as very small (Std. Coef = -0.01)."
+},
+
+{
+    "location": "man/tutorials.html#Mixed-Models-1",
+    "page": "Tutorials",
+    "title": "Mixed Models",
+    "category": "section",
+    "text": "WIP"
+},
+
+{
+    "location": "man/tutorials.html#Bayesian-Models-1",
+    "page": "Tutorials",
+    "title": "Bayesian Models",
+    "category": "section",
+    "text": "WIP"
 },
 
 {
@@ -133,15 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.report",
     "category": "method",
-    "text": "report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel}; CI::Number=95)\n\nDescribe a linear model.\n\nArguments\n\nmodel: A LinearModel.\nCI::Number: Confidence interval level.\n\nExamples\n\nusing GLM, DataFrames\n\nmodel = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))\nreport(model)\n\n\n\n\n\n"
-},
-
-{
-    "location": "man/API.html#Psycho.report-Tuple{StatsModels.DataFrameRegressionModel{#s1,T} where T where #s1<:GeneralizedLinearModel}",
-    "page": "API",
-    "title": "Psycho.report",
-    "category": "method",
-    "text": "report(model::StatsModels.DataFrameRegressionModel{<:GLM.GeneralizedLinearModel}; CI::Number=95)\n\nDescribe a general linear model.\n\nArguments\n\nmodel: A GeneralizedLinearModel.\nCI::Number: Confidence interval level.\n\nExamples\n\nusing GLM, DataFrames\n\nmodel = glm(@formula(y ~ Var1), DataFrame(y=[0, 0, 1, 1], Var1=[1, 2, 2, 4]), GLM.Binomial())\nreport(model)\n\n\n\n\n\n"
+    "text": "report(model::StatsModels.DataFrameRegressionModel{<:GLM.LinearModel};\n    CI::Number=95,\n    std_coefs::Bool=true,\n    effect_size=\"cohen1988\")\n\nDescribe a linear model.\n\nArguments\n\nmodel: A LinearModel.\nCI: Confidence interval level.\nstd_coefs: Interpret effect sizes of standardized, rather than raw, coefs.\neffect_size: Can be \'cohen1988\', \'sawilowsky2009\', or custom set of Rules (See cohen_d). Set to nothing to omit interpretation.\n\nExamples\n\nusing GLM, DataFrames\n\nmodel = lm(@formula(y ~ Var1), DataFrame(y=[0, 1, 2, 3], Var1=[2, 3, 3.5, 4]))\nreport(model)\n\n\n\n\n\n"
 },
 
 {
@@ -197,7 +205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.Rules",
     "category": "type",
-    "text": "Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)\n\nCreate a container for interpretation rules of thumb. See interpret(x::Real, rules::Rules).\n\nArguments\n\nbreakpoints::AbstractVector: Vector of value break points (edges defining categories).\nlabels::AbstractVector: Labels associated with each category. Must contain one label more than breakpoints.\niflower::Bool: If true, each label will be given if the value is lower than its breakpoint. The contrary if false.\n\nExamples\n\nRules([0.05], [\"significant\", \"not significant\"], true)\n\n# output\n\nRules{Float64}([0.05], [\"significant\", \"not significant\"], true)\n\n\n\n\n\n"
+    "text": "Rules(breakpoints::AbstractVector, labels::AbstractVector, iflower::Bool=true)\n\nCreate a container for interpretation rules of thumb. See interpret(x::Real, rules::Rules).\n\nArguments\n\nbreakpoints: Vector of value break points (edges defining categories).\nlabels: Labels associated with each category. Must contain one label more than breakpoints.\niflower: If true, each label will be given if the value is lower than its breakpoint. The contrary if false.\n\nExamples\n\nRules([0.05], [\"significant\", \"not significant\"], true)\n\n# output\n\nRules{Float64}([0.05], [\"significant\", \"not significant\"], true)\n\n\n\n\n\n"
 },
 
 {
@@ -205,7 +213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.interpret",
     "category": "method",
-    "text": "interpret(x::Real, rules::Rules)\n\nInterpret a value based on a set of rules of thumb.\n\nArguments\n\nx::Real: The value to interpret.\nrules::Rules: A Rules object.\n\nExamples\n\np_rules = Rules([0.05], [\"significant\", \"not significant\"], true)\ninterpret(0.04, p_rules)\n\n# output\n\n\"significant\"\n\n\n\n\n\n"
+    "text": "interpret(x::Real, rules::Rules)\n\nInterpret a value based on a set of rules of thumb.\n\nArguments\n\nx: The value to interpret.\nrules: A Rules object.\n\nExamples\n\np_rules = Rules([0.05], [\"significant\", \"not significant\"], true)\ninterpret(0.04, p_rules)\n\n# output\n\n\"significant\"\n\n\n\n\n\n"
 },
 
 {
@@ -213,7 +221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.interpret_p",
     "category": "method",
-    "text": "interpret_p(p::Number; alpha=::Number=0.05)\n\nInterpret the p value based on the alpha level.\n\nP-values are the probability of obtaining an effect at least as extreme as the one in your sample data, assuming the truth of the null hypothesis. The significance level, also denoted as alpha or α, is the probability of rejecting the null hypothesis when it is true (i.e., claiming \"there is an effect\" when there is not). For example, a significance level of 0.05 indicates a 5% risk of concluding that a difference exists when there is no actual difference. The traditional default for alpha is .05. However, a strong wave of criticism suggests to either justify your alpha (Lakens et al., 2018) or lower the treshold (for instance to .005; Benjamin et al., 2018).\n\nArguments\n\np::Number: The p value.\nalpha::Number: Significance treshold.\n\nExamples\n\ninterpret_p(0.04)\n\n# output\n\n\"significant\"\n\n\n\n\n\n"
+    "text": "interpret_p(p::Number; alpha=::Number=0.05)\n\nInterpret the p value based on the alpha level.\n\nP-values are the probability of obtaining an effect at least as extreme as the one in your sample data, assuming the truth of the null hypothesis. The significance level, also denoted as alpha or α, is the probability of rejecting the null hypothesis when it is true (i.e., claiming \"there is an effect\" when there is not). For example, a significance level of 0.05 indicates a 5% risk of concluding that a difference exists when there is no actual difference. The traditional default for alpha is .05. However, a strong wave of criticism suggests to either justify your alpha (Lakens et al., 2018) or lower the treshold (for instance to .005; Benjamin et al., 2018).\n\nArguments\n\np: The p value.\nalpha: Significance treshold.\n\nExamples\n\ninterpret_p(0.04)\n\n# output\n\n\"significant\"\n\n\n\n\n\n"
 },
 
 {
@@ -221,7 +229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "API",
     "title": "Psycho.format_p",
     "category": "method",
-    "text": "format_p(p::Number; stars::Bool=false)\n\nFormat the p value according to APA standards.\n\nArguments\n\np::Number: The p value.\nstars::Bool: Add stars (*) when significant.\n\nExamples\n\nformat_p(0.04, stars=true)\n\n# output\n\n\"p < .05*\"\n\n\n\n\n\n"
+    "text": "format_p(p::Number; stars::Bool=false)\n\nFormat the p value according to APA standards.\n\nArguments\n\np: The p value.\nstars: Add stars (*) when significant.\n\nExamples\n\nformat_p(0.04, stars=true)\n\n# output\n\n\"p < .05*\"\n\n\n\n\n\n"
 },
 
 {

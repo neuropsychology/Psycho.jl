@@ -16,17 +16,15 @@ standardize!(data)
 
 # Describe the data
 report(data)</code></pre><pre><code class="language-none">The data contains 200 observations of the following variables:
-  - y (Mean = 0 ± 1.0 [-2.22, 2.6])
-  - Var1 (Mean = 0 ± 1.0 [-2.77, 3.19])
-  - Group (1HK, 50.0%; 2YP, 50.0%)</code></pre><pre><code class="language-julia">using GLM
+  - y (Mean = 0 ± 1.0 [-2.92, 3.07])
+  - Var1 (Mean = 0 ± 1.0 [-2.35, 3.25])
+  - Group (1FD, 50.0%; 2HA, 50.0%)</code></pre><pre><code class="language-julia">using GLM
 
 # Fit a Linear Model
 model = lm(@formula(y ~ Var1 * Group), data)
 
 # Report the results
-results = report(model)</code></pre><pre><code class="language-none">We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 &amp; Group).
-The model&#39;s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model&#39;s intercept is at -0.0. Within this model:
-  - Var1 is significant (β = 0.3, t(196) = 3.05, 95% [0.11; 0.49], p &lt; .01)
-  - Group: 2YP is not significant (β = 0.0, t(196) = 0.0, 95% [-0.27; 0.27], p &gt; .1)
-  - Var1 &amp; Group: 2YP is not significant (β = -0.2, t(196) = -1.44, 95% [-0.47; 0.07],
-p &gt; .1)</code></pre><footer><hr/><a class="next" href="man/tutorials.html"><span class="direction">Next</span><span class="title">Tutorials</span></a></footer></article></body></html>
+results = report(model)</code></pre><pre><code class="language-none">We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 &amp; Group). The model&#39;s explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model&#39;s intercept is at 0.0. Within this model:
+  - Var1 is significant (Coef = 0.3, t(196) = 3.05, 95% CI [0.11; 0.49], p &lt; .01) and can be considered as small (Std. Coef = 0.3).
+  - Group: 2HA is not significant (Coef = 0, t(196) = 0, 95% CI [-0.27; 0.27], p &gt; .1) and can be considered as very small (Std. Coef = 0).
+  - Var1 &amp; Group: 2HA is not significant (Coef = -0.2, t(196) = -1.44, 95% CI [-0.47; 0.07], p &gt; .1) and can be considered as very small (Std. Coef = -0.2).</code></pre><footer><hr/><a class="next" href="man/tutorials.html"><span class="direction">Next</span><span class="title">Tutorials</span></a></footer></article></body></html>

@@ -81,7 +81,8 @@ model = lm(@formula(y ~ Var1 * Group), data)
 results = report(model)
 ```
 ```
-We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at 0.0. Within this model:
+We fitted a linear regression to predict y with Var1 and Group (Formula: y ~ 1 + Var1 + Group + Var1 & Group). 
+The model's explanatory power (R²) is of 0.05 (adj. R² = 0.04). The model's intercept is at 0.0. Within this model:
   - Var1 is significant (Coef = 0.3, t(196) = 3.05, 95% CI [0.11; 0.49], p < .01) and can be considered as small (Std. Coef = 0.3).
   - Group: 2HA is not significant (Coef = 0, t(196) = 0, 95% CI [-0.27; 0.27], p > .1) and can be considered as very small (Std. Coef = 0).
   - Var1 & Group: 2HA is not significant (Coef = -0.2, t(196) = -1.44, 95% CI [-0.47; 0.07], p > .1) and can be considered as very small (Std. Coef = -0.2).

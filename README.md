@@ -7,7 +7,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/313hx3rmmc1swckg?svg=true)](https://ci.appveyor.com/project/DominiqueMakowski/psycho-jl)
 [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://neuropsychology.github.io/Psycho.jl/latest/)
 [![codecov](https://codecov.io/gh/neuropsychology/Psycho.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/Psycho.jl)
-[![HitCount](http://hits.dwyl.io/neuropsychology/neuropsychology/neurokit.py.svg)](http://hits.dwyl.io/neuropsychology/neuropsychology/neurokit.py)
+[![HitCount](http://hits.dwyl.io/neuropsychology/neuropsychology/psycho.jl.svg)](http://hits.dwyl.io/neuropsychology/neuropsychology/psycho.jl)
 
 
 # Goal
